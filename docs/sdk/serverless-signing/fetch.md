@@ -3,7 +3,7 @@ import FeedbackComponent from "@site/src/pages/feedback.md";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Fetching Data from the Web from within a Lit Action
+# Fetching Data from the Web within a Lit Action
 
 ## Overview
 
@@ -48,14 +48,21 @@ export const litActionCode = `(${_litActionCode.toString()})();`;
 ```
 
 ## Important Considerations
-You can also use fetch() inside a Lit Action to write data, but you **must be careful**. The HTTP request will be run N times where N is the number of Lit Nodes.
+You can use fetch() inside a Lit Action to write data, but caution is necessary. The HTTP request will execute multiple times, once for each Lit Node in the network.
+When writing data, it's crucial to use operations that produce the same result regardless of how often they're repeated. Consider these examples:
 
-Some operations give the same result no matter how many times you repeat them, while others don't. For example:
+1. Repeatable operation (preferred):
 
-SQL Insert: Running it 10 times creates 10 rows - the result changes each time.
-SQL Update: Running it 10 times only changes the row once - repeating doesn't affect the outcome.
+- SQL Update: Running it multiple times only changes the row once.
+- Result: Consistent outcome, regardless of repetition.
 
-When using fetch() to write data, it's best if the server operation is the second type. This way, if the request accidentally repeats (due to network issues or user actions), it won't cause unwanted duplicates or changes.
+
+2. Non-repeatable operation (avoid):
+
+- SQL Insert: Each execution creates a new row.
+- Result: Unintended duplicates with multiple executions.
+
+For Lit Actions using fetch() to write data, aim for repeatable operations. This approach prevents issues like duplicate entries or unintended changes if the request repeats due to network conditions or distributed execution across nodes.
 
 ## Summary
 This guide demonstrates how to fetch data from the web within a Lit Action.
