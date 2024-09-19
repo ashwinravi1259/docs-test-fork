@@ -3,13 +3,13 @@ import FeedbackComponent from "@site/src/pages/feedback.md";
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Signing within a Lit Action using EIP-191
+# Fetching Data from the Web from within a Lit Action
 
 ## Overview
 
 Unlike traditional smart contract ecosystems, Lit Actions can natively talk to the external world. This is useful for things like fetching data from the web, or sending API requests to other services.
 
-The Lit Action below will get the current temperature from the [National Weather Service](https://www.weather.gov/) API, and ONLY sign a txn if the temperature is forecast to be **above 60 degrees F**. Since you can put this HTTP request and logic that uses the response directly in your Lit Action, you don't have to worry about using a 3rd party oracle to pull data in.
+This Lit Action fetches the current temperature from the [National Weather Service](https://www.weather.gov/) API. It will only sign the given message if the temperature forecast exceeds 60°F (15.5°C). By incorporating the API request and response logic directly within the Lit Action, you eliminate the need for a third-party oracle.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ The complete code example is available in the [Lit Developer Guides Code Reposit
 
 ### Example Lit Action
 
-The return value of `ethPersonalSignMessageEcdsa` (the `sigShare` variable in this example) is set to a boolean value of `true` if the signature was successfully generated, and `false` otherwise. The Lit Action will also return the complete signature as an object under the `sigName` key.
+The `signEcdsa` function returns a boolean value stored in the `sigShare` variable. It's `true` if the message is successfully signed, and `false` if an error occurs during the Lit Action. If the temperature is below 60°F (15.5°C), the Lit Action will instead return a response message to the user.
 
 ```jsx
 const _litActionCode = async () => {
@@ -58,7 +58,7 @@ SQL Update: Running it 10 times only changes the row once - repeating doesn't af
 When using fetch() to write data, it's best if the server operation is the second type. This way, if the request accidentally repeats (due to network issues or user actions), it won't cause unwanted duplicates or changes.
 
 ## Summary
-This guide demonstrates how to sign an EIP-191 message using Lit Actions.
+This guide demonstrates how to fetch data from the web within a Lit Action.
 
 If you'd like to learn more about Lit Actions, check out the [Lit Actions SDK](https://actions-docs.litprotocol.com/), or our [Advanced Topics](https://developer.litprotocol.com/category/advanced-topics-1) section on Lit Actions.
 
