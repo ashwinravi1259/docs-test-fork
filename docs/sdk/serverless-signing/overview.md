@@ -8,7 +8,8 @@ Lit Actions are immutable JavaScript programs that run on a decentralized Lit ne
 
 Lit Actions are a paradigm shift in decentralized computation, offering a flexible and powerful tool for creating sophisticated decentralized applications. Here's some of what makes them unique:
 
-- **JavaScript-Based**: They're written in JavaScript, executed in a secure Deno environment, and support the importing of third-party libraries such as [ethers.js](https://github.com/ethers-io/ethers.js) and [@solana/web3.js](https://github.com/solana-labs/solana-web3.js).
+- **JavaScript-Based**: They're written in JavaScript, executed in a secure Deno environment, and support the importing of third-party libraries such as [@solana/web3.js](https://github.com/solana-labs/solana-web3.js).
+- **Built-in Ethers.js and Lit SDK Support**: Lit Actions have built-in support for Ethers.js (`v5.7.0`) and the Lit SDK, making it easy to interact with Ethereum, other EVM based blockchains, and the Lit Network.
 - **Blockchain Agnostic**: Unlike traditional smart contracts, Lit Actions can interact with multiple blockchains, allowing for cross-chain applications and broader interoperability.
 - **Off-Chain Capabilities**: Lit Actions can make HTTP requests and interact directly with off-chain APIs, eliminating the need for complex oracle systems.
 - **Programmable Signing**: Through integration with [Programmable Key Pairs (PKPs)](../../user-wallets/pkps/overview.md), Lit Actions enable custom and automated, condition-based signing.
