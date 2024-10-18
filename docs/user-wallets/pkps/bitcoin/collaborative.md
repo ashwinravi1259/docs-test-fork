@@ -36,7 +36,7 @@ import { LitNodeClient } from "@lit-protocol/lit-node-client";
 
 bitcoin.initEccLib(ecc);
 
-async function collaborativeMultiSig(litNodeClient: LitNodeClient, sessionSigs: any, pkpPublicKey1: string, pkpPublicKey2: string, destinationAddress: string) {
+export async function collaborativeMultiSig(litNodeClient: LitNodeClient, sessionSigs: any, pkpPublicKey1: string, pkpPublicKey2: string, destinationAddress: string) {
     const network = bitcoin.networks.bitcoin;
     const pubKeyBuffer_1 = Buffer.from(pkpPublicKey1, "hex");
     const pubKeyBuffer_2 = Buffer.from(pkpPublicKey2, "hex");
@@ -155,11 +155,11 @@ async function collaborativeMultiSig(litNodeClient: LitNodeClient, sessionSigs: 
         },
     });
 
-    const signatureWithHashType1 = convertSignature(
+    const signatureWithHashType1 = await convertSignature(
         litActionResponse1.signatures.btcSignature
     );
 
-    const signatureWithHashType2 = convertSignature(
+    const signatureWithHashType2 = await convertSignature(
         litActionResponse2.signatures.btcSignature
     );
 

@@ -35,7 +35,7 @@ import { LitNodeClient } from "@lit-protocol/lit-node-client";
 
 bitcoin.initEccLib(ecc);
 
-async function oneOfOneMultiSig(litNodeClient: LitNodeClient, sessionSigs: any, pkpPublicKey1: string, pkpPublicKey2: string, destinationAddress: string) {
+export async function oneOfOneMultiSig(litNodeClient: LitNodeClient, sessionSigs: any, pkpPublicKey1: string, pkpPublicKey2: string, destinationAddress: string) {
     const network = bitcoin.networks.bitcoin;
     const pubKeyBuffer_1 = Buffer.from(pkpPublicKey1, "hex");
     const pubKeyBuffer_2 = Buffer.from(pkpPublicKey2, "hex");
@@ -104,7 +104,7 @@ async function oneOfOneMultiSig(litNodeClient: LitNodeClient, sessionSigs: any, 
     },
     });
 
-    const signatureWithHashType = convertSignature(
+    const signatureWithHashType = await convertSignature(
         litActionResponse.signatures.btcSignature
     );
 
