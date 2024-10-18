@@ -110,7 +110,7 @@ import * as bip66 from "bip66";
 import * as bitcoin from "bitcoinjs-lib";
 import BN from "bn.js";
 
-function convertSignature(litSignature: any) {
+export const convertSignature = async (litSignature: any) => {
     const EC = elliptic.ec;
     let r = Buffer.from(litSignature.r, "hex");
     let s = Buffer.from(litSignature.s, "hex");
@@ -177,7 +177,7 @@ Once the transaction is fully signed and formatted, it needs to be broadcasted t
 ```tsx
 import fetch from "node-fetch";
 
-const broadcastTransaction = async (txHex: string) => {
+export const broadcastTransaction = async (txHex: string) => {
     try {
     const response = await fetch("https://mempool.space/api/tx", {
         method: "POST",

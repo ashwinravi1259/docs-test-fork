@@ -33,7 +33,7 @@ import { LitNodeClient } from "@lit-protocol/lit-node-client";
 
 bitcoin.initEccLib(ecc);
 
-async function singleSig(litNodeClient: LitNodeClient, sessionSigs: any, pkpPublicKey: string, destinationAddress: string) {
+export async function singleSig(litNodeClient: LitNodeClient, sessionSigs: any, pkpPublicKey: string, destinationAddress: string) {
     const network = bitcoin.networks.bitcoin;
     const pubKeyBuffer = Buffer.from(pkpPublicKey, "hex");
 
@@ -98,7 +98,7 @@ async function singleSig(litNodeClient: LitNodeClient, sessionSigs: any, pkpPubl
         },
     });
 
-    const signatureWithHashType = convertSignature(
+    const signatureWithHashType = await convertSignature(
         litActionResponse.signatures.btcSignature
     );
 
