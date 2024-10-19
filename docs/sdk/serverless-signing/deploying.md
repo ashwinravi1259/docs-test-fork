@@ -11,7 +11,7 @@ In order for the Lit nodes to be able to run your Lit Action, they need access t
 
 Before diving into the approaches for deploying a Lit Action, it's important to understand the constraints that in place to prevent malicious parties from performing DoS attacks, and the over consumption of resources on the Lit nodes. The following are the time and size constraints that are imposed on Lit Actions:
 
-- A `30 second` time limit
+- A `30 second` time limit on the Datil and Datil-test network, and a `60 second` time limit on Datil-dev.
 - A max size of `100MB`
   - Code minifiers can help address code size issues
 - Memory usage (RAM) of `256MB`
