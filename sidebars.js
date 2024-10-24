@@ -505,6 +505,7 @@ const sidebars = {
               collapsed: true,
               items: [
                 'integrations/storage/ceramic-example',
+                'integrations/storage/orbis-example',
                 'integrations/storage/irys',
               ],
             },
