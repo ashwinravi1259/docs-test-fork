@@ -27,7 +27,7 @@ At completion of this reading you should be able to:
 
 The Ceramic Protocol is built on decentralized event streams, where user accounts (enabled by decentralized identifiers, or [DIDs](https://developers.ceramic.network/protocol/accounts/decentralized-identifiers/)) cryptographically sign data events and submit them to the network. These events are synchronized across subscribing nodes in the network and arranged into event logs, or Ceramic "streams." Each stream offers the flexibility to hold various types of content, making Ceramic suitable for a wide range of data applications, including user profiles, posts, relationships, and more, while retaining the history of changes the stream has undergone throughout its lifetime.
 
-To extend Ceramic's functionality, most developers utilize a database interface that sits on top of the Ceramic protocol, enabling flexible options for preferred database types, hosting methods, and other developer tools.
+To extend Ceramic's functionality, most developers utilize a database interface that sits on top of the Ceramic protocol enabling flexible options for preferred database types, hosting methods, and other developer tools.
 
 For more information on how Ceramic works, visit [How it Works](https://ceramic.network/how-it-works).
 
@@ -35,7 +35,7 @@ For more information on how Ceramic works, visit [How it Works](https://ceramic.
 
 OrbisDB is an open-source relational database that inherits data ownership, composability, and the decentralized properties of the network it’s built on (Ceramic). OrbisDB offers many developer-friendly features in a highly scalable way, including multiple ways to query data, a built-in dashboard UI, shared nodes for testing and iteration, and an ecosystem of plugins that extend its data functionality.
 
-For the purpose of this tutorial, we will be using Ceramic with OrbisDB to illustrate how developers can generate, store, and query simple encrypted messages.
+For this tutorial, we will be using Ceramic with OrbisDB to illustrate how developers can generate, store, and query simple encrypted messages.
 
 This tutorial will use a message board example application to show how to create encrypted messages using Lit Protocol and save message instances to the Ceramic Network using OrbisDB.
 
@@ -69,15 +69,15 @@ The following sections include additional setup details:
 
 **WalletConnect**
 
-You will also need to obtain a Client ID from WalletConnect as the demo uses it for its wallet provider. Log into your [WalletConnect Cloud Dashboard](https://cloud.walletconnect.com/) and create a new project (with the "App" type selected). Once created, copy the "Project ID" and assign it to `NEXT_PUBLIC_PROJECT_ID`.
+You must obtain a Client ID from WalletConnect as the demo uses it for its wallet provider. Log into your [WalletConnect Cloud Dashboard](https://cloud.walletconnect.com/) and create a new project (with the "App" type selected). Once created, copy the "Project ID" and assign it to `NEXT_PUBLIC_PROJECT_ID`.
 
 **OrbisDB**
 
-You will also need to configure a few variables to be able to work with OrbisDB. To make things simple, we will use the hosted [OrbisDB Studio](https://studio.useorbis.com/) and the shared node instance it provides for this demo, but keep in mind that you can set up your own instance whenever you want (more details at [OrbisDB](https://useorbis.com/)).
+You will also need to configure a few variables to work with OrbisDB. To make things simple, we will use the hosted [OrbisDB Studio](https://studio.useorbis.com/) and the shared node instance it provides for this demo, but keep in mind that you can set up your own instance whenever you want (more details at [OrbisDB](https://useorbis.com/)).
 
 First, go ahead and sign in with your wallet.
 
-Once signed in, the studio will default to the "Contexts" tab at the top. On the right-hand side you will see your environment ID. Go ahead and assign that value to `NEXT_PUBLIC_ENV_ID` in your new .env file.
+Once signed in, the studio will show the "Contexts" tab at the top. On the right-hand side, you will see your environment ID. Go ahead and assign that value to `NEXT_PUBLIC_ENV_ID` in your new .env file.
 
 Next, set up a context. These help developers segment their data models and usage based on the applications they are meant for. Create a new context (you can call it "forum-app" if you'd like), and assign the resulting string to `NEXT_PUBLIC_CONTEXT_ID` in your .env file.
 
@@ -158,7 +158,7 @@ Once authenticated, you should now see a blank message board appear on the scree
 
 </div>
 
-If you now check your local storage, you'll also see a new generated field with a "orbis:session" key and a serialized corresponding value.
+If you now check your local storage, you'll also see a newly generated field with a "orbis:session" key and a serialized corresponding value.
 
 Finally, navigating back to /src/pages/index.tsx, you'll also notice that a `startLitClient` method is invoked within the `useEffect` hook. This method is imported from /utils/client.ts and is meant to connect your host to LIT Protocol's network:
 
@@ -184,7 +184,7 @@ Next, you'll find an `encrypted` constant assigned to the evaluated result of in
 
 Observe how the child methods within `encryptWithLit` use the original arguments to eventually return an object that we will then save to OrbisDB.
 
-Back in `/src/fragments/chatinputbox.tsx`, observe how the `insert` method on our `orbis` client class instance is invoked with the values we just generated from the LIT encryption sequence. It's important to note that mutation queries (such as this one) only work when a user is authenticated. Since we are importing the `useOrbisContext` wrapper from /context/OrbisContext.tsx, we are able to access the authenticated session we established in the last section from within any child components. You can also see how the `createPosts` mutation query accessing the table definitions we created in the Orbis Studio by importing them as client environment variables:
+Back in `/src/fragments/chatinputbox.tsx`, observe how the `insert` method on our `orbis` client class instance is invoked with the values we just generated from the LIT encryption sequence. It's important to note that mutation queries (such as this one) only work when a user is authenticated. Since we are importing the `useOrbisContext` wrapper from /context/OrbisContext.tsx, we are able to access the authenticated session we established in the last section from within any child components. You can also see how the `createPosts` mutation query accesses the table definitions we created in the Orbis Studio by importing them as client environment variables:
 
 ```typescript
 const accessControlConditions = [
@@ -306,8 +306,8 @@ To learn more about Ceramic please visit the following links
 
 To learn more about OrbisDB please visit the following links
 
-[OrbisDB Overview](https://developers.ceramic.network/docs/orbisdb/overview)
-[OrbisDB SDK](https://developers.ceramic.network/docs/orbisdb/orbisdb-sdk)
-[OrbisDB Website](https://useorbis.com/)
+- [OrbisDB Overview](https://developers.ceramic.network/docs/orbisdb/overview)
+- [OrbisDB SDK](https://developers.ceramic.network/docs/orbisdb/orbisdb-sdk)
+- [OrbisDB Website](https://useorbis.com/)
 
 <FeedbackComponent/>
