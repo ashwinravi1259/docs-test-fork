@@ -72,7 +72,7 @@ ethers@v5
 
 ```ts
 import ethers from "ethers";
-import { LIT_RPC } from "@lit-protocol/constants";
+import { LIT_RPC, LIT_ABILITY } from "@lit-protocol/constants";
 
 const ethersSigner = new ethers.Wallet(
     process.env.ETHEREUM_PRIVATE_KEY,
@@ -88,10 +88,10 @@ The address corresponding to `process.env.ETHEREUM_PRIVATE_KEY` **needs** to hav
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.DatilTest,
+    litNetwork: LIT_NETWORK.DatilTest,
     debug: false,
 });
 await litNodeClient.connect();
@@ -113,7 +113,7 @@ const sessionSigs = await litNodeClient.getSessionSigs({
     resourceAbilityRequests: [
     {
         resource: new LitActionResource("*"),
-        ability: LitAbility.LitActionExecution,
+        ability: LIT_ABILITY.LitActionExecution,
     },
     ],
     authNeededCallback: async ({

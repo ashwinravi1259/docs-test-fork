@@ -55,11 +55,11 @@ JSON_RPC_NODE_PROVIDER= // Get an RPC from a Node provider
 ```jsx
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
 import { LitAuthClient, GoogleProvider } from "@lit-protocol/lit-auth-client";
-import { ProviderType, LitNetwork } from "@lit-protocol/constants";
+import { PROVIDER_TYPE, LIT_NETWORK } from "@lit-protocol/constants";
 
 const initalizeClientsAndProvider = async () => {
   const litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.DatilDev,
+    litNetwork: LIT_NETWORK.DatilDev,
     debug: true,
   });
   await litNodeClient.connect();
@@ -74,7 +74,7 @@ const initalizeClientsAndProvider = async () => {
   console.log("Connected to Lit Node and Lit Auth Clients ✔️");
 
   const provider = litAuthClient.initProvider<GoogleProvider>(
-    ProviderType.Google,
+    PROVIDER_TYPE.Google,
     {
       // redirectUri: The redirect URI Lit's login server should redirect to after a successful login
     }
@@ -127,7 +127,7 @@ console.log("Minted PKP ✔️");
 
 ```jsx
 import { PKPEthersWallet } from "@lit-protocol/pkp-ethers";
-import { LitAbility, LitPKPResource } from "@lit-protocol/auth-helpers";
+import { LIT_ABILITY, LitPKPResource } from "@lit-protocol/auth-helpers";
 import { AuthCallbackParams } from "@lit-protocol/types";
 import { LIT_RPC } from "@lit-protocol/constants";
 
@@ -139,7 +139,7 @@ const response = await litNodeClient.signSessionKey({
   resourceAbilityRequests: [
     {
       resource: new LitPKPResource("*"),
-      ability: LitAbility.PKPSigning,
+      ability: LIT_ABILITY.PKPSigning,
     },
   ],
   expiration: params.expiration,
@@ -159,7 +159,7 @@ const guardianSigner = new PKPEthersWallet({
       resourceAbilityRequests: [
         {
           resource: new LitPKPResource("*"),
-          ability: LitAbility.PKPSigning,
+          ability: LIT_ABILITY.PKPSigning,
         },
       ],
       authNeededCallback: authNeededCallback,

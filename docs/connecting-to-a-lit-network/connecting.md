@@ -4,11 +4,11 @@ After installing the Lit SDK, you can connect an instance of [LitNodeClient](htt
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const litNodeClient = new LitNodeClient({
     // Change this to the Lit SDK Network Identifier you want to connect to
-    litNetwork: LitNetwork.DatilDev,
+    litNetwork: LIT_NETWORK.DatilDev,
 });
 await litNodeClient.connect();
 ```

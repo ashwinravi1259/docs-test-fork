@@ -41,10 +41,10 @@ An example of claiming with a customized `ClaimProcessor` using the `contracts-s
 ```jsx
 import { LitContracts } from '@lit-protocol/contracts-sdk';
 import { ClaimRequest, ClaimResult, ClientClaimProcessor } from "@lit-protocol/types"
-import { LIT_RPC, LitNetwork } from "@lit-protocol/constants";
+import { LIT_RPC, LIT_NETWORK } from "@lit-protocol/constants";
 
 const client = new LitNodeClient({
-	litNetwork: LitNetwork.DatilDev,
+	litNetwork: LIT_NETWORK.DatilDev,
 	debug: false
 });
 await client.connect();
@@ -164,6 +164,7 @@ Now we can create an instance of the `LitAuthClient` with a `relay API key` . Th
 Finally, we can pass the `session jwt` from the `authenticate` response .
 
 ```jsx
+import { PROVIDER_TYPE } from "@lit-protocol/constants";
 
 const authClient = new LitAuthClient({
   litRelayConfig: {
@@ -171,7 +172,7 @@ const authClient = new LitAuthClient({
   }
 });
 
-const session = authClient.initProvider(ProviderType.StytchOtp, {
+const session = authClient.initProvider(PROVIDER_TYPE.StytchOtp, {
   userId: sessionStatus.session.user_id,
   appId: "<your project id>"
 })
@@ -228,13 +229,15 @@ Now we can create an instance of the `LitAuthClient` with a `relay API key` . Th
 Finally, we can pass the `session jwt` from the `authenticate` response . Upon successful `authentication` of the token, an `AuthMethod` will be generated. With the `Auth Method` created we can parse it and get an `AuthMethodId` which can be used to calculate the public key. This is because the `AuthMethodId` is the `key id`
 
 ```jsx
+import { PROVIDER_TYPE } from "@lit-protocol/constants";
+
 const authClient = new LitAuthClient({
   litRelayConfig: {
       relayApiKey: '<your relayer api key>',
   }
 });
 
-const session = authClient.initProvider(ProviderType.StytchOtp, {
+const session = authClient.initProvider(PROVIDER_TYPE.StytchOtp, {
   userId: sessionStatus.session.user_id,
   appId: "<your project id>"
 })

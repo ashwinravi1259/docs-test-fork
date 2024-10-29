@@ -112,9 +112,9 @@ async decrypt(encryptedString, encryptedSymmetricKey) {
 ### 3. Connect to `Habanero` or `Manzano` and encrypt it again
 ```js
 import {ethers} from "ethers";
+import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
   LitAccessControlConditionResource,
-  LitAbility,
   createSiweMessageWithRecaps,
   generateAuthSig,
 } from "@lit-protocol/auth-helpers";
@@ -182,7 +182,7 @@ class LitV3 {  // or Class LitV4
           resourceAbilityRequests: [
               {
                   resource: litResource,
-                  ability: LitAbility.AccessControlConditionDecryption,
+                  ability: LIT_ABILITY.AccessControlConditionDecryption,
               },
           ],
           authNeededCallback,

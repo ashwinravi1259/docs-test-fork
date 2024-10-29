@@ -63,10 +63,10 @@ Using this strategy, you could implement your own MFA, where the user must prese
 ```js
 import { LitAuthClient } from '@lit-protocol/lit-auth-client';
 import { LitContracts } from '@lit-protocol/contracts-sdk';
-import { AuthMethodScope, AuthMethodType } from '@lit-protocol/constants';
+import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE } from '@lit-protocol/constants';
 
 const authMethod = {
-  authMethodType: AuthMethodType.EthWallet,
+  authMethodType: AUTH_METHOD_TYPE.EthWallet,
   accessToken: ...,
 };
 
@@ -74,7 +74,7 @@ const authId = LitAuthClient.getAuthIdByAuthMethod(authMethod);
 
 const scopes = await contractClient.pkpPermissionsContract.read.getPermittedAuthMethodScopes(
   tokenId,
-  AuthMethodType.EthWallet,
+  AUTH_METHOD_TYPE.EthWallet,
   authId,
   3 // there are only 2 scope numbers atm. and index 0 doesn't count
 );
@@ -92,7 +92,7 @@ if (scopes[2] !== false) {
 ```js
 import { LitAuthClient } from '@lit-protocol/lit-auth-client';
 import { LitContracts } from '@lit-protocol/contracts-sdk';
-import { AuthMethodScope, AuthMethodType } from '@lit-protocol/constants';
+import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE } from '@lit-protocol/constants';
 
 const authMethod = {
   authMethodType: xx,
@@ -104,9 +104,9 @@ const authId = LitAuthClient.getAuthIdByAuthMethod(authMethod);
 const setScopeTx =
   await contractClient.pkpPermissionsContract.write.addPermittedAuthMethodScope(
     tokenId,
-    AuthMethodType.EthWallet,
+    AUTH_METHOD_TYPE.EthWallet,
     authId,
-    AuthMethodScope.SignAnything
+    AUTH_METHOD_SCOPE.SignAnything
   );
 
 await setScopeTx.wait();

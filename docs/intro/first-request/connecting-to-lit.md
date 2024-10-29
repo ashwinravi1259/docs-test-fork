@@ -6,19 +6,19 @@ When initializing a `LitNodeClient` instance, you must provide a `litNetwork`.
 
 ```tsx
 import { LitNodeClient } from '@lit-protocol/lit-node-client';
-import { LitNetwork } from '@lit-protocol/constants';
+import { LIT_NETWORK } from '@lit-protocol/constants';
 
 const litNodeClient = new LitNodeClient({
-  litNetwork: LitNetwork.DatilDev,
+  litNetwork: LIT_NETWORK.DatilDev,
   debug: false,
 });
 
 await litNodeClient.connect();
 ```
 
-### `LitNetwork` Constant
+### `LIT_NETWORK` Constant
 
-The `LitNetwork` constant contains the past and present Lit networks. The constant is imported from the `@lit-protocol/constants` package. The current networks in the constant can be found [here](https://v6-api-doc-lit-js-sdk.vercel.app/enums/constants_src.LitNetwork.html).
+The `LIT_NETWORK` constant contains the past and present Lit networks. The constant is imported from the `@lit-protocol/constants` package. The current networks in the constant can be found [here](https://v6-api-doc-lit-js-sdk.vercel.app/enums/constants_src.LitNetwork.html).
 
 ### `LitNodeClient` Flags
 
@@ -38,13 +38,13 @@ In a browser environment, the `storageProvider` flag will be ignored, and the Se
 
 ```ts
 import { LitNodeClient } from '@lit-protocol/lit-node-client';
-import { LitNetwork } from '@lit-protocol/constants';
+import { LIT_NETWORK } from '@lit-protocol/constants';
 import { disconnectWeb3 } from "@lit-protocol/auth-browser";
 
 let litNodeClient;
 try {
   litNodeClient = new LitNodeClient({
-      litNetwork: LitNetwork.DatilDev,
+      litNetwork: LIT_NETWORK.DatilDev,
       debug: false,
   });
 

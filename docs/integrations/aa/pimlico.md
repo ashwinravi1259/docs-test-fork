@@ -152,13 +152,15 @@ You can also ping the Lit developement team on [Discord](https://litgateway.com/
 ### 6. Mint a PKPs through Lit Protocol
 
 ```js
+import { PROVIDER_TYPE } from "@lit-protocol/constants";
+
 const litClient = new LitAuthClient({
     litRelayConfig: {
         relayApiKey: '<Your Lit Relay Server API Key>',
     }
 });
  
-const session = litClient.initProvider(ProviderType.StytchOtp, {
+const session = litClient.initProvider(PROVIDER_TYPE.StytchOtp, {
     userId: sessionStatus.session.user_id,
     appId: "project-test-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 })
@@ -175,8 +177,11 @@ const pkps = await session.fetchPKPsThroughRelayer(authMethod)
 ### 7. Generate the Controller Session Signatures or its context to generate them on demand
 
 ```js
+import { LitNodeClientNodeJs } from "@lit-protocol/lit-node-client-nodejs";
+import { LIT_ABILITY, LIT_NETWORK } from "@lit-protocol/constants";
+
 const litNodeClient = new LitNodeClientNodeJs({
-    litNetwork: "datil-dev",
+    litNetwork: LIT_NETWORK.DatilDev,
     debug: false,
 })
 await litNodeClient.connect();
@@ -184,7 +189,7 @@ await litNodeClient.connect();
 const resourceAbilities = [
     {
         resource: new LitActionResource("*"),
-        ability: LitAbility.PKPSigning,
+        ability: LIT_ABILITY.PKPSigning,
     },
 ];
  

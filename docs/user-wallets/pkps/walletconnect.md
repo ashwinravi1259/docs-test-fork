@@ -16,7 +16,8 @@ To connect a PKP and a dApp, you will need to:
 
 ```js
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitAbility, LitActionResource } from '@lit-protocol/auth-helpers';
+import { LIT_ABILITY } from "@lit-protocol/constants";
+import { LitActionResource } from '@lit-protocol/auth-helpers';
 import { PKPClient } from "@lit-protocol/pkp-client";
 
 // If you haven't done before, create a LitNodeClient instance
@@ -29,7 +30,7 @@ await litNodeClient.connect();
 const resourceAbilities = [
   {
     resource: new LitActionResource("*"),
-    ability: LitAbility.PKPSigning,
+    ability: LIT_ABILITY.PKPSigning,
   },
 ];
 

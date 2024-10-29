@@ -81,12 +81,12 @@ Here we are initializing an instance of `LitNodeClient` and connecting it to the
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 let litNodeClient: LitNodeClient;
 
 litNodeClient = new LitNodeClient({
-      litNetwork: LitNetwork.DatilTest,
+      litNetwork: LIT_NETWORK.DatilTest,
       debug: false,
     });
 await litNodeClient.connect();
@@ -100,8 +100,8 @@ To get the Lit resource identifier for other resources, you can use the other me
 If you would like to use this function on the `datil` or `datil-test` networks, a `capacityDelegationAuthSig` is required. An example of how to generate one can be found in the full code example.
 
 ```ts
+import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
-  LitAbility,
   LitAccessControlConditionResource,
   createSiweMessage,
   generateAuthSig,
@@ -114,7 +114,7 @@ const sessionSignatures = await litNodeClient.getSessionSigs({
   resourceAbilityRequests: [
     {
       resource: new LitAccessControlConditionResource("*"),
-      ability: LitAbility.AccessControlConditionDecryption,
+      ability: LIT_ABILITY.AccessControlConditionDecryption,
     },
   ],
   authNeededCallback: async ({

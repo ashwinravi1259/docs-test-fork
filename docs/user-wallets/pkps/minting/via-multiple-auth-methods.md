@@ -24,7 +24,7 @@ yarn add @lit-protocol/lit-auth-client
 
 ```javascript
 import { LitAuthClient } from '@lit-protocol/lit-auth-client';
-import { ProviderType } from '@lit-protocol/constants';
+import { PROVIDER_TYPE } from '@lit-protocol/constants';
 
 // Set up LitAuthClient
 const litAuthClient = new LitAuthClient({
@@ -35,7 +35,7 @@ const litAuthClient = new LitAuthClient({
 });
 
 // Initialize Google provider
-litAuthClient.initProvider(ProviderType.Google, {
+litAuthClient.initProvider(PROVIDER_TYPE.Google, {
   // The URL of your web app where users will be redirected after authentication
   redirectUri: '<Your redirect URI>',
 });
@@ -43,7 +43,7 @@ litAuthClient.initProvider(ProviderType.Google, {
 // Begin login flow with Google
 async function authWithGoogle() {
   const provider = litAuthClient.getProvider(
-    ProviderType.Google
+    PROVIDER_TYPE.Google
   );
   await provider.signIn();
 }
@@ -63,14 +63,14 @@ At the `redirectUri` specified when initializing the providers, call `handleSign
 
 ```javascript
 import { LitAuthClient, isSignInRedirect } from '@lit-protocol/lit-auth-client';
-import { AuthMethodScope, ProviderType } from '@lit-protocol/constants';
+import { AUTH_METHOD_SCOPE, PROVIDER_TYPE } from '@lit-protocol/constants';
 
 async function handleRedirect() {
   // Check if app has been redirected from Lit login server
   if (isSignInRedirect(redirectUri)) {
     // Get the provider that was used to sign in
     const provider = provider = litAuthClient.getProvider(
-      ProviderType.Google,
+      PROVIDER_TYPE.Google,
     );
     // Get auth method object that has the OAuth token from redirect callback
     const authMethodGoogle: AuthMethod = await provider.authenticate();
@@ -87,7 +87,7 @@ You can also authenticate users using SMS (OTP) by sending a one-time passcode t
 
 ```javascript
 import { LitAuthClient } from '@lit-protocol/lit-auth-client';
-import { AuthMethodScope, ProviderType } from '@lit-protocol/constants';
+import { AUTH_METHOD_SCOPE, PROVIDER_TYPE } from '@lit-protocol/constants';
 
 // Set up LitAuthClient
 const litAuthClient = new LitAuthClient({
@@ -122,7 +122,7 @@ async function authenticateWithStytch(code, methodId) {
   });
 
   // Initialize StytchSmsFactorOtp provider
-  const provider = litAuthClient.initProvider(ProviderType.StytchSmsFactorOtp, {
+  const provider = litAuthClient.initProvider(PROVIDER_TYPE.StytchSmsFactorOtp, {
     appId: YOUR_STYTCH_PROJECT_ID
   });
 
@@ -181,11 +181,11 @@ First, configure your Ethereum provider and the controller wallet. Initialize th
 
 ```javascript
 import { LitContracts } from '@lit-protocol/contracts-sdk';
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const contractClient = new LitContracts({
   signer: controllerWallet,    // Your ethers wallet
-  network: LitNetwork.DatilTest,
+  network: LIT_NETWORK.DatilTest,
 });
 
 await contractClient.connect();
@@ -216,7 +216,7 @@ const mintCost = await contractClient.pkpNftContract.read.mintCost();
 // Mint PKP using both Auth Methods
 const mintTx = await contractClient.pkpHelperContract.write.mintNextAndAddAuthMethods(
   2, // key type
-  [AuthMethodType.EthWallet, AuthMethodType.LitAction], // Specify the auth method types
+  [AUTH_METHOD_TYPE.EthWallet, AUTH_METHOD_TYPE.LitAction], // Specify the auth method types
   [authIdWallet, authIdAction],  // Specify the auth method IDs
   ['0x', '0x'], // Specify the auth method public keys
   [[1], [1]], // Specify the auth method scopes

@@ -19,7 +19,7 @@ yarn add @lit-protocol/lit-auth-client
 
 ```javascript
 import { LitAuthClient } from '@lit-protocol/lit-auth-client';
-import { ProviderType } from '@lit-protocol/constants';
+import { PROVIDER_TYPE } from '@lit-protocol/constants';
 
 // Set up LitAuthClient
 const litAuthClient = new LitAuthClient({
@@ -30,7 +30,7 @@ const litAuthClient = new LitAuthClient({
 });
 
 // Initialize Google provider
-litAuthClient.initProvider(ProviderType.Google, {
+litAuthClient.initProvider(PROVIDER_TYPE.Google, {
   // The URL of your web app where users will be redirected after authentication
   redirectUri: '<Your redirect URI>',
 });
@@ -38,7 +38,7 @@ litAuthClient.initProvider(ProviderType.Google, {
 // Begin login flow with Google
 async function authWithGoogle() {
   const provider = litAuthClient.getProvider(
-    ProviderType.Google
+    PROVIDER_TYPE.Google
   );
   await provider.signIn();
 }
@@ -58,21 +58,21 @@ At the `redirectUri` specified when initializing the providers, call `handleSign
 
 ```javascript
 import { LitAuthClient, isSignInRedirect } from '@lit-protocol/lit-auth-client';
-import { AuthMethodScope, ProviderType } from '@lit-protocol/constants';
+import { AUTH_METHOD_SCOPE, PROVIDER_TYPE } from '@lit-protocol/constants';
 
 async function handleRedirect() {
   // Check if app has been redirected from Lit login server
   if (isSignInRedirect(redirectUri)) {
     // Get the provider that was used to sign in
     const provider = provider = litAuthClient.getProvider(
-      ProviderType.Google,
+      PROVIDER_TYPE.Google,
     );
     // Get auth method object that has the OAuth token from redirect callback
     const authMethod: AuthMethod = await provider.authenticate();
     // -- setting scope for the auth method
     // <https://developer.litprotocol.com/v3/sdk/wallets/auth-methods/#auth-method-scopes>
     const options = {
-        permittedAuthMethodScopes: [[AuthMethodScope.SignAnything]],
+        permittedAuthMethodScopes: [[AUTH_METHOD_SCOPE.SignAnything]],
     };
     // Mint PKP using the auth method
     const mintTx = await provider.mintPKPThroughRelayer(
@@ -95,6 +95,8 @@ With the `AuthMethod` object, you can mint and fetch PKPs associated with the au
 After successfully authenticating with a social login provider, you can generate `SessionSigs` using the provider's `getSessionSigs` method. The `getSessionSigs` method takes in an `AuthMethod` object, optional `LitNodeClient` object, a PKP public key, and other session-specific arguments in `SessionSigsParams` object such as `resourceAbilityRequests` and `chain`. View the [API Docs](https://js-sdk.litprotocol.com/interfaces/types_src.BaseProviderSessionSigsParams.html).
 
 ```javascript
+import { LIT_ABILITY } from "@lit-protocol/constants";
+
 // Get session signatures for the given PKP public key and auth method
 const sessionSigs = await provider.getSessionSigs({
   authMethod: '<AuthMethod object returned from authenticate()>',
@@ -103,7 +105,7 @@ const sessionSigs = await provider.getSessionSigs({
     chain: 'ethereum',
     resourceAbilityRequests: [{
         resource: litResource,
-        ability: LitAbility.AccessControlConditionDecryption
+        ability: LIT_ABILITY.AccessControlConditionDecryption
       }
     ],
   },
@@ -117,7 +119,7 @@ You can also mint a PKP by presenting a generated token from sucessful OTP code 
 
 ```javascript
 import { LitAuthClient } from '@lit-protocol/lit-auth-client';
-import { AuthMethodScope, ProviderType } from '@lit-protocol/constants';
+import { AUTH_METHOD_SCOPE, PROVIDER_TYPE } from '@lit-protocol/constants';
 
 // Set up LitAuthClient
 const litAuthClient = new LitAuthClient({
@@ -153,11 +155,11 @@ async function authenticateWithStytch(method, code, methodId) {
   // Initialize StytchEmailFactorOtp or StytchSmsFactorOtp provider
   let provider;
   if (method === "email") {
-    provider = litAuthClient.initProvider(ProviderType.StytchEmailFactorOtp, {
+    provider = litAuthClient.initProvider(PROVIDER_TYPE.StytchEmailFactorOtp, {
       appId: YOUR_STYTCH_PROJECT_ID,
     });
   } else {
-    provider = litAuthClient.initProvider(ProviderType.StytchSmsFactorOtp, {
+    provider = litAuthClient.initProvider(PROVIDER_TYPE.StytchSmsFactorOtp, {
       appId: YOUR_STYTCH_PROJECT_ID
     });
   }
@@ -168,7 +170,7 @@ async function authenticateWithStytch(method, code, methodId) {
   // -- setting scope for the auth method
   // <https://developer.litprotocol.com/v3/sdk/wallets/auth-methods/#auth-method-scopes>
   const options = {
-      permittedAuthMethodScopes: [[AuthMethodScope.SignAnything]],
+      permittedAuthMethodScopes: [[AUTH_METHOD_SCOPE.SignAnything]],
   };
   // Mint PKP using the auth method
   const mintTx = await provider.mintPKPThroughRelayer(

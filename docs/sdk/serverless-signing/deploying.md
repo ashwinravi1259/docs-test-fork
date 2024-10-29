@@ -59,11 +59,10 @@ Most of the code in the full implementation is boilerplate code used to connect 
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LIT_RPC, LitNetwork } from "@lit-protocol/constants";
+import { LIT_RPC, LIT_NETWORK, LIT_ABILITY } from "@lit-protocol/constants";
 import {
   createSiweMessageWithRecaps,
   generateAuthSig,
-  LitAbility,
   LitActionResource,
 } from "@lit-protocol/auth-helpers";
 
@@ -73,7 +72,7 @@ const ethersSigner = new ethers.Wallet(
 );
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.DatilDev,
+    litNetwork: LIT_NETWORK.DatilDev,
     debug: false,
 });
 await litNodeClient.connect();
@@ -84,7 +83,7 @@ const sessionSigs = await litNodeClient.getSessionSigs({
     resourceAbilityRequests: [
         {
             resource: new LitActionResource("*"),
-            ability: LitAbility.LitActionExecution,
+            ability: LIT_ABILITY.LitActionExecution,
         },
     ],
     authNeededCallback: async ({
@@ -156,11 +155,10 @@ Most of the code in the full implementation is boilerplate code used to connect 
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LIT_RPC, LitNetwork } from "@lit-protocol/constants";
+import { LIT_RPC, LIT_NETWORK, LIT_ABILITY } from "@lit-protocol/constants";
 import {
   createSiweMessageWithRecaps,
   generateAuthSig,
-  LitAbility,
   LitActionResource,
 } from "@lit-protocol/auth-helpers";
 
@@ -170,7 +168,7 @@ const ethersSigner = new ethers.Wallet(
 );
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.DatilDev,
+    litNetwork: LIT_NETWORK.DatilDev,
     debug: false,
 });
 await litNodeClient.connect();
@@ -181,7 +179,7 @@ const sessionSigs = await litNodeClient.getSessionSigs({
     resourceAbilityRequests: [
         {
             resource: new LitActionResource("*"),
-            ability: LitAbility.LitActionExecution,
+            ability: LIT_ABILITY.LitActionExecution,
         },
     ],
     authNeededCallback: async ({

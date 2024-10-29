@@ -87,12 +87,12 @@ const ethersSigner = new ethers.Wallet(
 Here we are initializing an instance of `LitNodeClient` and connecting it to the `datil-test` Lit network.
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 let litNodeClient: LitNodeClient;
 
 litNodeClient = new LitNodeClient({
-      litNetwork: LitNetwork.DatilTest,
+      litNetwork: LIT_NETWORK.DatilTest,
       debug: false,
     });
 await litNodeClient.connect();
@@ -103,11 +103,11 @@ Here we are initializing an instance of `LitContracts`. This allows us to intera
 
 ```ts
 import { LitContracts } from "@lit-protocol/contracts-sdk";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const litContracts = new LitContracts({
     signer: ethersSigner,
-    network: LitNetwork.DatilTest,
+    network: LIT_NETWORK.DatilTest,
     debug: false,
 });
 await litContracts.connect();
@@ -124,7 +124,8 @@ If you would like to use this function on the `datil` or `datil-test` networks, 
 
 
 ```ts
-import { LitAbility, LitPKPResource } from "@lit-protocol/auth-helpers";
+import { LIT_ABILITY } from "@lit-protocol/constants";
+import { LitPKPResource } from "@lit-protocol/auth-helpers";
 
 const sessionSignatures = await litNodeClient.getPkpSessionSigs({
     pkpPublicKey: pkp.publicKey!,
@@ -133,7 +134,7 @@ const sessionSignatures = await litNodeClient.getPkpSessionSigs({
     resourceAbilityRequests: [
         {
             resource: new LitPKPResource("*"),
-            ability: LitAbility.PKPSigning,
+            ability: LIT_ABILITY.PKPSigning,
         },
     ],
     expiration: new Date(Date.now() + 1000 * 60 * 10).toISOString(), // 10 minutes

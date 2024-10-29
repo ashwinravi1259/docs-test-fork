@@ -72,12 +72,13 @@ Additionally, we'll initialize an Ethereum wallet using the `ETHEREUM_PRIVATE_KE
 <p>
 
 ```ts
-import { LitNodeClient, encryptString, decryptToString } from "@lit-protocol/lit-node-client";
-import { LitNetwork, LIT_RPC } from "@lit-protocol/constants";
+import { LitNodeClient } from "@lit-protocol/lit-node-client";
+import { encryptString, decryptToString } from "lit-protocol/encryption";
+import { LIT_NETWORK, LIT_RPC } from "@lit-protocol/constants";
 import * as ethers from "ethers";
 
 const litNodeClient = new LitNodeClient({
-  litNetwork: LitNetwork.DatilDev,
+  litNetwork: LIT_NETWORK.DatilDev,
   debug: false
 });
 await litNodeClient.connect();
@@ -157,10 +158,10 @@ In this step, we'll generate Session Signatures that grant permission to decrypt
 <p>
 
 ```ts
+import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
   createSiweMessage,
   generateAuthSig,
-  LitAbility,
   LitAccessControlConditionResource,
 } from "@lit-protocol/auth-helpers";
 
@@ -175,7 +176,7 @@ const sessionSigs = await litNodeClient.getSessionSigs({
                     dataToEncryptHash
                 )
             ),
-            ability: LitAbility.AccessControlConditionDecryption,
+            ability: LIT_ABILITY.AccessControlConditionDecryption,
         },
     ],
     authNeededCallback: async ({

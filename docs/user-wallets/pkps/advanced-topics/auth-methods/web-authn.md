@@ -26,10 +26,10 @@ const litAuthClient = new LitAuthClient({
 });
 
 // Initialize WebAuthn provider
-litAuthClient.initProvider(ProviderType.WebAuthn);
+litAuthClient.initProvider(PROVIDER_TYPE.WebAuthn);
 
 async function registerWithWebAuthn() {
-  const provider = litAuthClient.getProvider(ProviderType.WebAuthn);
+  const provider = litAuthClient.getProvider(PROVIDER_TYPE.WebAuthn);
   // Register new WebAuthn credential
   const options = await provider.register();
 
@@ -68,8 +68,10 @@ An alternative to minting the PKP NFT via the Lit Relay Server is to send a tran
 Authentication is similar to logging in with an existing account. During the authentication process, the user is prompted to sign a challenge. The signed challenge is then sent to the Lit nodes, which verify the signature and generates a threshold signature of an `AuthSig` for the associated PKP.
 
 ```javascript
+import { PROVIDER_TYPE } from "@lit-protocol/constants";
+
 async function authenticateWithWebAuthn() {
-  const provider = litAuthClient.getProvider(ProviderType.WebAuthn);
+  const provider = litAuthClient.getProvider(PROVIDER_TYPE.WebAuthn);
   const authMethod = await provider.authenticate();
   return authMethod;
 }
@@ -82,6 +84,8 @@ The `authenticate` method returns an `AuthMethod` object containing the authenti
 After successfully authenticating with a social login provider, you can generate `SessionSigs` using the provider's `getSessionSigs` method. The `getSessionSigs` method takes in an `AuthMethod` object, optional `LitNodeClient` object, a PKP public key, and other session-specific arguments in `SessionSigsParams` object such as `resourceAbilityRequests` and `chain`. View the [API Docs](https://js-sdk.litprotocol.com/interfaces/types_src.BaseProviderSessionSigsParams.html).
 
 ```javascript
+import { LIT_ABILITY } from "@lit-protocol/constants";
+
 // Get session signatures for the given PKP public key and auth method
 const sessionSigs = await provider.getSessionSigs({
   authMethod: '<AuthMethod object returned from authenticate()>',
@@ -90,7 +94,7 @@ const sessionSigs = await provider.getSessionSigs({
     chain: 'ethereum',
     resourceAbilityRequests: [{
         resource: litResource,
-        ability: LitAbility.AccessControlConditionDecryption
+        ability: LIT_ABILITY.AccessControlConditionDecryption
       }
     ],
   },

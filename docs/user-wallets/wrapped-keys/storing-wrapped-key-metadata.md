@@ -94,11 +94,11 @@ In the below example, `process.env.PKP_ETH_ADDRESS` would be the Ethereum addres
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitNetwork } from "@lit-protocol/constants";
-import { encryptString } from '@lit-protocol/lit-node-client';
+import { LIT_NETWORK } from "@lit-protocol/constants";
+import { encryptString } from '@lit-protocol/encryption';
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.DatilDev,
+    litNetwork: LIT_NETWORK.DatilDev,
     debug: false,
 });
 await litNodeClient.connect();
@@ -137,11 +137,11 @@ In the below example, `process.env.PKP_ETH_ADDRESS` would be the Ethereum addres
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitNetwork } from "@lit-protocol/constants";
-import { encryptString } from '@lit-protocol/lit-node-client';
+import { LIT_NETWORK } from "@lit-protocol/constants";
+import { encryptString } from '@lit-protocol/encryption';
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.DatilDev,
+    litNetwork: LIT_NETWORK.DatilDev,
     debug: false,
 });
 await litNodeClient.connect();
@@ -270,10 +270,10 @@ Here we are instantiating an instance of `LitNodeClient` and connecting it to th
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.DatilDev,
+    litNetwork: LIT_NETWORK.DatilDev,
     debug: false,
 });
 await litNodeClient.connect();
@@ -295,8 +295,8 @@ The Auth Method used in this example implementation is signing a Sign in With Et
 
 ```ts
 import { EthWalletProvider } from "@lit-protocol/lit-auth-client";
+import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
-  LitAbility,
   LitActionResource,
   LitPKPResource,
 } from "@lit-protocol/auth-helpers";
@@ -313,7 +313,7 @@ const pkpSessionSigs = await litNodeClient.getPkpSessionSigs({
     resourceAbilityRequests: [
     {
         resource: new LitActionResource("*"),
-        ability: LitAbility.LitActionExecution,
+        ability: LIT_ABILITY.LitActionExecution,
     },
     ],
     expiration: new Date(Date.now() + 1000 * 60 * 10).toISOString(), // 10 minutes
@@ -326,14 +326,14 @@ In order to initialize a Wrapped Key, we need to store the encrypted underlying 
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitNetwork } from "@lit-protocol/constants";
-import { encryptString } from '@lit-protocol/lit-node-client';
+import { LIT_NETWORK } from "@lit-protocol/constants";
+import { encryptString } from '@lit-protocol/encryption';
 import { api } from "@lit-protocol/wrapped-keys";
 
 const { storeEncryptedKey } = api;
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.DatilDev,
+    litNetwork: LIT_NETWORK.DatilDev,
     debug: false,
 });
 await litNodeClient.connect();

@@ -78,11 +78,11 @@ Additionally, we'll initialize an Ethereum wallet using the `ETHEREUM_PRIVATE_KE
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitNetwork, LIT_RPC } from "@lit-protocol/constants";
+import { LIT_NETWORK, LIT_RPC } from "@lit-protocol/constants";
 import * as ethers from "ethers";
 
 const litNodeClient = new LitNodeClient({
-  litNetwork: LitNetwork.DatilDev,
+  litNetwork: LIT_NETWORK.DatilDev,
   debug: false
 });
 await litNodeClient.connect();
@@ -109,7 +109,7 @@ import { LitContracts } from "@lit-protocol/contracts-sdk";
 
 const litContracts = new LitContracts({
     signer: ethersWallet,
-    network: LitNetwork.DatilDev,
+    network: LIT_NETWORK.DatilDev,
     debug: false
 });
 await litContracts.connect();
@@ -136,10 +136,10 @@ These permissions ensure that the session can only perform specific actions with
 <p>
 
 ```ts
+import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
   createSiweMessage,
   generateAuthSig,
-  LitAbility,
   LitActionResource,
   LitPKPResource,
 } from "@lit-protocol/auth-helpers";
@@ -150,11 +150,11 @@ const sessionSigs = await litNodeClient.getSessionSigs({
     resourceAbilityRequests: [
         {
             resource: new LitPKPResource(pkpInfo.tokenId),
-            ability: LitAbility.PKPSigning,
+            ability: LIT_ABILITY.PKPSigning,
         },
         {
           resource: new LitActionResource("*"),
-          ability: LitAbility.LitActionExecution,
+          ability: LIT_ABILITY.LitActionExecution,
         },
     ],
     authNeededCallback: async ({

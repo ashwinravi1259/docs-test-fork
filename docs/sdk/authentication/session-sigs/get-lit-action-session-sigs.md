@@ -95,12 +95,12 @@ const ethersSigner = new ethers.Wallet(
 Here we are initializing an instance of `LitNodeClient` and connecting it to the `datil-test` Lit network.
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 let litNodeClient: LitNodeClient;
 
 litNodeClient = new LitNodeClient({
-      litNetwork: LitNetwork.DatilTest,
+      litNetwork: LIT_NETWORK.DatilTest,
       debug: false,
     });
 await litNodeClient.connect();
@@ -111,11 +111,11 @@ Here we are initializing an instance of `LitContracts`. This allows us to intera
 
 ```ts
 import { LitContracts } from "@lit-protocol/contracts-sdk";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const litContracts = new LitContracts({
     signer: ethersSigner,
-    network: LitNetwork.DatilTest,
+    network: LIT_NETWORK.DatilTest,
     debug: false,
 });
 await litContracts.connect();
@@ -133,8 +133,8 @@ To get the Lit resource identifier for other resources, you can use the other me
 If you would like to use this function on the `datil` or `datil-test` networks, a `capacityDelegationAuthSig` is required. Please also keep in mind that implementing this requires owning or minting a PKP and defining a Lit Action. How this is done can be found in the full code example.
 
 ```ts
+import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
-  LitAbility,
   LitActionResource,
   LitPKPResource,
 } from "@lit-protocol/auth-helpers";
@@ -146,11 +146,11 @@ const sessionSignatures = await litNodeClient.getLitActionSessionSigs({
     resourceAbilityRequests: [
     {
         resource: new LitPKPResource("*"),
-        ability: LitAbility.PKPSigning,
+        ability: LIT_ABILITY.PKPSigning,
     },
     {
         resource: new LitActionResource("*"),
-        ability: LitAbility.LitActionExecution,
+        ability: LIT_ABILITY.LitActionExecution,
     },
     ],
     // With this setup you could use either the litActionIpfsId or the litActionCode property

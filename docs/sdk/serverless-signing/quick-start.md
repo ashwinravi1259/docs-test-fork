@@ -70,11 +70,11 @@ We will also be initializing an Ethereum wallet using the `ETHEREUM_PRIVATE_KEY`
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitNetwork, LIT_RPC } from "@lit-protocol/constants";
+import { LIT_NETWORK, LIT_RPC } from "@lit-protocol/constants";
 import * as ethers from "ethers";
 
 const litNodeClient = new LitNodeClient({
-  litNetwork: LitNetwork.DatilDev,
+  litNetwork: LIT_NETWORK.DatilDev,
   debug: false
 });
 await litNodeClient.connect();
@@ -97,8 +97,8 @@ Session signatures are used to authenticate and maintain an active connection to
 <p>
 
 ```ts
+import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
-  LitAbility,
   LitActionResource,
   createSiweMessage,
   generateAuthSig,
@@ -110,7 +110,7 @@ const sessionSignatures = await litNodeClient.getSessionSigs({
   resourceAbilityRequests: [
     {
       resource: new LitActionResource("*"),
-      ability: LitAbility.LitActionExecution,
+      ability: LIT_ABILITY.LitActionExecution,
     },
   ],
   authNeededCallback: async ({

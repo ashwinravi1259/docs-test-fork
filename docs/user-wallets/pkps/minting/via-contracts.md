@@ -33,19 +33,19 @@ You can also set scopes: `[]` which will mean that the auth method can only be u
 The following code block demonstrates how to mint a PKP with specific permitted scopes:
 
 ```js
-import { AuthMethodScope, AuthMethodType } from '@lit-protocol/constants';
+import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE } from '@lit-protocol/constants';
 
 const authMethod = {
-  authMethodType: AuthMethodType.EthWallet,
+  authMethodType: AUTH_METHOD_TYPE.EthWallet,
   accessToken: JSON.stringify(authSig),
 };
 
 const mintInfo = await contractClient.mintWithAuth({
   authMethod: authMethod,
   scopes: [
-		// AuthMethodScope.NoPermissions,
-		AuthMethodScope.SignAnything, 
-		AuthMethodScope.PersonalSign
+		// AUTH_METHOD_SCOPE.NoPermissions,
+		AUTH_METHOD_SCOPE.SignAnything, 
+		AUTH_METHOD_SCOPE.PersonalSign
 	],
 });
 
@@ -68,12 +68,12 @@ The relayer is an open source project, and we run one for your use.  The source 
 If you wish to sign with an ethers wallet type or `signer` you may use the `signMessage` callback to implement a signing callback for the `SIWE` message.
 ```js
 import { LitAuthClient } from '@lit-protocol/lit-auth-client';
-import { AuthMethodScope, AuthMethodType, ProviderType } from '@lit-protocol/constants';
+import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE, PROVIDER_TYPE } from '@lit-protocol/constants';
 import * as ethers from 'ethers';
 
 const provider = new ethers.providers.JsonRpcProvider("your rpc url");
 let wallet = new ethers.Wallet("your wallet private key", provider);
-const authProvider = litAuthClient.initProvider(ProviderType.EthWallet);
+const authProvider = litAuthClient.initProvider(PROVIDER_TYPE.EthWallet);
 
 let authMethod = authProvider.authenticate({
   signMessage: (message: string) => {
@@ -81,10 +81,8 @@ let authMethod = authProvider.authenticate({
   }
 });
 
-// -- setting scope for the auth method
-// <https://developer.litprotocol.com/v3/sdk/wallets/auth-methods/#auth-method-scopes>
 const options = {
-  permittedAuthMethodScopes: [[AuthMethodScope.SignAnything]],
+  permittedAuthMethodScopes: [[AUTH_METHOD_SCOPE.SignAnything]],
 };
 
 const mintTx = await authProvider.mintPKPThroughRelayer(
@@ -98,10 +96,10 @@ In the case where you wish to generagte a signature from a browser extension wal
 you may simply call `authenticate` which calls `checkAndSignAuthMessage`.
 ```js
 import { LitAuthClient } from '@lit-protocol/lit-auth-client';
-import { AuthMethodScope, AuthMethodType, ProviderType } from '@lit-protocol/constants';
-import {Wallet} from 'ethers';
+import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE, PROVIDER_TYPE } from '@lit-protocol/constants';
+import { Wallet } from 'ethers';
 
-const authProvider = litAuthClient.initProvider(ProviderType.EthWallet);
+const authProvider = litAuthClient.initProvider(PROVIDER_TYPE.EthWallet);
 
 // Will call `checkAndSignAuthMessage({chain: ethereum})`
 let authMethod = await authProvider.authenticate({chain: "ethereum"});
@@ -109,7 +107,7 @@ let authMethod = await authProvider.authenticate({chain: "ethereum"});
 // -- setting scope for the auth method
 // <https://developer.litprotocol.com/v3/sdk/wallets/auth-methods/#auth-method-scopes>
 const options = {
-  permittedAuthMethodScopes: [[AuthMethodScope.SignAnything]],
+  permittedAuthMethodScopes: [[AUTH_METHOD_SCOPE.SignAnything]],
 };
 
 const mintTx = await authProvider.mintPKPThroughRelayer(

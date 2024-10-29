@@ -22,7 +22,7 @@ const litAuthClient = new LitAuthClient({
 });
 
 // Initialize Google provider
-litAuthClient.initProvider(ProviderType.Google, {
+litAuthClient.initProvider(PROVIDER_TYPE.Google, {
   // The URL of your web app where users will be redirected after authentication
   redirectUri: '<Your redirect URI>',
 });
@@ -30,7 +30,7 @@ litAuthClient.initProvider(ProviderType.Google, {
 // Begin login flow with Google
 async function authWithGoogle() {
   const provider = litAuthClient.getProvider(
-    ProviderType.Google
+    PROVIDER_TYPE.Google
   );
   await provider.signIn();
 }
@@ -39,6 +39,8 @@ async function authWithGoogle() {
 By default, Lit's social login providers use Lit's OAuth project. In case you want to use a custom OAuth project instead of the one provided by Lit, you can pass a callback in the `signIn` method and modify the URL as needed.
 
 ```javascript
+import { PROVIDER_TYPE } from "@lit-protocol/constants";
+
 // Set up LitAuthClient
 const litAuthClient = new LitAuthClient({
   litRelayConfig: {
@@ -48,7 +50,7 @@ const litAuthClient = new LitAuthClient({
 });
 
 // Initialize Google provider
-litAuthClient.initProvider(ProviderType.Google, {
+litAuthClient.initProvider(PROVIDER_TYPE.Google, {
   // The URL of your web app where users will be redirected after authentication
   redirectUri: '<Your redirect URI>',
 });
@@ -56,7 +58,7 @@ litAuthClient.initProvider(ProviderType.Google, {
 // Begin login flow with Google but using your own OAuth project
 async function authWithGoogle() {
   const provider = litAuthClient.getProvider(
-    ProviderType.Google
+    PROVIDER_TYPE.Google
   );
   await provider.signIn((url) => {
     const myURL = new URL(url);
@@ -71,7 +73,7 @@ async function authWithGoogle() {
 }
 ```
 
-To login using Discord, you need to initialize the provider with `ProviderType.Discord` and pass it a Discord `clientId` along `redirectUri`
+To login using Discord, you need to initialize the provider with `PROVIDER_TYPE.Discord` and pass it a Discord `clientId` along `redirectUri`
 
 ```javascript
 // Set up LitAuthClient
@@ -83,7 +85,7 @@ const litAuthClient = new LitAuthClient({
 });
 
 // Initialize Discord provider
-litAuthClient.initProvider(ProviderType.Discord, {
+litAuthClient.initProvider(PROVIDER_TYPE.Discord, {
   // The URL of your web app where users will be redirected after authentication
   redirectUri: '<Your redirect URI>',
   clientId: '<Your Discord Client ID>',
@@ -92,7 +94,7 @@ litAuthClient.initProvider(ProviderType.Discord, {
 // Begin login flow with Discord
 async function authWithDiscord() {
   const provider = litAuthClient.getProvider(
-    ProviderType.Discord
+    PROVIDER_TYPE.Discord
   );
   await provider.signIn((url) => {
     const myURL = new URL(url);
@@ -127,7 +129,7 @@ async function handleRedirect() {
   if (isSignInRedirect(redirectUri)) {
     // Get the provider that was used to sign in
     const provider = litAuthClient.getProvider(
-      ProviderType.Google,
+      PROVIDER_TYPE.Google,
     );
     // Get auth method object that has the OAuth token from redirect callback
     const authMethod: AuthMethod = await provider.authenticate();
@@ -145,6 +147,8 @@ With the `AuthMethod` object, you can mint or fetch PKPs associated with the aut
 After successfully authenticating with a social login provider, you can generate `SessionSigs` using the provider's `getSessionSigs` method. The `getSessionSigs` method takes in an `AuthMethod` object, optional `LitNodeClient` object, a PKP public key, and other session-specific arguments in `SessionSigsParams` object such as `resourceAbilityRequests` and `chain`. View the [API Docs](https://js-sdk.litprotocol.com/interfaces/types_src.BaseProviderSessionSigsParams.html).
 
 ```javascript
+import { LIT_ABILITY } from "@lit-protocol/constants";
+
 // Get session signatures for the given PKP public key and auth method
 const sessionSigs = await provider.getSessionSigs({
   authMethod: '<AuthMethod object returned from authenticate()>',
@@ -153,7 +157,7 @@ const sessionSigs = await provider.getSessionSigs({
     chain: 'ethereum',
     resourceAbilityRequests: [{
         resource: litResource,
-        ability: LitAbility.AccessControlConditionDecryption
+        ability: LIT_ABILITY.AccessControlConditionDecryption
       }
     ],
   },

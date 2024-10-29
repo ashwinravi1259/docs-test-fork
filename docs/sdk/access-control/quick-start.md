@@ -65,7 +65,7 @@ Within a file (in the Lit example repos it will likely be called `lit.js`), set
 
 ```jsx
 import * as LitJsSdk from "@lit-protocol/lit-node-client";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 class Lit {
    litNodeClient;
@@ -77,7 +77,7 @@ class Lit {
 
    async connect() {
       this.litNodeClient = new LitJsSdk.LitNodeClient({
-        litNetwork: "datil-dev",
+        litNetwork: LIT_NETWORK.DatilDev,
       });
       await this.litNodeClient.connect();
    }
@@ -121,7 +121,7 @@ Running `litNodeClient.connect()` will return a promise that resolves when you 
 
 ```jsx
 import * as LitJsSdk from "@lit-protocol/lit-node-client";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 class Lit {
    litNodeClient;
@@ -134,7 +134,7 @@ class Lit {
    async connect() {
       app.locals.litNodeClient = new LitJsSdk.LitNodeClientNodeJs({
         alertWhenUnauthorized: false,
-        litNetwork: "datil-dev",
+        litNetwork: LIT_NETWORK.DatilDev,
         debug: true,
       });
 
@@ -185,16 +185,13 @@ const accessControlConditions = [
 
 ### Encryption
 
-To encrypt a string, use one of the following functions:
+To encrypt a string, use the following function:
 
 - [encryptString()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html) - Used to encrypt the raw string.
-- [zipAndEncryptString()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.zipAndEncryptString.html) - Compresses the string (using [JSZip](https://www.npmjs.com/package/jszip)) before encrypting it. This is useful for saving space, but takes additional time to perform the zip.
 
 To encrypt a file, use:
 
 - [encryptFile()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptFile.html) - Used to encrypt a file without doing any zipping or packing. Because zipping larger files takes time, this function is useful when encrypting large files ( > 20mb). This also requires that you store the file metadata.
-- [encryptFileAndZipWithMetadata()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptFileAndZipWithMetadata.html) - Used to encrypt a file and then zip it up with the metadata (using [JSZip](https://www.npmjs.com/package/jszip)). This is useful for when you don't want to store the file metadata separately.
-- [zipAndEncryptFiles()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.zipAndEncryptFiles.html) - Used to zip and encrypt multiple files. This does **not** include the file metadatas in the zip, so you must store those yourself.
 
 Apart from these, we have one more function which can be used to encrypt both strings and files:
 
@@ -243,7 +240,7 @@ Both `ciphertext` and `dataToEncryptHash` will be base64 encoded strings.
 
 ## Performing Decryption
 
-Make sure we have `accessControlConditions`, `ciphertext`, and the `dataToEncryptHash` data we created during the encryption step. An exception is when using `encryptFileAndZipWithMetadata()` which will include this metadata in the zip.
+Make sure we have `accessControlConditions`, `ciphertext`, and the `dataToEncryptHash` data we created during the encryption step.
 
 There is just one step:
 
@@ -268,13 +265,13 @@ npm i @lit-protocol/contracts-sdk
 The next step is to initialize a signer. This should be a wallet controlled by your application and the same wallet you’ll use to mint the Capacity Credit NFT:
 
 ```jsx
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const walletWithCapacityCredit = new Wallet("<your private key or mnemonic>");
 
 let contractClient = new LitContracts({
   signer: dAppOwnerWallet,
-  network: LitNetwork.Datil,
+  network: LIT_NETWORK.Datil,
 });
 
 await contractClient.connect();
@@ -344,10 +341,10 @@ If you want to obtain a `SessionSigs` in the browser, you can instantiate an `et
 
 
 ```jsx
-import {ethers} from "ethers";
+import { ethers } from "ethers";
+import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
   LitAccessControlConditionResource,
-  LitAbility,
   createSiweMessageWithRecaps,
   generateAuthSig,
 } from "@lit-protocol/auth-helpers";
@@ -407,7 +404,7 @@ class Lit {
          resourceAbilityRequests: [
              {
                  resource: litResource,
-                 ability: LitAbility.AccessControlConditionDecryption,
+                 ability: LIT_ABILITY.AccessControlConditionDecryption,
              },
          ],
          authNeededCallback,
@@ -426,9 +423,9 @@ If you want to obtain a `SessionSigs` on the server-side, you can instantiate an
 
 ```jsx
 import {ethers} from "ethers";
+import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
   LitAccessControlConditionResource,
-  LitAbility,
   createSiweMessageWithRecaps,
   generateAuthSig,
 } from "@lit-protocol/auth-helpers";
@@ -486,7 +483,7 @@ class Lit {
           resourceAbilityRequests: [
               {
                   resource: litResource,
-                  ability: LitAbility.AccessControlConditionDecryption,
+                  ability: LIT_ABILITY.AccessControlConditionDecryption,
               },
           ],
           authNeededCallback,
@@ -511,9 +508,7 @@ If using a `mainnet` in order to keep the wallet which holds the `Capacity Credi
 To decrypt use the following functions depending on the function used to encrypt:
 
 - [decryptToString()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.decryptToString.html) for [encryptString()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html)
-- [decryptToZip()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.decryptToZip.html) for [zipAndEncryptString()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.zipAndEncryptString.html) & [zipAndEncryptFiles()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.zipAndEncryptFiles.html)
 - [decryptToFile()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.decryptToFile.html) for [encryptFile()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptFile.html)
-- [decryptZipFileWithMetadata()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.decryptZipFileWithMetadata.html) for [encryptFileAndZipWithMetadata()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptFileAndZipWithMetadata.html)
 - [decryptFromJson()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.decryptFromJson.html) for [encryptToJson()](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptToJson.html)
 
 In the example, we used `encryptString()` to encrypt so we will use `decryptToString()` to decrypt. Pass in the data  `accessControlConditions`, `ciphertext`, `dataToEncryptHash`, and `authSig`.

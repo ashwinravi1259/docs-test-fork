@@ -66,11 +66,11 @@ const ethersSigner = new ethers.Wallet(
 
 ```ts
 import { LitContracts } from "@lit-protocol/contracts-sdk";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const litContractClient = new LitContracts({
     signer: ethersSigner,
-    network: LitNetwork.DatilTest,
+    network: LIT_NETWORK.DatilTest,
 });
 await litContractClient.connect();
 ```

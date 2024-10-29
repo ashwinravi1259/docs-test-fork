@@ -52,10 +52,10 @@ Within a file (in the Lit example repos it will likely be called `lit.js`), set
 `client.connect()` will return a promise that resolves when you are connected to the Lit Network.
 
 ```jsx
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const client = new LitJsSdk.LitNodeClient({
-  litNetwork: LitNetwork.Datil,
+  litNetwork: LIT_NETWORK.Datil,
 });
 
 await client.connect();
@@ -82,11 +82,11 @@ Keep in mind that in the server-side implementation, the client class is named 
 `app.locals.litNodeClient.connect()` returns a promise that resolves when you are connected to the Lit network.
 
 ```jsx
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 app.locals.litNodeClient = new LitJsSdk.LitNodeClientNodeJs({
   alertWhenUnauthorized: false,
-  litNetwork: LitNetwork.Datil,
+  litNetwork: LIT_NETWORK.Datil,
 });
 await app.locals.litNodeClient.connect();
 ```
@@ -116,11 +116,11 @@ You'll need to use ethers.js v5 with the Lit SDK. The Lit SDK is not compatible 
 
 ```jsx
 import { LitContracts } from '@lit-protocol/contracts-sdk';
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const contractClient = new LitContracts({
   signer: wallet,
-  network: LitNetwork.Datil,
+  network: LIT_NETWORK.Datil,
 });
 
 await contractClient.connect();
@@ -139,10 +139,9 @@ In order to interact with the nodes in the Lit Network, you will need to generat
 Using the Lit SDK and the methods `createSiweMessageWithRecaps` and `generateAuthSig` from the `@lit-protocol/auth-helpers` package, we can create a `SessionSigs` by signing a SIWE message using a private key stored in a browser wallet like MetaMask:
 
 ```jsx
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK, LIT_ABILITY } from "@lit-protocol/constants";
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
 import {
-  LitAbility,
   LitAccessControlConditionResource,
   createSiweMessage,
   generateAuthSig,
@@ -154,7 +153,7 @@ await provider.send("eth_requestAccounts", []);
 const ethersSigner = provider.getSigner();
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.Datil,
+    litNetwork: LIT_NETWORK.Datil,
   });
 await litNodeClient.connect();
 
@@ -164,7 +163,7 @@ const sessionSigs = await litNodeClient.getSessionSigs({
   resourceAbilityRequests: [
     {
       resource: new LitActionResource("*"),
-      ability: LitAbility.LitActionExecution,
+      ability: LIT_ABILITY.LitActionExecution,
     },
   ],
   authNeededCallback: async ({ resourceAbilityRequests, expiration, uri }) => {
@@ -268,7 +267,7 @@ const authNeededCallback = async (params) => {
 const resourceAbilities = [
  {
    resource: new LitActionResource('*'),
-   ability: LitAbility.PKPSigning,
+   ability: LIT_ABILITY.PKPSigning,
  },
 ];
 // Get the session key for the session signing request
@@ -300,19 +299,19 @@ The PKP NFT represents root ownership of the key pair. The NFT owner can grant o
 :::
 
 ```jsx
-import { AuthMethodScope, AuthMethodType } from '@lit-protocol/constants';
+import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE } from '@lit-protocol/constants';
 
 const authMethod = {
-  authMethodType: AuthMethodType.EthWallet,
+  authMethodType: AUTH_METHOD_TYPE.EthWallet,
   accessToken: JSON.stringify(authSig),
 };
 
 const mintInfo = await contractClient.mintWithAuth({
   authMethod: authMethod,
   scopes: [
-        // AuthMethodScope.NoPermissions,
-        AuthMethodScope.SignAnything, 
-        AuthMethodScope.PersonalSign
+        // AUTH_METHOD_SCOPE.NoPermissions,
+        AUTH_METHOD_SCOPE.SignAnything, 
+        AUTH_METHOD_SCOPE.PersonalSign
     ],
 });
 
@@ -335,7 +334,7 @@ import { LitAuthClient } from '@lit-protocol/lit-auth-client';
 const authId = await LitAuthClient.getAuthIdByAuthMethod(authMethod);
 await contractClient.pkpPermissionsContract.read.getPermittedAuthMethodScopes(
   mintInfo.pkp.tokenId,
-  AuthMethodType.EthWallet,
+  AUTH_METHOD_TYPE.EthWallet,
   authId,
   3
 );
@@ -357,13 +356,13 @@ In order to execute a transaction with Lit, you’ll need to reserve capacity on
 The first step is to initialize a signer. This should be a wallet controlled by your application and the same wallet you’ll use to mint the Capacity Credit NFT:
 
 ```jsx
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const walletWithCapacityCredit = new Wallet("<your private key or mnemonic>");
 
 let contractClient = new LitContracts({
   signer: dAppOwnerWallet,
-  network: LitNetwork.Datil,
+  network: LIT_NETWORK.Datil,
 });
 
 await contractClient.connect();
@@ -467,7 +466,7 @@ We can use the Capacity Credit delegation to generate a Session Signature for th
     resourceAbilityRequests: [
       {
         resource: new LitPKPResource('*'),
-        ability: LitAbility.PKPSigning,
+        ability: LIT_ABILITY.PKPSigning,
       },
     ],
     authNeededCallback: pkpAuthNeededCallback,

@@ -204,10 +204,10 @@ Here we are instantiating an instance of `LitNodeClient` and connecting it to th
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.DatilDev,
+    litNetwork: LIT_NETWORK.DatilDev,
     debug: false,
 });
 await litNodeClient.connect();
@@ -229,8 +229,8 @@ The Auth Method used in this example implementation is signing a Sign in With Et
 
 ```ts
 import { EthWalletProvider } from "@lit-protocol/lit-auth-client";
+import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
-  LitAbility,
   LitActionResource,
   LitPKPResource,
 } from "@lit-protocol/auth-helpers";
@@ -247,7 +247,7 @@ const pkpSessionSigs = await litNodeClient.getPkpSessionSigs({
     resourceAbilityRequests: [
     {
         resource: new LitActionResource("*"),
-        ability: LitAbility.LitActionExecution,
+        ability: LIT_ABILITY.LitActionExecution,
     },
     ],
     expiration: new Date(Date.now() + 1000 * 60 * 10).toISOString(), // 10 minutes
