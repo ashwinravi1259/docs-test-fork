@@ -202,7 +202,6 @@ const sidebars = {
                     'sdk/authentication/session-sigs/siws-pkp-session-sigs',
                   ],
                 },
-                'sdk/authentication/session-sigs/usage',
               ],
             },
             'sdk/authentication/authenticating-siws',
