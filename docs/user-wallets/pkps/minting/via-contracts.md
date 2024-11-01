@@ -12,8 +12,11 @@ The NFT represents root ownership of the PKP. The NFT owner can grant other user
 
 ## Installing the required packages
 ```bash
+yarn add @lit-protocol/lit-node-client
 yarn add @lit-protocol/lit-auth-client
 yarn add @lit-protocol/contracts-sdk
+yarn add @lit-protocol/constants
+yarn add @lit-protocol/providers
 ```
 
 ## Initializing your `LitContract` instance
@@ -67,17 +70,33 @@ The relayer is an open source project, and we run one for your use.  The source 
 ## Authenticating using `signMessage` Callback
 If you wish to sign with an ethers wallet type or `signer` you may use the `signMessage` callback to implement a signing callback for the `SIWE` message.
 ```js
-import { LitAuthClient } from '@lit-protocol/lit-auth-client';
-import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE, PROVIDER_TYPE } from '@lit-protocol/constants';
+import { LitNodeClient } from '@lit-protocol/lit-node-client';
+import { LitRelay } from '@lit-protocol/lit-auth-client';
+import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE, PROVIDER_TYPE, LIT_RPC, LIT_NETWORK } from '@lit-protocol/constants';
+import { EthWalletProvider } from '@lit-protocol/providers';
 import * as ethers from 'ethers';
 
-const provider = new ethers.providers.JsonRpcProvider("your rpc url");
-let wallet = new ethers.Wallet("your wallet private key", provider);
-const authProvider = litAuthClient.initProvider(PROVIDER_TYPE.EthWallet);
+const litNodeClient = new LitNodeClient({
+  litNetwork: LIT_NETWORK.DatilDev,
+  debug: true
+})
+await litNodeClient.connect();
 
-let authMethod = authProvider.authenticate({
+const litRelay = new LitRelay({
+  relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
+  relayApiKey: 'test-api-key',
+});
+
+const ethWalletProvider = new EthWalletProvider({ relay: litRelay, litNodeClient });
+
+const ethersWallet = new ethers.Wallet(
+  'Your Ethereum Private Key', // Replace with your private key
+  new ethers.providers.JsonRpcProvider(LIT_RPC.CHRONICLE_YELLOWSTONE)
+);
+
+const authMethod = await ethWalletProvider.authenticate({
   signMessage: (message: string) => {
-    return await wallet.signMessage(message);
+    return await ethersWallet.signMessage(message);
   }
 });
 
@@ -85,24 +104,33 @@ const options = {
   permittedAuthMethodScopes: [[AUTH_METHOD_SCOPE.SignAnything]],
 };
 
-const mintTx = await authProvider.mintPKPThroughRelayer(
-  authMethod,
-  options
-);
+const mintTx = await litRelay.mintPKPWithAuthMethods([authMethod], options);
 ```
 
 ## Authenticating using `Web3 Provider`
 In the case where you wish to generagte a signature from a browser extension wallet (MetaMask, Brave Wallet, etc)
 you may simply call `authenticate` which calls `checkAndSignAuthMessage`.
 ```js
-import { LitAuthClient } from '@lit-protocol/lit-auth-client';
+import { LitNodeClient } from '@lit-protocol/lit-node-client';
+import { LitRelay } from '@lit-protocol/lit-auth-client';
+import { EthWalletProvider } from '@lit-protocol/providers';
 import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE, PROVIDER_TYPE } from '@lit-protocol/constants';
 import { Wallet } from 'ethers';
 
-const authProvider = litAuthClient.initProvider(PROVIDER_TYPE.EthWallet);
+const litNodeClient = new LitNodeClient({
+  litNetwork: LIT_NETWORK.DatilDev,
+  debug: true
+})
+await litNodeClient.connect();
 
-// Will call `checkAndSignAuthMessage({chain: ethereum})`
-let authMethod = await authProvider.authenticate({chain: "ethereum"});
+const litRelay = new LitRelay({
+  relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
+  relayApiKey: 'test-api-key',
+});
+
+const ethWalletProvider = new EthWalletProvider({ relay: litRelay, litNodeClient });
+
+const authMethod = await authProvider.authenticate({chain: "ethereum"});
 
 // -- setting scope for the auth method
 // <https://developer.litprotocol.com/v3/sdk/wallets/auth-methods/#auth-method-scopes>
@@ -110,10 +138,7 @@ const options = {
   permittedAuthMethodScopes: [[AUTH_METHOD_SCOPE.SignAnything]],
 };
 
-const mintTx = await authProvider.mintPKPThroughRelayer(
-  authMethod,
-  options
-);
+const mintTx = await litRelay.mintPKPWithAuthMethods([authMethod], options);
 ```
 
 

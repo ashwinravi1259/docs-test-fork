@@ -329,9 +329,9 @@ const mintInfo = await contractClient.mintWithAuth({
 You should now have successfully minted a PKP! You can verify that the PKP has the necessary permissions for signing by calling the following function:
 
 ```jsx
-import { LitAuthClient } from '@lit-protocol/lit-auth-client';
+import { getAuthIdByAuthMethod } from '@lit-protocol/lit-auth-client';
 
-const authId = await LitAuthClient.getAuthIdByAuthMethod(authMethod);
+const authId = await getAuthIdByAuthMethod(authMethod);
 await contractClient.pkpPermissionsContract.read.getPermittedAuthMethodScopes(
   mintInfo.pkp.tokenId,
   AUTH_METHOD_TYPE.EthWallet,

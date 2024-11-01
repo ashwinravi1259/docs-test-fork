@@ -61,7 +61,7 @@ Using this strategy, you could implement your own MFA, where the user must prese
 **Adding permitted scopes to existing PKPs**
 1. Verify the scopes:
 ```js
-import { LitAuthClient } from '@lit-protocol/lit-auth-client';
+import { getAuthIdByAuthMethod } from '@lit-protocol/lit-auth-client';
 import { LitContracts } from '@lit-protocol/contracts-sdk';
 import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE } from '@lit-protocol/constants';
 
@@ -70,7 +70,7 @@ const authMethod = {
   accessToken: ...,
 };
 
-const authId = LitAuthClient.getAuthIdByAuthMethod(authMethod);
+const authId = await getAuthIdByAuthMethod(authMethod);
 
 const scopes = await contractClient.pkpPermissionsContract.read.getPermittedAuthMethodScopes(
   tokenId,
@@ -90,7 +90,7 @@ if (scopes[2] !== false) {
 ```
 2. Set the scopes:
 ```js
-import { LitAuthClient } from '@lit-protocol/lit-auth-client';
+import { getAuthIdByAuthMethod } from '@lit-protocol/lit-auth-client';
 import { LitContracts } from '@lit-protocol/contracts-sdk';
 import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE } from '@lit-protocol/constants';
 
@@ -99,7 +99,7 @@ const authMethod = {
   accessToken: xxx,
 };
 
-const authId = LitAuthClient.getAuthIdByAuthMethod(authMethod);
+const authId = await getAuthIdByAuthMethod(authMethod);
 
 const setScopeTx =
   await contractClient.pkpPermissionsContract.write.addPermittedAuthMethodScope(

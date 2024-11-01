@@ -60,20 +60,23 @@ const sessionStatus = await client.sessions.authenticate({
 });
 ```
 
-## Use an Authenticated Stytch Session with the `lit-auth-client`
+## Use an Authenticated Stytch Session with the `LitRelay`
 
 ```javascript
-import { LitAuthClient } from "@lit-protocol/lit-auth-client";
+import { LIT_NETWORK } from "@lit-protocol/constants";
+import { StytchOtpProvider } from "@lit-protocol/providers";
+import { LitRelay } from "@lit-protocol/lit-auth-client";
 
-const authClient = new LitAuthClient({
-  litRelayConfig: {
-    relayApiKey: LIT_RELAY_API_KEY,
-  },
-  litNodeClient,
+const litRelay = new LitRelay({
+  relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
+  relayApiKey: 'test-api-key',
 });
 
-const session =
-  authClient.initProvider < StytchOtpProvider > PROVIDER_TYPE.StytchOtp;
+const session = new StytchOtpProvider({ relay: litRelay, litNodeClient, options: {    
+    userId: sessionStatus.session.user_id,
+    appId: "project-test-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"} 
+    });
+
 // from the above example of using the Stytch client to get an authenticated session
 const authMethod = await session.authenticate({
   accessToken: sessionStatus.session_jwt,

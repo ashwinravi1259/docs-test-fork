@@ -17,21 +17,28 @@ The `@lit-protocol/lit-auth-client` package leverages the `@simplewebauthn/brows
 Registration is similar to creating a new account. During the registration process, the user is prompted to create a new public key credential. The public key credential is stored in the smart contract as the new PKP is minted for the user.
 
 ```javascript
-// Set up LitAuthClient
-const litAuthClient = new LitAuthClient({
-  litRelayConfig: {
-     // Request a Lit Relay Server API key here: https://forms.gle/RNZYtGYTY9BcD9MEA
-    relayApiKey: '<Your Lit Relay Server API Key>',
-  },
+import { LitRelay } from '@lit-protocol/lit-auth-client';
+import { WebAuthnProvider } from '@lit-protocol/providers';
+import { LitNodeClient } from '@lit-protocol/lit-node-client';
+import { LIT_NETWORK, PROVIDER_TYPE } from '@lit-protocol/constants';
+
+const litNodeClient = new LitNodeClient({
+    litNetwork: LIT_NETWORK.DatilDev,
+    debug: true,
+  });
+await litNodeClient.connect();
+
+const litRelay = new LitRelay({
+  relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
+  relayApiKey: 'test-api-key',
 });
 
 // Initialize WebAuthn provider
-litAuthClient.initProvider(PROVIDER_TYPE.WebAuthn);
+const webAuthnProvider = new WebAuthnProvider({ relay, litNodeClient });
 
 async function registerWithWebAuthn() {
-  const provider = litAuthClient.getProvider(PROVIDER_TYPE.WebAuthn);
   // Register new WebAuthn credential
-  const options = await provider.register();
+  const options = await webAuthnProvider.register();
 
   // Verify registration and mint PKP through relay server
   const txHash = await provider.verifyAndMintPKPThroughRelayer(options);
@@ -68,11 +75,8 @@ An alternative to minting the PKP NFT via the Lit Relay Server is to send a tran
 Authentication is similar to logging in with an existing account. During the authentication process, the user is prompted to sign a challenge. The signed challenge is then sent to the Lit nodes, which verify the signature and generates a threshold signature of an `AuthSig` for the associated PKP.
 
 ```javascript
-import { PROVIDER_TYPE } from "@lit-protocol/constants";
-
 async function authenticateWithWebAuthn() {
-  const provider = litAuthClient.getProvider(PROVIDER_TYPE.WebAuthn);
-  const authMethod = await provider.authenticate();
+  const authMethod = await webAuthnProvider.authenticate();
   return authMethod;
 }
 ```

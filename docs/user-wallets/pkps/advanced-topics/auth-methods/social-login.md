@@ -10,57 +10,54 @@ Social login offers users a convenient way to authenticate with Lit Protocol by 
 
 ## Integrating Social Login
 
-`@lit-protocol/lit-auth-client` makes it easy to implement social login in your web apps. The library provides a `LitAuthClient` class that you can use to initialize a provider for each supported social login method. Each provider has a `signIn()` method that you can call to begin the authentication flow.
+`@lit-protocol/lit-auth-client` makes it easy to implement social login in your web apps. The library provides a `LitRelay` class that you can use to initialize a provider for each supported social login method. Each provider has a `signIn()` method that you can call to begin the authentication flow.
 
 ```javascript
-// Set up LitAuthClient
-const litAuthClient = new LitAuthClient({
-  litRelayConfig: {
-     // Request a Lit Relay Server API key here: https://forms.gle/RNZYtGYTY9BcD9MEA
-    relayApiKey: '<Your Lit Relay Server API Key>',
-  },
+import { GoogleProvider } from '@lit-protocol/providers';
+import { LitRelay } from '@lit-protocol/lit-auth-client';
+import { LitNodeClient } from '@lit-protocol/lit-node-client';
+import { LIT_NETWORK, PROVIDER_TYPE } from '@lit-protocol/constants';
+
+const litNodeClient = new LitNodeClient({
+    litNetwork: LIT_NETWORK.DatilDev,
+    debug: true,
+  });
+await litNodeClient.connect();
+
+const litRelay = new LitRelay({
+  relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
+  relayApiKey: 'test-api-key',
 });
 
 // Initialize Google provider
-litAuthClient.initProvider(PROVIDER_TYPE.Google, {
-  // The URL of your web app where users will be redirected after authentication
-  redirectUri: '<Your redirect URI>',
-});
+const googleProvider = new GoogleProvider({ relay, litNodeClient });
 
 // Begin login flow with Google
 async function authWithGoogle() {
-  const provider = litAuthClient.getProvider(
-    PROVIDER_TYPE.Google
-  );
-  await provider.signIn();
+  await googleProvider.signIn();
 }
 ```
 
 By default, Lit's social login providers use Lit's OAuth project. In case you want to use a custom OAuth project instead of the one provided by Lit, you can pass a callback in the `signIn` method and modify the URL as needed.
 
 ```javascript
-import { PROVIDER_TYPE } from "@lit-protocol/constants";
+const litNodeClient = new LitNodeClient({
+    litNetwork: LIT_NETWORK.DatilDev,
+    debug: true,
+  });
+await litNodeClient.connect();
 
-// Set up LitAuthClient
-const litAuthClient = new LitAuthClient({
-  litRelayConfig: {
-     // Request a Lit Relay Server API key here: https://forms.gle/RNZYtGYTY9BcD9MEA
-    relayApiKey: '<Your Lit Relay Server API Key>',
-  },
+const litRelay = new LitRelay({
+  relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
+  relayApiKey: 'test-api-key',
 });
 
 // Initialize Google provider
-litAuthClient.initProvider(PROVIDER_TYPE.Google, {
-  // The URL of your web app where users will be redirected after authentication
-  redirectUri: '<Your redirect URI>',
-});
+const googleProvider = new GoogleProvider({ relay, litNodeClient });
 
 // Begin login flow with Google but using your own OAuth project
 async function authWithGoogle() {
-  const provider = litAuthClient.getProvider(
-    PROVIDER_TYPE.Google
-  );
-  await provider.signIn((url) => {
+  await googleProvider.signIn((url) => {
     const myURL = new URL(url);
     
     // Modify URL as needed
@@ -76,27 +73,28 @@ async function authWithGoogle() {
 To login using Discord, you need to initialize the provider with `PROVIDER_TYPE.Discord` and pass it a Discord `clientId` along `redirectUri`
 
 ```javascript
-// Set up LitAuthClient
-const litAuthClient = new LitAuthClient({
-  litRelayConfig: {
-     // Request a Lit Relay Server API key here: https://forms.gle/RNZYtGYTY9BcD9MEA
-    relayApiKey: '<Your Lit Relay Server API Key>',
-  },
+import { DiscordProvider } from '@lit-protocol/providers';
+import { LitRelay } from '@lit-protocol/lit-auth-client';
+import { LitNodeClient } from '@lit-protocol/lit-node-client';
+import { LIT_NETWORK, PROVIDER_TYPE } from '@lit-protocol/constants';
+
+const litNodeClient = new LitNodeClient({
+    litNetwork: LIT_NETWORK.DatilDev,
+    debug: true,
+  });
+await litNodeClient.connect();
+
+const litRelay = new LitRelay({
+  relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
+  relayApiKey: 'test-api-key',
 });
 
 // Initialize Discord provider
-litAuthClient.initProvider(PROVIDER_TYPE.Discord, {
-  // The URL of your web app where users will be redirected after authentication
-  redirectUri: '<Your redirect URI>',
-  clientId: '<Your Discord Client ID>',
-});
+const discordProvider = new DiscordProvider({ relay, litNodeClient, clientId: '<Your Discord Client ID>', redirectUri: '<Your redirect URI>' });
 
 // Begin login flow with Discord
 async function authWithDiscord() {
-  const provider = litAuthClient.getProvider(
-    PROVIDER_TYPE.Discord
-  );
-  await provider.signIn((url) => {
+  await discordProvider.signIn((url) => {
     const myURL = new URL(url);
     
     // Modify URL as needed
@@ -127,12 +125,8 @@ import { isSignInRedirect } from '@lit-protocol/lit-auth-client';
 async function handleRedirect() {
   // Check if app has been redirected from Lit login server
   if (isSignInRedirect(redirectUri)) {
-    // Get the provider that was used to sign in
-    const provider = litAuthClient.getProvider(
-      PROVIDER_TYPE.Google,
-    );
     // Get auth method object that has the OAuth token from redirect callback
-    const authMethod: AuthMethod = await provider.authenticate();
+    const authMethod: AuthMethod = await discordProvider.authenticate();
     return authMethod;
   }
 }
