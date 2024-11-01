@@ -152,25 +152,26 @@ You can also ping the Lit developement team on [Discord](https://litgateway.com/
 ### 6. Mint a PKPs through Lit Protocol
 
 ```js
-import { PROVIDER_TYPE } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
+import { StytchOtpProvider } from "@lit-protocol/providers";
+import { LitRelay } from "@lit-protocol/lit-auth-client";
 
-const litClient = new LitAuthClient({
-    litRelayConfig: {
-        relayApiKey: '<Your Lit Relay Server API Key>',
-    }
+const litRelay = new LitRelay({
+    relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
+    relayApiKey: 'test-api-key',
 });
- 
-const session = litClient.initProvider(PROVIDER_TYPE.StytchOtp, {
+
+const session = new StytchOtpProvider({ relay: litRelay, litNodeClient,    
     userId: sessionStatus.session.user_id,
     appId: "project-test-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-})
+});
  
 const authMethod = await session.authenticate({ 
     accessToken: sessionStatus.session_jwt 
-})
+});
  
-await session.mintPKPThroughRelayer(authMethod)
-const pkps = await session.fetchPKPsThroughRelayer(authMethod)
+await litRelay.mintPKPWithAuthMethods([authMethod], {});
+const pkps = await session.fetchPKPs(authMethod);
 ```
 
 
