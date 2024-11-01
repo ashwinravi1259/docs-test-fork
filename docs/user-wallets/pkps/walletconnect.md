@@ -6,18 +6,18 @@ Leverage Lit Protocol and WalletConnect V2 to seamlessly connect PKPs to hundred
 
 To connect a PKP and a dApp, you will need to:
 
-1. Create a `PKPClient`
-2. Initialize `PKPWalletConnect` with the `PKPClient`
+1. Create a `PKPEthersWallet`
+2. Initialize `PKPWalletConnect` with the `PKPEthersWallet`
 3. Subscribe and respond to events
 
-## 1. Create a `PKPClient`
+## 1. Create a `PKPEthersWallet`
 
-`PKPClient` represents a PKP and initializes signers for use across multiple blockchains (note: EVM-only at the moment).
+`PKPEthersWallet` represents a PKP and initializes signers for use across multiple blockchains (note: EVM-only at the moment).
 
 ```js
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
 import { LitAbility, LitActionResource } from '@lit-protocol/auth-helpers';
-import { PKPClient } from "@lit-protocol/pkp-client";
+import { PKPEthersWallet } from "@lit-protocol/pkp-ethers";
 
 // If you haven't done before, create a LitNodeClient instance
 const litNodeClient = new LitNodeClient({
@@ -44,9 +44,9 @@ const authNeededCallback = async (params: AuthCallbackParams) => {
   return response.authSig;
 };
 
-const pkpClient = new PKPClient({
+const pkpWallet = new PKPEthersWallet({
+  litNodeClient,
   authContext: {
-    client: litNodeClient,
     getSessionSigsProps: {
       chain: 'ethereum',
       expiration: new Date(Date.now() + 60_000 * 60).toISOString(),
@@ -57,17 +57,18 @@ const pkpClient = new PKPClient({
   // controllerAuthSig: authSig,
   // controllerSessionSigs: sesionSigs, // (deprecated)
   pkpPubKey: "<Your PKP public key>",
+  rpc: LIT_RPC.CHRONICLE_YELLOWSTONE,
 });
-await pkpClient.connect();
+await pkpWallet.init();
 ```
 
 The `getSessionSigsProps`, `controllerAuthSig` or `controllerSessionSigs` (this last one deprecated) are used to authorize requests to the Lit nodes. To learn how to leverage different authentication methods, refer to the [Authentication section](./advanced-topics/auth-methods/overview).
 
-To view more constructor options, refer to the [API docs](https://js-sdk.litprotocol.com/interfaces/types_src.PKPClientProp.html).
+To view more constructor options, refer to the [API docs](https://js-sdk.litprotocol.com/interfaces/types_src.PKPEthersWalletProp.html).
 
-## 2. Initialize `PKPWalletConnect` with the `PKPClient`
+## 2. Initialize `PKPWalletConnect` with the `PKPEthersWallet`
 
-`PKPWalletConnect` wraps [`@walletconnect/web3wallet`](https://www.npmjs.com/package/@walletconnect/web3wallet) to manage WalletConnect session proposals and requests using the given PKPClient.
+`PKPWalletConnect` wraps [`@walletconnect/web3wallet`](https://www.npmjs.com/package/@walletconnect/web3wallet) to manage WalletConnect session proposals and requests using the given PKPEthersWallet.
 
 ```js
 import { PKPWalletConnect } from "@lit-protocol/pkp-walletconnect";
@@ -83,7 +84,7 @@ const config = {
 };
 const wcClient = new PKPWalletConnect();
 await wcClient.initWalletConnect(config);
-wcClient.addPKPClient(pkpWallet);
+wcClient.addPKPEthersWallet(pkpWallet);
 ```
 
 ## 3. Subscribe and respond to events
