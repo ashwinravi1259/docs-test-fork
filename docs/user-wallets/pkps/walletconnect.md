@@ -4,16 +4,17 @@ import FeedbackComponent from "@site/src/pages/feedback.md";
 
 Leverage Lit Protocol and WalletConnect V2 to seamlessly connect PKPs to hundreds of dApps. WalletConnect enables secure communication between wallets and dApps through QR code scanning and deep linking. With WalletConnect, PKPs act as MPC wallets, interacting with dApps without ever exposing private keys.
 
-This guide will show you how to implement this for an Ethereum wallet. If you'd like to do the same for [Sui](https://github.com/LIT-Protocol/js-sdk/tree/master/packages/pkp-sui) with `PKPSuiWallet` or [Cosmos](https://github.com/LIT-Protocol/js-sdk/tree/master/packages/pkp-cosmos) with `PKPCosmosWallet`.  
+This guide will show you how to implement this for an Ethereum wallet. If you'd like to do the same for [Sui](https://github.com/LIT-Protocol/js-sdk/tree/master/packages/pkp-sui) with `PKPSuiWallet` or [Cosmos](https://github.com/LIT-Protocol/js-sdk/tree/master/packages/pkp-cosmos) with `PKPCosmosWallet`. 
 
+Please note that this example requires you install the `@walletconnect/web3wallet` package.
 
 ## 1. Create a `PKPClient`
 
 Connecting a PKP to a dApp requires:
 
 1. Creation of a `PKPEthersWallet`
-2. Initialization of  `PKPWalletConnect`
-3. Subscribe and respond to events
+2. Initialization of  `PKPWalletConnect` using the `PKPEthersWallet`
+3. Subscribing and responding to events
 
 ```js
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
@@ -82,17 +83,13 @@ const pkpWalletConnect = new PKPWalletConnect();
 pkpWalletConnect.addPKPEthersWallet(pkpEthersWallet);
 ```
 
-The `getSessionSigsProps`, `controllerAuthSig` or `controllerSessionSigs` (this last one deprecated) are used to authorize requests to the Lit nodes. To learn how to leverage different authentication methods, refer to the [Authentication section](./advanced-topics/auth-methods/overview).
-
-To view more constructor options, refer to the [API docs](https://js-sdk.litprotocol.com/interfaces/types_src.PKPClientProp.html).
+The `authContext` or `controllerSessionSigs` are used to authorize requests to the Lit nodes. The only difference between these methods are that `controllerSessionSigs` accepts the Session Signatures object, while `authContext` accepts the same properties that Session Signatures do during creation. Those properties can be found [here](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.AuthenticationProps.html#getSessionSigsProps).
 
 ## 2. Initialize `PKPWalletConnect` with the `PKPClient`
 
 `PKPWalletConnect` wraps [`@walletconnect/web3wallet`](https://www.npmjs.com/package/@walletconnect/web3wallet) to manage WalletConnect session proposals and requests using the given PKPClient.
 
 ```js
-import { PKPWalletConnect } from "@lit-protocol/pkp-walletconnect";
-
 const config = {
   projectId: "<Your WalletConnect project ID>",
   metadata: {
@@ -102,9 +99,8 @@ const config = {
     icons: ["https://litprotocol.com/favicon.png"],
   },
 };
-const wcClient = new PKPWalletConnect();
-await wcClient.initWalletConnect(config);
-wcClient.addPKPClient(pkpWallet);
+
+await pkpWalletConnect.initWalletConnect(config);
 ```
 
 ## 3. Subscribe and respond to events
