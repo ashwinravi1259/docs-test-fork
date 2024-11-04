@@ -234,8 +234,22 @@ We will now generate a wallet that can act a regular Ethers.js wallet, but will 
 const pkpWallet = new PKPEthersWallet({
   pkpPubKey: pkp[pkp.length - 1].publicKey,
   rpc: "<standard RPC URL for the chain you are using>", // e.g. https://rpc.ankr.com/eth_goerli
+  litNodeClient,
   authContext: {
-    client: litNodeClient,
+    getSessionSigsProps: {
+      chain: 'ethereum',
+      expiration: new Date(Date.now() + 60_000 * 60).toISOString(),
+      resourceAbilityRequests: resourceAbilities,
+      authNeededCallback,
+    },
+  },
+  // controllerSessionSigs: sesionSigs, // (deprecated) If you will be passing sessionSigs directly, do not pass authContext
+});
+
+const pkpWallet = new PKPEthersWallet({
+  pkpPubKey: pkp[pkp.length - 1].publicKey,
+  litNodeClient,
+  authContext: {
     getSessionSigsProps: {
       chain: 'ethereum',
       expiration: new Date(Date.now() + 60_000 * 60).toISOString(),

@@ -46,8 +46,8 @@ const authNeededCallback = async (params: AuthCallbackParams) => {
 };
 
 const pkpWallet = new PKPEthersWallet({
+  litNodeClient,
   authContext: {
-    client: litNodeClient,
     getSessionSigsProps: {
       chain: 'ethereum',
       expiration: new Date(Date.now() + 60_000 * 60).toISOString(),
