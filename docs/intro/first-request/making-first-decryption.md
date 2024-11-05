@@ -121,7 +121,7 @@ const accessControlConditions = [
 
 ### Encrypting Data
 
-The Lit SDK offers several methods for encrypting data, which you can explore [here](https://v6-api-doc-lit-js-sdk.vercel.app/modules/encryption_src.html). In this example, we'll use the [encryptString](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html) method.
+The Lit SDK offers several methods for encrypting data, which you can explore [here](https://v7-api-doc-lit-js-sdk.vercel.app/modules/encryption_src.html). In this example, we'll use the [encryptString](https://v7-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html) method.
 
 We start by defining the string we want to encrypt, stored in the `dataToEncrypt` variable. Using the `encryptString` method, we encrypt the data by providing the `accessControlConditions` (ACCs) and `dataToEncrypt` as parameters. This method returns an object containing:
 
@@ -207,7 +207,7 @@ const sessionSigs = await litNodeClient.getSessionSigs({
 
 With the generated Session Signatures, we can proceed to decrypt the data using the `decryptToString` method. This method sends a decryption request to the Lit network, which verifies your permissions based on the ACCs and Session Signatures.
 
-If all conditions are met, the data is decrypted and returned as a string. You can explore other decryption methods [here](https://v6-api-doc-lit-js-sdk.vercel.app/modules/encryption_src.html).
+If all conditions are met, the data is decrypted and returned as a string. You can explore other decryption methods [here](https://v7-api-doc-lit-js-sdk.vercel.app/modules/encryption_src.html).
 
 <details>
 <summary> Click here to see how this is done</summary>

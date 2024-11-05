@@ -41,7 +41,7 @@ const authMethodId = ethers.utils.keccak256(
 );
 ```
 
-Then we utilize the [mintNextAndAddAuthMethods](https://v6-api-doc-lit-js-sdk.vercel.app/classes/contracts_sdk_src.LitContracts.html#pkpHelperContractUtil) from the `@lit-protocol/contracts-sdk` package to mint the PKP and add the permitted auth methods to the PKP:
+Then we utilize the [mintNextAndAddAuthMethods](https://v7-api-doc-lit-js-sdk.vercel.app/classes/contracts_sdk_src.LitContracts.html#pkpHelperContractUtil) from the `@lit-protocol/contracts-sdk` package to mint the PKP and add the permitted auth methods to the PKP:
 
 ```ts
 const tx =

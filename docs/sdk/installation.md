@@ -121,7 +121,7 @@ await client.disconnect();
 
 ## Debug Logging and Lit Node Client configuration
 
-The `LitNodeClient` object has a number of config params you can pass, documented here: [API Docs](https://v6-api-doc-lit-js-sdk.vercel.app/)
+The `LitNodeClient` object has a number of config params you can pass, documented here: [API Docs](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.LitNodeClientConfig.html)
 
 For example, to turn off logging, you could set `debug` to `false` like this: `const client = new LitJsSdk.LitNodeClient({debug: false})`
 

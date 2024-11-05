@@ -97,7 +97,7 @@ litNodeClient = new LitNodeClient({
 await litNodeClient.connect();
 ```
 
-You can learn more about the `@lit-protocol/lit-node-client` package and what is offers using the [API reference docs](https://v6-api-doc-lit-js-sdk.vercel.app/modules/lit_node_client_src.html).
+You can learn more about the `@lit-protocol/lit-node-client` package and what is offers using the [API reference docs](https://v7-api-doc-lit-js-sdk.vercel.app/modules/lit_node_client_src.html).
 
 ### Generating Session Sigs with the Delegation Auth Sig
 

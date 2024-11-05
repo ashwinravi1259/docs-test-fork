@@ -12,7 +12,7 @@ Below we will walk through an implementation of `getEncryptedKey`. The full code
 ## Overview of How it Works
 
 1. The Wrapped Keys SDK will use the provided Wrapped Key ID and PKP Session Signatures to fetch the stored metadata for a specific Wrapped Key from the Wrapped Keys backend service
-2. The stored metadata is returned as a [StoredKeyData](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/wrapped_keys_src.StoredKeyData.html) object
+2. The stored metadata is returned as a [StoredKeyData](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/wrapped_keys_src.StoredKeyData.html) object
 
 ## Prerequisites
 
@@ -73,11 +73,11 @@ When a Wrapped Key is generated, it's encrypted with the following [Access Contr
 
 where `pkpAddress` is the addressed derived from the `pkpSessionSigs`. This restricts the decryption of the Wrapped Key to only those whom can generate valid Authentication Signatures from the PKP which generated the Wrapped Key.
 
-A valid `pkpSessionSigs` object can be obtained using the [getPkpSessionSigs](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#getPkpSessionSigs) helper method available on an instance of [LitNodeClient](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html). We dive deeper into obtaining a `pkpSessionSigs` using `getPkpSessionSigs` in the [Generating PKP Session Signatures](#generating-pkp-session-signatures) section of this guide.
+A valid `pkpSessionSigs` object can be obtained using the [getPkpSessionSigs](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#getPkpSessionSigs) helper method available on an instance of [LitNodeClient](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html). We dive deeper into obtaining a `pkpSessionSigs` using `getPkpSessionSigs` in the [Generating PKP Session Signatures](#generating-pkp-session-signatures) section of this guide.
 
 #### `litNodeClient`
 
-This is an instance of the [LitNodeClient](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html) that is connected to a Lit network.
+This is an instance of the [LitNodeClient](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html) that is connected to a Lit network.
 
 #### `id`
 

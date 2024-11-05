@@ -94,7 +94,7 @@ litNodeClient = new LitNodeClient({
 await litNodeClient.connect();
 ```
 
-You can learn more about the `@lit-protocol/lit-node-client` package and what is offers using the [API reference docs](https://v6-api-doc-lit-js-sdk.vercel.app/modules/lit_node_client_src.html).
+You can learn more about the `@lit-protocol/lit-node-client` package and what is offers using the [API reference docs](https://v7-api-doc-lit-js-sdk.vercel.app/modules/lit_node_client_src.html).
 
 ## Generating the Capacity Delegation Auth Sig
 
@@ -113,7 +113,7 @@ const { capacityDelegationAuthSig } =
 
 #### `dAppOwnerWallet`
 
-This parameter is a [SignerLike](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.SignerLike.html) object (for this guide it's an instance of `ethers.Wallet`) that will be used to sign the ERC-5573 SIWE message that authorizes `delegateeAddresses` to use the Capacity Credit. The Ethereum address of the signer **must** own the Capacity Credit to delegate usage of it.
+This parameter is a [SignerLike](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.SignerLike.html) object (for this guide it's an instance of `ethers.Wallet`) that will be used to sign the ERC-5573 SIWE message that authorizes `delegateeAddresses` to use the Capacity Credit. The Ethereum address of the signer **must** own the Capacity Credit to delegate usage of it.
 
 #### `capacityTokenId`
 

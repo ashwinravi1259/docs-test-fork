@@ -14,12 +14,12 @@ Below we will walk through an implementation of `storeEncryptedKey`. The full co
 ## Overview of How it Works
 
 :::note
-The [StoreEncryptedKeyParams](https://v6-api-doc-lit-js-sdk.vercel.app/types/wrapped_keys_src.StoreEncryptedKeyParams.html) required for this method include the encryption metadata of the private key that will be turned into a Wrapped Key. For more information on how to obtain the encryption metadata, please refer to this guide on [encrypting data using the Lit SDK](../../user-wallets/wrapped-keys/custom-wrapped-keys#generating-and-encrypting-a-private-key), and this guide on [Custom Wrapped Keys](../../user-wallets/wrapped-keys/custom-wrapped-keys#generating-and-encrypting-a-private-key).
+The [StoreEncryptedKeyParams](https://v7-api-doc-lit-js-sdk.vercel.app/types/wrapped_keys_src.StoreEncryptedKeyParams.html) required for this method include the encryption metadata of the private key that will be turned into a Wrapped Key. For more information on how to obtain the encryption metadata, please refer to this guide on [encrypting data using the Lit SDK](../../user-wallets/wrapped-keys/custom-wrapped-keys#generating-and-encrypting-a-private-key), and this guide on [Custom Wrapped Keys](../../user-wallets/wrapped-keys/custom-wrapped-keys#generating-and-encrypting-a-private-key).
 :::
 
 1. The Wrapped Keys SDK will derive the PKP's Ethereum address from the provided PKP Session Signatures
-2. The SDK stores the provided [StoreEncryptedKeyParams](https://v6-api-doc-lit-js-sdk.vercel.app/types/wrapped_keys_src.StoreEncryptedKeyParams.html) using the Wrapped Keys backend service, associating the resulting Wrapped Key with the PKP's Ethereum address
-3. The SDK returns a [StoreEncryptedKeyResult](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/wrapped_keys_src.StoreEncryptedKeyResult.html) object containing the generated Wrapped Key ID, and the PKP Ethereum address the Wrapped Key is associated with
+2. The SDK stores the provided [StoreEncryptedKeyParams](https://v7-api-doc-lit-js-sdk.vercel.app/types/wrapped_keys_src.StoreEncryptedKeyParams.html) using the Wrapped Keys backend service, associating the resulting Wrapped Key with the PKP's Ethereum address
+3. The SDK returns a [StoreEncryptedKeyResult](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/wrapped_keys_src.StoreEncryptedKeyResult.html) object containing the generated Wrapped Key ID, and the PKP Ethereum address the Wrapped Key is associated with
 
 ## Prerequisites
 
@@ -76,17 +76,17 @@ When a Wrapped Key is generated, it's encrypted with the following [Access Contr
 
 where `pkpAddress` is the addressed derived from the `pkpSessionSigs`. This restricts the decryption of the Wrapped Key to only those whom can generate valid Authentication Signatures from the PKP which generated the Wrapped Key.
 
-A valid `pkpSessionSigs` object can be obtained using the [getPkpSessionSigs](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#getPkpSessionSigs) helper method available on an instance of [LitNodeClient](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html). We dive deeper into obtaining a `pkpSessionSigs` using `getPkpSessionSigs` in the [Generating PKP Session Signatures](#generating-pkp-session-signatures) section of this guide.
+A valid `pkpSessionSigs` object can be obtained using the [getPkpSessionSigs](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#getPkpSessionSigs) helper method available on an instance of [LitNodeClient](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html). We dive deeper into obtaining a `pkpSessionSigs` using `getPkpSessionSigs` in the [Generating PKP Session Signatures](#generating-pkp-session-signatures) section of this guide.
 
 #### `litNodeClient`
 
-This is an instance of the [LitNodeClient](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html) that is connected to a Lit network.
+This is an instance of the [LitNodeClient](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html) that is connected to a Lit network.
 
 #### `ciphertext`
 
 This is the result of encrypting the clear text private key and the Access Control Conditions for decryption using the Lit SDK.
 
-This value can be obtained using the Lit SDK's [encryptString](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html) method:
+This value can be obtained using the Lit SDK's [encryptString](https://v7-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html) method:
 
 :::note
 In the below example, `process.env.PKP_ETH_ADDRESS` would be the Ethereum address of the PKP you would like to associate the Wrapped Key with. This restricts the decryption (and by extension, usage) of the Wrapped Key to only those whom can generate valid Authentication Signatures from the PKP which corresponds to this address.
@@ -129,7 +129,7 @@ const { ciphertext, dataToEncryptHash } = await encryptString(
 
 This is the SHA-256 hash of the clear text private key.
 
-This value can be obtained using the Lit SDK's [encryptString](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html) method:
+This value can be obtained using the Lit SDK's [encryptString](https://v7-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html) method:
 
 :::note
 In the below example, `process.env.PKP_ETH_ADDRESS` would be the Ethereum address of the PKP you would like to associate the Wrapped Key with. This restricts the decryption (and by extension, usage) of the Wrapped Key to only those whom can generate valid Authentication Signatures from the PKP which corresponds to this address.
@@ -322,7 +322,7 @@ const pkpSessionSigs = await litNodeClient.getPkpSessionSigs({
 
 ### Encrypting the Private Key
 
-In order to initialize a Wrapped Key, we need to store the encrypted underlying private key. This is done using the Lit SDK's [encryptString](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html) method.
+In order to initialize a Wrapped Key, we need to store the encrypted underlying private key. This is done using the Lit SDK's [encryptString](https://v7-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html) method.
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";

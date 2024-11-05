@@ -47,7 +47,7 @@ However, it's important to note some potential drawbacks:
 
 ## Deploying Using a Code String
 
-This method is the more straightforward of the two, as we're simply providing our Lit Action code as a string when using one of the Lit SDK methods such as [executeJs](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.ILitNodeClient.html#executeJs).
+This method is the more straightforward of the two, as we're simply providing our Lit Action code as a string when using one of the Lit SDK methods such as [executeJs](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.ILitNodeClient.html#executeJs).
 
 :::note
 Most of the code in the full implementation is boilerplate code used to connect to a Lit network and generate Session Signatures. If you don't understand all of the code, or want to learn more about it, you can go [here](../../connecting-to-a-lit-network/connecting.md) to learn about connecting to a network, and [here](../authentication/session-sigs/intro.md) to learn more about generating Session Signatures.
@@ -143,7 +143,7 @@ Next we're calling the `executeJs` method to create a request to the Lit network
 
 ## Deploying Using IPFS
 
-While providing a code string is generally recommended, there are scenarios where uploading your Lit Action to IPFS can be beneficial as covered above. To implement this, we pass the [IPFS Content Identifier (CID)](https://docs.ipfs.tech/quickstart/publish/#cids-explained) when calling Lit SDK methods such as [executeJs](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.ILitNodeClient.html#executeJs).
+While providing a code string is generally recommended, there are scenarios where uploading your Lit Action to IPFS can be beneficial as covered above. To implement this, we pass the [IPFS Content Identifier (CID)](https://docs.ipfs.tech/quickstart/publish/#cids-explained) when calling Lit SDK methods such as [executeJs](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.ILitNodeClient.html#executeJs).
 
 :::note
 Most of the code in the full implementation is boilerplate code used to connect to a Lit network and generate Session Signatures. If you don't understand all of the code, or want to learn more about it, you can go [here](../../connecting-to-a-lit-network/connecting.md) to learn about connecting to a network, and [here](../authentication/session-sigs/intro.md) to learn more about generating Session Signatures.

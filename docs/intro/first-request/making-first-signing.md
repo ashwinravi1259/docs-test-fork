@@ -185,7 +185,7 @@ const sessionSigs = await litNodeClient.getSessionSigs({
 
 With the generated Session Signatures, we can use the `pkpSign` method to sign our data using the PKP. In this example, we're signing the hash of the message **"The answer to the universe is 42."**.
 
-If you'd like to see the `pkpSign` method's parameters, you can find them [here](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#pkpSign).
+If you'd like to see the `pkpSign` method's parameters, you can find them [here](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#pkpSign).
 
 <details>
 <summary> Click here to see how this is done</summary>

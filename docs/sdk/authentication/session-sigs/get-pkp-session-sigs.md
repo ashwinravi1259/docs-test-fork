@@ -14,7 +14,7 @@ Using the `getPkpSessionSigs` function, you can specify the capabilities of your
 
 This function requires you to own a PKP and some form of authentication to prove your identity (e.g. a custom Lit Action, AuthMethod, or AuthSig). It will enable specific abilities for your session keypair defined by the resources you specify.
 
-This function uses the [`signSessionKey`](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#signSessionKey) function to sign the session public key using the PKP, which will generate an `AuthSig`.
+This function uses the [`signSessionKey`](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#signSessionKey) function to sign the session public key using the PKP, which will generate an `AuthSig`.
 
 Once the `AuthSig` has been created, it is then signed by the session keypair. Signing the `AuthSig` with the session keypair creates the Session Signatures.
 
@@ -27,7 +27,7 @@ Before continuing this guide, you should have an understanding of:
 
 ## Parameters and Returns Values
 
-To see the parameters and return values of `getPkpSessionSigs`, please visit our [API Docs](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#getPkpSessionSigs).
+To see the parameters and return values of `getPkpSessionSigs`, please visit our [API Docs](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#getPkpSessionSigs).
 
 ## Example Implementation
 
@@ -118,7 +118,7 @@ In this example, we're enabling our session to use a PKP for signing.
 
 The current code uses the wildcard (`*`) identifier for `LitPKPResource`, which grants signing abilities to **any** PKP. This should only be used for example implementations or debugging. A more secure implementation would instead use the PKP `tokenId` to grant signing abilities to a specific PKP.
 
-To get the Lit resource identifier for other resources, you can use the other methods included in [@lit-protocol/auth-helpers](https://v6-api-doc-lit-js-sdk.vercel.app/modules/auth_helpers_src.html) package.
+To get the Lit resource identifier for other resources, you can use the other methods included in [@lit-protocol/auth-helpers](https://v7-api-doc-lit-js-sdk.vercel.app/modules/auth_helpers_src.html) package.
 
 If you would like to use this function on the `datil` or `datil-test` networks, a `capacityDelegationAuthSig` is required. Please also keep in mind that implementing this requires owning or minting a PKP and some form of authentication (e.g. a custom Lit Action, Auth Method, or AuthSig). How this is done can be found in the full code example.
 

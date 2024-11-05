@@ -1,6 +1,6 @@
 # Connecting to a Lit Network
 
-After installing the Lit SDK, you can connect an instance of [LitNodeClient](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html) to a Lit network. This is done by setting the `litNetwork` property when instantiating an instance of `LitNodeClient`:
+After installing the Lit SDK, you can connect an instance of [LitNodeClient](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html) to a Lit network. This is done by setting the `litNetwork` property when instantiating an instance of `LitNodeClient`:
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";

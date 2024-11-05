@@ -60,7 +60,7 @@ You should use **at least Node v19.9.0** for
 
 ### Connecting to the Lit Network
 
-Running a Lit Action requires an active connection to the Lit network. This can be done by initializing a [LitNodeClient](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html) instance, which will establish a connection to the Lit nodes.
+Running a Lit Action requires an active connection to the Lit network. This can be done by initializing a [LitNodeClient](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html) instance, which will establish a connection to the Lit nodes.
 
 We will also be initializing an Ethereum wallet using the `ETHEREUM_PRIVATE_KEY` environment variable, which is required for generating session signatures in this example.
 
@@ -167,7 +167,7 @@ To execute the Lit Action, we use the `executeJs` function. You'll need to pass 
 
 If you'd like to use the IPFS method mentioned previously, you would instead use `ipfsId` instead of `code: litActionCode`, and the `ipfsId` would be the IPFS CID of the Lit Action code.
 
-More details on the `executeJs` method can be found [here](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.JsonExecutionSdkParams.html).
+More details on the `executeJs` method can be found [here](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.JsonExecutionSdkParams.html).
 
 <details>
 <summary>Click here to see how this is done</summary>
