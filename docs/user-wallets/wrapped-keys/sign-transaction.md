@@ -19,7 +19,7 @@ Below we will walk through an implementation of `signTransactionWithEncryptedKey
 3. The Lit Action will verify the required transaction parameters were provided in order to sign the transaction
 4. The Lit Action will check the Access Control Conditions the plaintext private key was encrypted with to verify the PKP is authorized to decrypt the private key
 5. If authorized, the Wrapped Key will be decrypted within a Lit node's TEE. If not authorized, an error will be returned
-6. The Lit Action will use the decrypted Wrapped Key and the provided [SignTransactionWithEncryptedKeyParams](https://v6-api-doc-lit-js-sdk.vercel.app/types/wrapped_keys_src.SignTransactionWithEncryptedKeyParams.html) to sign the transaction
+6. The Lit Action will use the decrypted Wrapped Key and the provided [SignTransactionWithEncryptedKeyParams](https://v7-api-doc-lit-js-sdk.vercel.app/types/wrapped_keys_src.SignTransactionWithEncryptedKeyParams.html) to sign the transaction
 7. If the `broadcast` parameter was set to `true`, the Lit Action will then broadcast the signed transaction to the specified `network`, returning the transaction hash. Otherwise, the signed transaction will be returned
 
 ## Prerequisites
@@ -157,11 +157,11 @@ When a Wrapped Key is generated, it's encrypted with the following [Access Contr
 
 where `pkpAddress` is the addressed derived from the `pkpSessionSigs`. This restricts the decryption of the Wrapped Key to only those whom can generate valid Authentication Signatures from the PKP which generated the Wrapped Key.
 
-A valid `pkpSessionSigs` object can be obtained using the [getPkpSessionSigs](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#getPkpSessionSigs) helper method available on an instance of [LitNodeClient](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html). We dive deeper into obtaining a `pkpSessionSigs` using `getPkpSessionSigs` in the [Generating PKP Session Signatures](#generating-pkp-session-signatures) section of this guide.
+A valid `pkpSessionSigs` object can be obtained using the [getPkpSessionSigs](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#getPkpSessionSigs) helper method available on an instance of [LitNodeClient](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html). We dive deeper into obtaining a `pkpSessionSigs` using `getPkpSessionSigs` in the [Generating PKP Session Signatures](#generating-pkp-session-signatures) section of this guide.
 
 #### `litNodeClient`
 
-This is an instance of the [LitNodeClient](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html) that is connected to a Lit network.
+This is an instance of the [LitNodeClient](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html) that is connected to a Lit network.
 
 #### `network`
 
@@ -483,10 +483,10 @@ Here we are instantiating an instance of `LitNodeClient` and connecting it to th
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.DatilDev,
+    litNetwork: LIT_NETWORK.DatilDev,
     debug: false,
 });
 await litNodeClient.connect();
@@ -508,8 +508,8 @@ The Auth Method used in this example implementation is signing a Sign in With Et
 
 ```ts
 import { EthWalletProvider } from "@lit-protocol/lit-auth-client";
+import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
-  LitAbility,
   LitActionResource,
   LitPKPResource,
 } from "@lit-protocol/auth-helpers";
@@ -526,7 +526,7 @@ const pkpSessionSigs = await litNodeClient.getPkpSessionSigs({
     resourceAbilityRequests: [
     {
         resource: new LitActionResource("*"),
-        ability: LitAbility.LitActionExecution,
+        ability: LIT_ABILITY.LitActionExecution,
     },
     ],
     expiration: new Date(Date.now() + 1000 * 60 * 10).toISOString(), // 10 minutes

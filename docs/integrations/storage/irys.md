@@ -91,7 +91,7 @@ Connect to a Lit node on one of our [active networks](https://developer.litproto
 
 ```ts
 import * as LitJsSdk from "@lit-protocol/lit-node-client-nodejs";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 let litNodeClientInstance: LitJsSdk.LitNodeClientNodeJs | null = null;
 
@@ -100,7 +100,7 @@ async function getLitNodeClient(): Promise<LitJsSdk.LitNodeClientNodeJs> {
 
   litNodeClientInstance = new LitJsSdk.LitNodeClientNodeJs({
     alertWhenUnauthorized: false,
-    litNetwork: LitNetwork.DatilDev, // DatilDev network for free usage
+    litNetwork: LIT_NETWORK.DatilDev, // DatilDev network for free usage
     debug: false,
   });
 
@@ -181,8 +181,6 @@ We provide multiple methods to encrypt data, including strings, files, zip files
 
 - `encryptString():` Encrypts a string.
 - `encryptToJson()`: Encrypts a string or file and serializes the result to JSON. 
-- `zipAndEncryptString()`: Encrypts and compresses a string into a zip file. Useful for bundling multiple pieces of data.
-- `encryptFile()` and `zipAndEncryptFiles()`: Encrypt a single file or multiple files. 
 
 We will use `encryptString()` to encrypt a simple string:
 
@@ -291,7 +289,7 @@ async function decryptData(
     resourceAbilityRequests: [
       {
         resource: new LitAccessControlConditionResource("*"),
-        ability: LitAbility.AccessControlConditionDecryption,
+        ability: LIT_ABILITY.AccessControlConditionDecryption,
       },
     ],
     authNeededCallback: async (params: any) => {
@@ -351,10 +349,13 @@ Connect to a Lit node on one of our [active networks](https://developer.litproto
 ```ts
 import * as LitJsSdk from "@lit-protocol/lit-node-client";
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
-const litClient = new LitNodeClient({
-  litNetwork: "datil-dev",
+const litNodeClient = new LitNodeClient({
+  litNetwork: LIT_NETWORK.DatilDev,
 });
+
+await litNodeClient.connect();
 ```
 
 ### Setting Access Control Rules
@@ -427,8 +428,6 @@ We provide multiple methods to encrypt data, including strings, files, zip files
 
 - `encryptString()`: Encrypts a string.
 - `encryptToJson()`: Encrypts a string or file and serializes the result to JSON. 
-- `zipAndEncryptString()`: Encrypts and compresses a string into a zip file. Useful for bundling multiple pieces of data.
-- `encryptFile()` and `zipAndEncryptFiles()`: Encrypt a single file or multiple files. 
 
 We will use `encryptString()` to encrypt a string:
 
@@ -569,7 +568,7 @@ export const decryptData = async (encryptedText: string, dataToEncryptHash: stri
     resourceAbilityRequests: [
       {
         resource: litResource,
-        ability: LitAbility.AccessControlConditionDecryption,
+        ability: LIT_ABILITY.AccessControlConditionDecryption,
       },
     ],
     authNeededCallback,

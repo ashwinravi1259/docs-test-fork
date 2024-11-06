@@ -8,7 +8,7 @@ import FeedbackComponent from "@site/src/pages/feedback.md";
 
 Session Signatures are used to authenticate with the Lit nodes and create a secure connection to the Lit network. 
 
-Generating a Session Signature is required whenever you want to request a specific [Lit Ability](https://v6-api-doc-lit-js-sdk.vercel.app/enums/types_src.LitAbility.html) (e.g. signing a transaction) for a particular Lit Resource (e.g. a PKP).
+Generating a Session Signature is required whenever you want to request a specific [Lit Ability](https://v7-api-doc-lit-js-sdk.vercel.app/variables/constants_src.LIT_ABILITY.html) (e.g. signing a transaction) for a particular Lit Resource (e.g. a PKP).
 
 Session Signatures are created using session keys, which are generated for you when you initiate a connection with the Lit network via the Lit SDK. These session keys are unique [`ed25519`](https://ed25519.cr.yp.to/) keypairs generated locally by the Lit SDK. They are used to sign all requests to the Lit network during the current session.
 
@@ -39,9 +39,10 @@ A `storageProvider` needs to specified when creating an instance of the `LitNode
 
 ```javascript
 import { LocalStorage } from "node-localstorage";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.DatilDev,
+    litNetwork: LIT_NETWORK.DatilDev,
     // This storageProvider object can be omitted if executing in a browser
     storageProvider: {
         provider: new LocalStorage("./lit_storage.db"),
