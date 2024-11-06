@@ -7,7 +7,7 @@ import FeedbackComponent from "@site/src/pages/feedback.md";
 # Session Signatures
 
 :::warning
-Please do not cache session signatures, and instead generate them on-demand.
+Please do not cache Session Signatures, and instead generate them on-demand.
 :::
 
 Session Signatures are used to authenticate with the Lit nodes and create a secure connection to the Lit network. 

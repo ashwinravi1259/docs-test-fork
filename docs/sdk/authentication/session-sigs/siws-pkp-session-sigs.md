@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 # Using a Sign-in With Solana Message
 
 :::warning
-Please do not cache session signatures, and instead generate them on-demand.
+Please do not cache Session Signatures, and instead generate them on-demand.
 :::
 
 This guide builds on the [Sign-in With Solana Authentication](../authenticating-siws) guide to show how to use Lit Actions to generate PKP Session Signatures for an authorized Solana public key.
