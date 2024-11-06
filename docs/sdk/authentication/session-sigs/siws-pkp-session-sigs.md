@@ -1,4 +1,16 @@
+---
+sidebar_position: 2
+---
+
+import FeedbackComponent from "@site/src/pages/feedback.md";
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Using a Sign-in With Solana Message
+
+:::warning
+Instead of manually caching Session Signatures, please generate them on-demand.
+:::
 
 This guide builds on the [Sign-in With Solana Authentication](../authenticating-siws) guide to show how to use Lit Actions to generate PKP Session Signatures for an authorized Solana public key.
 

@@ -8,6 +8,10 @@ import TabItem from '@theme/TabItem';
 
 # Using an Auth Sig
 
+:::warning
+Instead of manually caching Session Signatures, please generate them on-demand.
+:::
+
 This guide covers the `getSessionSigs` function from the Lit SDK. For an overview of what Session Signatures are and how they are to be used, please go [here](./intro).
 
 Using the `getSessionSigs` function, you can specify the capabilities of your current session on the Lit network.
