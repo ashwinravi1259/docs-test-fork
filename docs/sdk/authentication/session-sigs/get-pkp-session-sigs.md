@@ -8,6 +8,10 @@ import TabItem from '@theme/TabItem';
 
 # Using a PKP
 
+:::warning
+Please do not cache Session Signatures, and instead generate them on-demand.
+:::
+
 This guide covers the `getPkpSessionSigs` function from the Lit SDK. For an overview of what Session Signatures are and how they are to be used, please go [here](./intro).
 
 Using the `getPkpSessionSigs` function, you can specify the capabilities of your current session on the Lit network. 

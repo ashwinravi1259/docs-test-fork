@@ -6,6 +6,10 @@ import FeedbackComponent from "@site/src/pages/feedback.md";
 
 # Session Signatures
 
+:::warning
+Please do not cache Session Signatures, and instead generate them on-demand.
+:::
+
 Session Signatures are used to authenticate with the Lit nodes and create a secure connection to the Lit network. 
 
 Generating a Session Signature is required whenever you want to request a specific [Lit Ability](https://v7-api-doc-lit-js-sdk.vercel.app/variables/constants_src.LIT_ABILITY.html) (e.g. signing a transaction) for a particular Lit Resource (e.g. a PKP).
