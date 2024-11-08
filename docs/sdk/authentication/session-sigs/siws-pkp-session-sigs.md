@@ -53,13 +53,13 @@ const authMethodId = ethers.utils.keccak256(
 );
 ```
 
-Then we utilize the [mintNextAndAddAuthMethods](https://v7-api-doc-lit-js-sdk.vercel.app/classes/contracts_sdk_src.LitContracts.html#pkpHelperContractUtil) from the `@lit-protocol/contracts-sdk` package to mint the PKP and add the permitted auth methods to the PKP:
+Then we utilize the [mintNextAndAddAuthMethods](https://v6-api-doc-lit-js-sdk.vercel.app/classes/contracts_sdk_src.LitContracts.html#pkpHelperContractUtil) from the `@lit-protocol/contracts-sdk` package to mint the PKP and add the permitted auth methods to the PKP:
 
 ```ts
 const tx =
     await litContractsClient.pkpHelperContract.write.mintNextAndAddAuthMethods(
-        AUTH_METHOD_TYPE.LitAction, // keyType
-        [AUTH_METHOD_TYPE.LitAction, authMethodType], // permittedAuthMethodTypes
+        AuthMethodType.LitAction, // keyType
+        [AuthMethodType.LitAction, authMethodType], // permittedAuthMethodTypes
         [
         `0x${Buffer.from(
             ethers.utils.base58.decode(
@@ -69,7 +69,7 @@ const tx =
         authMethodId,
         ], // permittedAuthMethodIds
         ["0x", "0x"], // permittedAuthMethodPubkeys
-        [[AUTH_METHOD_SCOPE.SignAnything], [AUTH_METHOD_SCOPE.NoPermissions]], // permittedAuthMethodScopes
+        [[AuthMethodScope.SignAnything], [AuthMethodScope.NoPermissions]], // permittedAuthMethodScopes
         true, // addPkpEthAddressAsPermittedAddress
         true, // sendPkpToItself
         { value: await litContractsClient.pkpNftContract.read.mintCost() }
@@ -78,9 +78,9 @@ const receipt = await tx.wait();
 ```
 
 :::info
-It's important to note that the first permitted Auth Method (the IPFS CID of the Lit Action) has the permission scope: `[AUTH_METHOD_SCOPE.SignAnything]` which allows anything to be signed using the PKP, as long as the signing request is executed from within the Lit Action with the specific IPFS CID.
+It's important to note that the first permitted Auth Method (the IPFS CID of the Lit Action) has the permission scope: `[AuthMethodScope.SignAnything]` which allows anything to be signed using the PKP, as long as the signing request is executed from within the Lit Action with the specific IPFS CID.
 
-The second permitted Auth Method (our custom Auth Method) has the permission scope: `[AUTH_METHOD_SCOPE.NoPermissions]` which grants no signing permissions. This is desired because this Auth Method is only used by the Lit Action to check if a Solana public key is authorized to sign using the PKP.
+The second permitted Auth Method (our custom Auth Method) has the permission scope: `[AuthMethodScope.NoPermissions]` which grants no signing permissions. This is desired because this Auth Method is only used by the Lit Action to check if a Solana public key is authorized to sign using the PKP.
 :::
 
 At this point, we have minted a PKP that is only authorized to sign within a specific Lit Action, and can check if a derived Solana public key from a signed SIWS message is authorized to sign using the PKP.

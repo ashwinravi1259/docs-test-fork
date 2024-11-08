@@ -34,7 +34,7 @@ The Lit SDK has multiple methods for generating Session Signatures:
 - [`getSessionSigs`](../../sdk/authentication/session-sigs/get-session-sigs)
     - This function is the simplest way to get Session Signatures, at the minimum only requiring an Ethereum wallet and the `LitNodeClient`. It will enable specific capabilities for your session keypair using the resources you specify in the `AuthSig`.
 - [`getPkpSessionSigs`](../../sdk/authentication/session-sigs/get-pkp-session-sigs)
-    - This function uses the [signSessionKey](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#signSessionKey) function to sign the session public key using the PKP, which will generate an `AuthSig`. Once the `AuthSig` has been created, it is then signed by the session keypair. Signing the `AuthSig` with the session keypair creates the Session Signatures.
+    - This function uses the [signSessionKey](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#signSessionKey) function to sign the session public key using the PKP, which will generate an `AuthSig`. Once the `AuthSig` has been created, it is then signed by the session keypair. Signing the `AuthSig` with the session keypair creates the Session Signatures.
 - [`getLitActionSessionSigs`](../../sdk/authentication/session-sigs/get-lit-action-session-sigs)
     - This function is the same as `getPkpSessionSigs`, but executes the given Lit Action to determine authorization.
 
@@ -44,7 +44,7 @@ The best method to use depends on your use case.
 
 #### Node.js
 
-If you're using Node.js, the Session Signatures will be stored wherever the [storageProvider](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.LitNodeClientConfig.html#storageProvider) is configured to store them. If no `storageProvider` is provided, the Session Signatures will not be stored.
+If you're using Node.js, the Session Signatures will be stored wherever the [storageProvider](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.LitNodeClientConfig.html#storageProvider) is configured to store them. If no `storageProvider` is provided, the Session Signatures will not be stored.
 
 #### Browser
 
@@ -52,7 +52,7 @@ If you're executing within a browser environment, the Session Signatures will be
 
 ### Session Capabilities
 
-Session Signatures are used to grant access to specific resources on the Lit network. The resources you can request for your session can be found [here](https://v7-api-doc-lit-js-sdk.vercel.app/variables/constants_src.LIT_ABILITY.html).
+Session Signatures are used to grant access to specific resources on the Lit network. The resources you can request for your session can be found [here](https://v6-api-doc-lit-js-sdk.vercel.app/enums/types_src.LitAbility.html).
 
 ### Table
 
@@ -65,6 +65,8 @@ Session Signatures are used to grant access to specific resources on the Lit net
 | Decryption Access Control       | ✅                           |
 | Signing Access Control          | ✅                           |
 | Capacity Credits Authentication | ✅                           |
+
+More information on the requestable resources can be found [here](https://v6-api-doc-lit-js-sdk.vercel.app/enums/types_src.LitAbility.html#AccessControlConditionSigning).
 
 ### Restricting Session Signatures
 

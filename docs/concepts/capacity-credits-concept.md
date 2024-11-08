@@ -47,10 +47,10 @@ You can read more about Session Signatures [here](../sdk/authentication/session-
 
 
 ```javascript
-import { LIT_NETWORK, LIT_ABILITY } from "@lit-protocol/constants";
+import { LitNetwork } from "@lit-protocol/constants";
 
   const litNodeClient = new LitNodeClient({
-      litNetwork: LIT_NETWORK.DatilTest,
+      litNetwork: LitNetwork.DatilTest,
       checkNodeAttestation: true,
   });
   
@@ -66,12 +66,12 @@ import { LIT_NETWORK, LIT_ABILITY } from "@lit-protocol/constants";
 
     recapObject.addCapabilityForResource(
       litResource,
-      LIT_ABILITY.LitActionExecution
+      LitAbility.LitActionExecution
     );
 
     const verified = recapObject.verifyCapabilitiesForResource(
       litResource,
-      LIT_ABILITY.LitActionExecution
+      LitAbility.LitActionExecution
     );
 
     if (!verified) {
@@ -110,7 +110,7 @@ import { LIT_NETWORK, LIT_ABILITY } from "@lit-protocol/constants";
     resourceAbilityRequests: [
       {
         resource: new LitActionResource('*'),
-        ability: LIT_ABILITY.LitActionExecution,
+        ability: LitAbility.LitActionExecution,
       },
     ],
     authNeededCallback,

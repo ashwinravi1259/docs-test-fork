@@ -4,92 +4,74 @@ import FeedbackComponent from "@site/src/pages/feedback.md";
 
 Leverage Lit Protocol and WalletConnect V2 to seamlessly connect PKPs to hundreds of dApps. WalletConnect enables secure communication between wallets and dApps through QR code scanning and deep linking. With WalletConnect, PKPs act as MPC wallets, interacting with dApps without ever exposing private keys.
 
-This guide will show you how to implement this for an Ethereum wallet. If you'd like to do the same for [Sui](https://github.com/LIT-Protocol/js-sdk/tree/master/packages/pkp-sui) with `PKPSuiWallet` or [Cosmos](https://github.com/LIT-Protocol/js-sdk/tree/master/packages/pkp-cosmos) with `PKPCosmosWallet`. 
+To connect a PKP and a dApp, you will need to:
 
-Please note that this example requires you install the `@walletconnect/web3wallet` package.
+1. Create a `PKPClient`
+2. Initialize `PKPWalletConnect` with the `PKPClient`
+3. Subscribe and respond to events
 
 ## 1. Create a `PKPClient`
 
-Connecting a PKP to a dApp requires:
-
-1. Creation of a `PKPEthersWallet`
-2. Initialization of  `PKPWalletConnect` using the `PKPEthersWallet`
-3. Subscribing and responding to events
+`PKPClient` represents a PKP and initializes signers for use across multiple blockchains (note: EVM-only at the moment).
 
 ```js
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LIT_NETWORK, LIT_ABILITY, LIT_RPC } from "@lit-protocol/constants";
-import {
-  createSiweMessage,
-  generateAuthSig,
-  LitPKPResource
-} from "@lit-protocol/auth-helpers";
-import { PKPEthersWallet } from "@lit-protocol/pkp-ethers";
-import { PKPWalletConnect } from "@lit-protocol/pkp-walletconnect";
-import * as ethers from "ethers";
+import { LitAbility, LitActionResource } from '@lit-protocol/auth-helpers';
+import { PKPClient } from "@lit-protocol/pkp-client";
 
-const ETHEREUM_PRIVATE_KEY = "<Your Ethereum private key>";
-const LIT_PKP_PUBLIC_KEY = "<Your Lit PKP public key>";
-
-const ethersWallet = new ethers.Wallet(
-  ETHEREUM_PRIVATE_KEY,
-  new ethers.providers.JsonRpcProvider(LIT_RPC.CHRONICLE_YELLOWSTONE)
-);
-
+// If you haven't done before, create a LitNodeClient instance
 const litNodeClient = new LitNodeClient({
-      litNetwork: LIT_NETWORK.DatilDev,
-      debug: false,
-    });
-    await litNodeClient.connect();
+  litNetwork: "datil-dev",
+});
+await litNodeClient.connect();
 
-const sessionSignatures = await litNodeClient.getSessionSigs({
-  chain: "ethereum",
-  expiration: new Date(Date.now() + 1000 * 60 * 10).toISOString(), // 10 minutes
-  resourceAbilityRequests: [
-    {
-      resource: new LitPKPResource("*"),
-      ability: LIT_ABILITY.PKPSigning,
-    },
-  ],
-  authNeededCallback: async ({
-    uri,
-    expiration,
-    resourceAbilityRequests,
-  }) => {
-    const toSign = await createSiweMessage({
-      uri,
-      expiration,
-      resources: resourceAbilityRequests,
-      walletAddress: await ethersWallet.getAddress(),
-      nonce: await litNodeClient.getLatestBlockhash(),
-      litNodeClient,
-    });
-
-    return await generateAuthSig({
-      signer: ethersWallet,
-      toSign,
-    });
+// Prepare needed params for authContext
+const resourceAbilities = [
+  {
+    resource: new LitActionResource("*"),
+    ability: LitAbility.PKPSigning,
   },
+];
+
+const authNeededCallback = async (params: AuthCallbackParams) => {
+  const response = await litNodeClient.signSessionKey({
+    statement: params.statement,
+    authMethods: [authMethod],
+    expiration: params.expiration,
+    resources: params.resources,
+    chainId: 1,
+  });
+  return response.authSig;
+};
+
+const pkpClient = new PKPClient({
+  authContext: {
+    client: litNodeClient,
+    getSessionSigsProps: {
+      chain: 'ethereum',
+      expiration: new Date(Date.now() + 60_000 * 60).toISOString(),
+      resourceAbilityRequests: resourceAbilities,
+      authNeededCallback,
+    },
+  },
+  // controllerAuthSig: authSig,
+  // controllerSessionSigs: sesionSigs, // (deprecated)
+  pkpPubKey: "<Your PKP public key>",
 });
-
-const pkpEthersWallet = new PKPEthersWallet({
-  litNodeClient,
-  pkpPubKey: LIT_PKP_PUBLIC_KEY!,
-  controllerSessionSigs: sessionSignatures
-});
-
-
-const pkpWalletConnect = new PKPWalletConnect();
-pkpWalletConnect.addPKPEthersWallet(pkpEthersWallet);
+await pkpClient.connect();
 ```
 
-The `authContext` or `controllerSessionSigs` are used to authorize requests to the Lit nodes. The only difference between these methods are that `controllerSessionSigs` accepts the Session Signatures object, while `authContext` accepts the same properties that Session Signatures do during creation. Those properties can be found [here](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.AuthenticationProps.html#getSessionSigsProps).
+The `getSessionSigsProps`, `controllerAuthSig` or `controllerSessionSigs` (this last one deprecated) are used to authorize requests to the Lit nodes. To learn how to leverage different authentication methods, refer to the [Authentication section](./advanced-topics/auth-methods/overview).
+
+To view more constructor options, refer to the [API docs](https://js-sdk.litprotocol.com/interfaces/types_src.PKPClientProp.html).
 
 ## 2. Initialize `PKPWalletConnect` with the `PKPClient`
 
 `PKPWalletConnect` wraps [`@walletconnect/web3wallet`](https://www.npmjs.com/package/@walletconnect/web3wallet) to manage WalletConnect session proposals and requests using the given PKPClient.
 
 ```js
+import { PKPWalletConnect } from "@lit-protocol/pkp-walletconnect";
+
 const config = {
   projectId: "<Your WalletConnect project ID>",
   metadata: {
@@ -99,8 +81,9 @@ const config = {
     icons: ["https://litprotocol.com/favicon.png"],
   },
 };
-
-await pkpWalletConnect.initWalletConnect(config);
+const wcClient = new PKPWalletConnect();
+await wcClient.initWalletConnect(config);
+wcClient.addPKPClient(pkpWallet);
 ```
 
 ## 3. Subscribe and respond to events

@@ -28,7 +28,7 @@ Before continuing this guide, you should have an understanding of:
 
 ## Parameters and Returns Values
 
-To see the parameters and return of `getSessionSigs`, please visit our [API Docs](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#getSessionSigs).
+To see the parameters and return of `getSessionSigs`, please visit our [API Docs](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#getSessionSigs).
 
 ## Example Implementation
 
@@ -85,27 +85,27 @@ Here we are initializing an instance of `LitNodeClient` and connecting it to the
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LIT_NETWORK } from "@lit-protocol/constants";
+import { LitNetwork } from "@lit-protocol/constants";
 
 let litNodeClient: LitNodeClient;
 
 litNodeClient = new LitNodeClient({
-      litNetwork: LIT_NETWORK.DatilTest,
+      litNetwork: LitNetwork.DatilTest,
       debug: false,
     });
 await litNodeClient.connect();
 ```
 
 ### Generating Session Signatures
-In this example, we're granting the capability to request to decrypt any data that we may be authorized to decrypt (i.e. we satisfy the Access Control Conditions the data was encrypted with). We could, however, specify the [LitAccessControlConditionResource](https://v7-api-doc-lit-js-sdk.vercel.app/classes/auth_helpers_src.LitAccessControlConditionResource.html) for specific encrypted data we're permitting the decryption capability for. In real-world applications, it's more common and secure to limit access to specific Lit resources instead of specifying the wildcard (`"*"`) identifier.
+In this example, we're granting the capability to request to decrypt any data that we may be authorized to decrypt (i.e. we satisfy the Access Control Conditions the data was encrypted with). We could, however, specify the [LitAccessControlConditionResource](https://v6-api-doc-lit-js-sdk.vercel.app/classes/auth_helpers_src.LitAccessControlConditionResource.html) for specific encrypted data we're permitting the decryption capability for. In real-world applications, it's more common and secure to limit access to specific Lit resources instead of specifying the wildcard (`"*"`) identifier.
 
-To get the Lit resource identifier for other resources, you can use the other methods included in [@lit-protocol/auth-helpers](https://v7-api-doc-lit-js-sdk.vercel.app/modules/auth_helpers_src.html) package.
+To get the Lit resource identifier for other resources, you can use the other methods included in [@lit-protocol/auth-helpers](https://v6-api-doc-lit-js-sdk.vercel.app/modules/auth_helpers_src.html) package.
 
 If you would like to use this function on the `datil` or `datil-test` networks, a `capacityDelegationAuthSig` is required. An example of how to generate one can be found in the full code example.
 
 ```ts
-import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
+  LitAbility,
   LitAccessControlConditionResource,
   createSiweMessage,
   generateAuthSig,
@@ -118,7 +118,7 @@ const sessionSignatures = await litNodeClient.getSessionSigs({
   resourceAbilityRequests: [
     {
       resource: new LitAccessControlConditionResource("*"),
-      ability: LIT_ABILITY.AccessControlConditionDecryption,
+      ability: LitAbility.AccessControlConditionDecryption,
     },
   ],
   authNeededCallback: async ({

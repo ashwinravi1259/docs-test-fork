@@ -12,11 +12,8 @@ The NFT represents root ownership of the PKP. The NFT owner can grant other user
 
 ## Installing the required packages
 ```bash
-yarn add @lit-protocol/lit-node-client
 yarn add @lit-protocol/lit-auth-client
 yarn add @lit-protocol/contracts-sdk
-yarn add @lit-protocol/constants
-yarn add @lit-protocol/providers
 ```
 
 ## Initializing your `LitContract` instance
@@ -31,24 +28,24 @@ await contractClient.connect();
 ## Minting a PKP and adding permitted scopes
 Permitted scopes are a crucial part of defining the capabilities of authentication methods. They determine what actions an authentication method can perform within the system. For instance, the `SignAnything` scope allows an auth method to sign any data, while the `PersonalSign` scope restricts it to signing messages using the EIP-191 scheme. 
 
-You can also set scopes: `[]` which will mean that the auth method can only be used for authentication, but not authorization. This means that the auth method can be used to prove that the user is who they say they are, but cannot be used to sign transactions or messages. You can read more about Auth Method scopes [here](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.MintWithAuthParams.html#scopes).
+You can also set scopes: `[]` which will mean that the auth method can only be used for authentication, but not authorization. This means that the auth method can be used to prove that the user is who they say they are, but cannot be used to sign transactions or messages. You can read more about Auth Method scopes [here](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.MintWithAuthParams.html#scopes).
 
 The following code block demonstrates how to mint a PKP with specific permitted scopes:
 
 ```js
-import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE } from '@lit-protocol/constants';
+import { AuthMethodScope, AuthMethodType } from '@lit-protocol/constants';
 
 const authMethod = {
-  authMethodType: AUTH_METHOD_TYPE.EthWallet,
+  authMethodType: AuthMethodType.EthWallet,
   accessToken: JSON.stringify(authSig),
 };
 
 const mintInfo = await contractClient.mintWithAuth({
   authMethod: authMethod,
   scopes: [
-		// AUTH_METHOD_SCOPE.NoPermissions,
-		AUTH_METHOD_SCOPE.SignAnything, 
-		AUTH_METHOD_SCOPE.PersonalSign
+		// AuthMethodScope.NoPermissions,
+		AuthMethodScope.SignAnything, 
+		AuthMethodScope.PersonalSign
 	],
 });
 
@@ -70,75 +67,55 @@ The relayer is an open source project, and we run one for your use.  The source 
 ## Authenticating using `signMessage` Callback
 If you wish to sign with an ethers wallet type or `signer` you may use the `signMessage` callback to implement a signing callback for the `SIWE` message.
 ```js
-import { LitNodeClient } from '@lit-protocol/lit-node-client';
-import { LitRelay } from '@lit-protocol/lit-auth-client';
-import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE, PROVIDER_TYPE, LIT_RPC, LIT_NETWORK } from '@lit-protocol/constants';
-import { EthWalletProvider } from '@lit-protocol/providers';
+import { LitAuthClient } from '@lit-protocol/lit-auth-client';
+import { AuthMethodScope, AuthMethodType, ProviderType } from '@lit-protocol/constants';
 import * as ethers from 'ethers';
 
-const litNodeClient = new LitNodeClient({
-  litNetwork: LIT_NETWORK.DatilDev,
-  debug: true
-})
-await litNodeClient.connect();
+const provider = new ethers.providers.JsonRpcProvider("your rpc url");
+let wallet = new ethers.Wallet("your wallet private key", provider);
+const authProvider = litAuthClient.initProvider(ProviderType.EthWallet);
 
-const litRelay = new LitRelay({
-  relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
-  relayApiKey: 'test-api-key',
-});
-
-const ethWalletProvider = new EthWalletProvider({ relay: litRelay, litNodeClient });
-
-const ethersWallet = new ethers.Wallet(
-  'Your Ethereum Private Key', // Replace with your private key
-  new ethers.providers.JsonRpcProvider(LIT_RPC.CHRONICLE_YELLOWSTONE)
-);
-
-const authMethod = await ethWalletProvider.authenticate({
+let authMethod = authProvider.authenticate({
   signMessage: (message: string) => {
-    return await ethersWallet.signMessage(message);
+    return await wallet.signMessage(message);
   }
 });
 
+// -- setting scope for the auth method
+// <https://developer.litprotocol.com/v3/sdk/wallets/auth-methods/#auth-method-scopes>
 const options = {
-  permittedAuthMethodScopes: [[AUTH_METHOD_SCOPE.SignAnything]],
+  permittedAuthMethodScopes: [[AuthMethodScope.SignAnything]],
 };
 
-const mintTx = await litRelay.mintPKPWithAuthMethods([authMethod], options);
+const mintTx = await authProvider.mintPKPThroughRelayer(
+  authMethod,
+  options
+);
 ```
 
 ## Authenticating using `Web3 Provider`
 In the case where you wish to generagte a signature from a browser extension wallet (MetaMask, Brave Wallet, etc)
 you may simply call `authenticate` which calls `checkAndSignAuthMessage`.
 ```js
-import { LitNodeClient } from '@lit-protocol/lit-node-client';
-import { LitRelay } from '@lit-protocol/lit-auth-client';
-import { EthWalletProvider } from '@lit-protocol/providers';
-import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE, PROVIDER_TYPE } from '@lit-protocol/constants';
-import { Wallet } from 'ethers';
+import { LitAuthClient } from '@lit-protocol/lit-auth-client';
+import { AuthMethodScope, AuthMethodType, ProviderType } from '@lit-protocol/constants';
+import {Wallet} from 'ethers';
 
-const litNodeClient = new LitNodeClient({
-  litNetwork: LIT_NETWORK.DatilDev,
-  debug: true
-})
-await litNodeClient.connect();
+const authProvider = litAuthClient.initProvider(ProviderType.EthWallet);
 
-const litRelay = new LitRelay({
-  relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
-  relayApiKey: 'test-api-key',
-});
-
-const ethWalletProvider = new EthWalletProvider({ relay: litRelay, litNodeClient });
-
-const authMethod = await authProvider.authenticate({chain: "ethereum"});
+// Will call `checkAndSignAuthMessage({chain: ethereum})`
+let authMethod = await authProvider.authenticate({chain: "ethereum"});
 
 // -- setting scope for the auth method
 // <https://developer.litprotocol.com/v3/sdk/wallets/auth-methods/#auth-method-scopes>
 const options = {
-  permittedAuthMethodScopes: [[AUTH_METHOD_SCOPE.SignAnything]],
+  permittedAuthMethodScopes: [[AuthMethodScope.SignAnything]],
 };
 
-const mintTx = await litRelay.mintPKPWithAuthMethods([authMethod], options);
+const mintTx = await authProvider.mintPKPThroughRelayer(
+  authMethod,
+  options
+);
 ```
 
 

@@ -49,31 +49,37 @@ JSON_RPC_NODE_PROVIDER= // Get an RPC from a Node provider
 #### Initialize the Lit Network Connection and GoogleProvider
 
 - Connect to the Lit Network using LitNodeClient.
-- Set up the LitRelay for authentication.
+- Set up the LitAuthClient for authentication.
 - Initialize a GoogleProvider for Google sign-in.
 
 ```jsx
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitRelay } from "@lit-protocol/lit-auth-client";
-import { GoogleProvider } from "@lit-protocol/providers";
-import { PROVIDER_TYPE, LIT_NETWORK } from "@lit-protocol/constants";
+import { LitAuthClient, GoogleProvider } from "@lit-protocol/lit-auth-client";
+import { ProviderType, LitNetwork } from "@lit-protocol/constants";
 
 const initalizeClientsAndProvider = async () => {
   const litNodeClient = new LitNodeClient({
-    litNetwork: LIT_NETWORK.DatilDev,
+    litNetwork: LitNetwork.DatilDev,
     debug: true,
   });
   await litNodeClient.connect();
 
-  const litRelay = new LitRelay({
-    relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
-    relayApiKey: 'test-api-key',
+  const litAuthClient = new LitAuthClient({
+    litRelayConfig: {
+      relayApiKey: process.env.LIT_API_KEY,
+    },
+    litNodeClient,
   });
-  console.log("Connected to Lit Nodes and Lit Relay ✔️");
 
-  const provider = new GoogleProvider({ relay: litRelay, litNodeClient });
+  console.log("Connected to Lit Node and Lit Auth Clients ✔️");
 
-  return { litNodeClient, litRelay, provider };
+  const provider = litAuthClient.initProvider<GoogleProvider>(
+    ProviderType.Google,
+    {
+      // redirectUri: The redirect URI Lit's login server should redirect to after a successful login
+    }
+  );
+  return { litNodeClient, litAuthClient, provider };
 };
 ```
 
@@ -102,20 +108,11 @@ const authMethod = await generateAuthMethod();
 if (!authMethod) {
   return;
 }
-```
-
-#### Mint PKP (Programmable Key Pair)
-
-```jsx
-import { LitRelay } from "@lit-protocol/lit-auth-client";
+Mint PKP (Programmable Key Pair)
+import { LitAuthClient } from "@lit-protocol/lit-auth-client";
 
 const mintWithGoogle = async (authMethod) => {
-  const litRelay = new LitRelay({
-    relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
-    relayApiKey: 'test-api-key',
-  });
-  
-  const pkp = await litRelay.mintPKPWithAuthMethods([authMethod], {
+  const pkp = await litAuthClient.mintPKPWithAuthMethods([authMethod], {
     addPkpEthAddressAsPermittedAddress: true
   });
   console.log("Fetched PKP", pkp);
@@ -130,7 +127,7 @@ console.log("Minted PKP ✔️");
 
 ```jsx
 import { PKPEthersWallet } from "@lit-protocol/pkp-ethers";
-import { LIT_ABILITY, LitPKPResource } from "@lit-protocol/auth-helpers";
+import { LitAbility, LitPKPResource } from "@lit-protocol/auth-helpers";
 import { AuthCallbackParams } from "@lit-protocol/types";
 import { LIT_RPC } from "@lit-protocol/constants";
 
@@ -142,7 +139,7 @@ const response = await litNodeClient.signSessionKey({
   resourceAbilityRequests: [
     {
       resource: new LitPKPResource("*"),
-      ability: LIT_ABILITY.PKPSigning,
+      ability: LitAbility.PKPSigning,
     },
   ],
   expiration: params.expiration,
@@ -162,7 +159,7 @@ const guardianSigner = new PKPEthersWallet({
       resourceAbilityRequests: [
         {
           resource: new LitPKPResource("*"),
-          ability: LIT_ABILITY.PKPSigning,
+          ability: LitAbility.PKPSigning,
         },
       ],
       authNeededCallback: authNeededCallback,

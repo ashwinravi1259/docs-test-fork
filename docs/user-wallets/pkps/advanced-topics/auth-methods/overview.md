@@ -61,20 +61,20 @@ Using this strategy, you could implement your own MFA, where the user must prese
 **Adding permitted scopes to existing PKPs**
 1. Verify the scopes:
 ```js
-import { getAuthIdByAuthMethod } from '@lit-protocol/lit-auth-client';
+import { LitAuthClient } from '@lit-protocol/lit-auth-client';
 import { LitContracts } from '@lit-protocol/contracts-sdk';
-import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE } from '@lit-protocol/constants';
+import { AuthMethodScope, AuthMethodType } from '@lit-protocol/constants';
 
 const authMethod = {
-  authMethodType: AUTH_METHOD_TYPE.EthWallet,
+  authMethodType: AuthMethodType.EthWallet,
   accessToken: ...,
 };
 
-const authId = await getAuthIdByAuthMethod(authMethod);
+const authId = LitAuthClient.getAuthIdByAuthMethod(authMethod);
 
 const scopes = await contractClient.pkpPermissionsContract.read.getPermittedAuthMethodScopes(
   tokenId,
-  AUTH_METHOD_TYPE.EthWallet,
+  AuthMethodType.EthWallet,
   authId,
   3 // there are only 2 scope numbers atm. and index 0 doesn't count
 );
@@ -90,23 +90,23 @@ if (scopes[2] !== false) {
 ```
 2. Set the scopes:
 ```js
-import { getAuthIdByAuthMethod } from '@lit-protocol/lit-auth-client';
+import { LitAuthClient } from '@lit-protocol/lit-auth-client';
 import { LitContracts } from '@lit-protocol/contracts-sdk';
-import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE } from '@lit-protocol/constants';
+import { AuthMethodScope, AuthMethodType } from '@lit-protocol/constants';
 
 const authMethod = {
   authMethodType: xx,
   accessToken: xxx,
 };
 
-const authId = await getAuthIdByAuthMethod(authMethod);
+const authId = LitAuthClient.getAuthIdByAuthMethod(authMethod);
 
 const setScopeTx =
   await contractClient.pkpPermissionsContract.write.addPermittedAuthMethodScope(
     tokenId,
-    AUTH_METHOD_TYPE.EthWallet,
+    AuthMethodType.EthWallet,
     authId,
-    AUTH_METHOD_SCOPE.SignAnything
+    AuthMethodScope.SignAnything
   );
 
 await setScopeTx.wait();

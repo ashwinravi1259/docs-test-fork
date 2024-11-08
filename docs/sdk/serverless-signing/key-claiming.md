@@ -47,14 +47,12 @@ const keyId = ethers.utils.keccak256(ethers.utils.toUtf8Bytes("theIPFSIdOfYourLi
 
 ### Adding an auth method when minting a claim
 ```jsx
-import { getAuthIdByAuthMethod } from '@lit-protocol/lit-auth-client';
-
   const authMethod = {
-    authMethodType: AUTH_METHOD_TYPE.EthWallet,
+    authMethodType: AuthMethodType.EthWallet,
     accessToken: JSON.stringify(authSig),
   };
 
-  const authMethodId = getAuthIdByAuthMethod(authMethod);
+  const authMethodId = LitAuthClient.getAuthMethodId(authMethod);
 
   const keyId = ethers.utils.keccak256(ethers.utils.toUtf8Bytes("theIPFSIdOfYourLitAction_yourUserId"))
 
@@ -77,7 +75,7 @@ import { getAuthIdByAuthMethod } from '@lit-protocol/lit-auth-client';
     permittedIpfsCIDScopes: [],
     permittedAddresses: [],
     permittedAddressScopes: [],
-    permittedAuthMethodTypes: [AUTH_METHOD_TYPE.EthWallet],
+    permittedAuthMethodTypes: [AuthMethodType.EthWallet],
     permittedAuthMethodIds: [`0x${authMethodId}`],
     permittedAuthMethodPubkeys: [`0x`],
     permittedAuthMethodScopes: [[BigNumber.from("1")]],

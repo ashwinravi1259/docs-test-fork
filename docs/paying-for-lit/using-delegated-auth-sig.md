@@ -72,7 +72,7 @@ ethers@v5
 
 ```ts
 import ethers from "ethers";
-import { LIT_RPC, LIT_ABILITY } from "@lit-protocol/constants";
+import { LIT_RPC } from "@lit-protocol/constants";
 
 const ethersSigner = new ethers.Wallet(
     process.env.ETHEREUM_PRIVATE_KEY,
@@ -88,16 +88,16 @@ The address corresponding to `process.env.ETHEREUM_PRIVATE_KEY` **needs** to hav
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LIT_NETWORK } from "@lit-protocol/constants";
+import { LitNetwork } from "@lit-protocol/constants";
 
 litNodeClient = new LitNodeClient({
-    litNetwork: LIT_NETWORK.DatilTest,
+    litNetwork: LitNetwork.DatilTest,
     debug: false,
 });
 await litNodeClient.connect();
 ```
 
-You can learn more about the `@lit-protocol/lit-node-client` package and what is offers using the [API reference docs](https://v7-api-doc-lit-js-sdk.vercel.app/modules/lit_node_client_src.html).
+You can learn more about the `@lit-protocol/lit-node-client` package and what is offers using the [API reference docs](https://v6-api-doc-lit-js-sdk.vercel.app/modules/lit_node_client_src.html).
 
 ### Generating Session Sigs with the Delegation Auth Sig
 
@@ -113,7 +113,7 @@ const sessionSigs = await litNodeClient.getSessionSigs({
     resourceAbilityRequests: [
     {
         resource: new LitActionResource("*"),
-        ability: LIT_ABILITY.LitActionExecution,
+        ability: LitAbility.LitActionExecution,
     },
     ],
     authNeededCallback: async ({
