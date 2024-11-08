@@ -17,28 +17,21 @@ The `@lit-protocol/lit-auth-client` package leverages the `@simplewebauthn/brows
 Registration is similar to creating a new account. During the registration process, the user is prompted to create a new public key credential. The public key credential is stored in the smart contract as the new PKP is minted for the user.
 
 ```javascript
-import { LitRelay } from '@lit-protocol/lit-auth-client';
-import { WebAuthnProvider } from '@lit-protocol/providers';
-import { LitNodeClient } from '@lit-protocol/lit-node-client';
-import { LIT_NETWORK, PROVIDER_TYPE } from '@lit-protocol/constants';
-
-const litNodeClient = new LitNodeClient({
-    litNetwork: LIT_NETWORK.DatilDev,
-    debug: true,
-  });
-await litNodeClient.connect();
-
-const litRelay = new LitRelay({
-  relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
-  relayApiKey: 'test-api-key',
+// Set up LitAuthClient
+const litAuthClient = new LitAuthClient({
+  litRelayConfig: {
+     // Request a Lit Relay Server API key here: https://forms.gle/RNZYtGYTY9BcD9MEA
+    relayApiKey: '<Your Lit Relay Server API Key>',
+  },
 });
 
 // Initialize WebAuthn provider
-const webAuthnProvider = new WebAuthnProvider({ relay, litNodeClient });
+litAuthClient.initProvider(ProviderType.WebAuthn);
 
 async function registerWithWebAuthn() {
+  const provider = litAuthClient.getProvider(ProviderType.WebAuthn);
   // Register new WebAuthn credential
-  const options = await webAuthnProvider.register();
+  const options = await provider.register();
 
   // Verify registration and mint PKP through relay server
   const txHash = await provider.verifyAndMintPKPThroughRelayer(options);
@@ -76,7 +69,8 @@ Authentication is similar to logging in with an existing account. During the aut
 
 ```javascript
 async function authenticateWithWebAuthn() {
-  const authMethod = await webAuthnProvider.authenticate();
+  const provider = litAuthClient.getProvider(ProviderType.WebAuthn);
+  const authMethod = await provider.authenticate();
   return authMethod;
 }
 ```
@@ -88,8 +82,6 @@ The `authenticate` method returns an `AuthMethod` object containing the authenti
 After successfully authenticating with a social login provider, you can generate `SessionSigs` using the provider's `getSessionSigs` method. The `getSessionSigs` method takes in an `AuthMethod` object, optional `LitNodeClient` object, a PKP public key, and other session-specific arguments in `SessionSigsParams` object such as `resourceAbilityRequests` and `chain`. View the [API Docs](https://js-sdk.litprotocol.com/interfaces/types_src.BaseProviderSessionSigsParams.html).
 
 ```javascript
-import { LIT_ABILITY } from "@lit-protocol/constants";
-
 // Get session signatures for the given PKP public key and auth method
 const sessionSigs = await provider.getSessionSigs({
   authMethod: '<AuthMethod object returned from authenticate()>',
@@ -98,7 +90,7 @@ const sessionSigs = await provider.getSessionSigs({
     chain: 'ethereum',
     resourceAbilityRequests: [{
         resource: litResource,
-        ability: LIT_ABILITY.AccessControlConditionDecryption
+        ability: LitAbility.AccessControlConditionDecryption
       }
     ],
   },

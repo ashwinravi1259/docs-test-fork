@@ -24,7 +24,7 @@ Below we will walk through an implementation of `generatePrivateKey`. The full c
 5. The generated private key is then encrypted using the previously generated Access Control Conditions
 6. The encryption metadata is returned from the Lit Action
 7. The Wrapped Keys SDK then stores the private key encryption metadata to the Wrapped Keys backend service, associating it with the PKP's Ethereum address
-8. The SDK returns a [GeneratePrivateKeyResult](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/wrapped_keys_src.GeneratePrivateKeyResult.html) object containing the generated Wrapped Key ID, the PKP Ethereum address the Wrapped Key is associated with, and the public key of the generated private key
+8. The SDK returns a [GeneratePrivateKeyResult](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/wrapped_keys_src.GeneratePrivateKeyResult.html) object containing the generated Wrapped Key ID, the PKP Ethereum address the Wrapped Key is associated with, and the public key of the generated private key
 
 ## Prerequisites
 
@@ -83,11 +83,11 @@ When a Wrapped Key is generated, it's encrypted with the following [Access Contr
 
 where `pkpAddress` is the addressed derived from the `pkpSessionSigs`. This restricts the decryption of the Wrapped Key to only those whom can generate valid Authentication Signatures from the PKP which generated the Wrapped Key.
 
-A valid `pkpSessionSigs` object can be obtained using the [getPkpSessionSigs](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#getPkpSessionSigs) helper method available on an instance of [LitNodeClient](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html). We dive deeper into obtaining a `pkpSessionSigs` using `getPkpSessionSigs` in the [Generating PKP Session Signatures](#generating-pkp-session-signatures) section of this guide.
+A valid `pkpSessionSigs` object can be obtained using the [getPkpSessionSigs](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#getPkpSessionSigs) helper method available on an instance of [LitNodeClient](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html). We dive deeper into obtaining a `pkpSessionSigs` using `getPkpSessionSigs` in the [Generating PKP Session Signatures](#generating-pkp-session-signatures) section of this guide.
 
 #### `litNodeClient`
 
-This is an instance of the [LitNodeClient](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html) that is connected to a Lit network.
+This is an instance of the [LitNodeClient](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClient.html) that is connected to a Lit network.
 
 #### `network`
 
@@ -194,10 +194,10 @@ Here we are instantiating an instance of `LitNodeClient` and connecting it to th
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LIT_NETWORK } from "@lit-protocol/constants";
+import { LitNetwork } from "@lit-protocol/constants";
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LIT_NETWORK.DatilDev,
+    litNetwork: LitNetwork.DatilDev,
     debug: false,
 });
 await litNodeClient.connect();
@@ -219,8 +219,8 @@ The Auth Method used in this example implementation is signing a Sign in With Et
 
 ```ts
 import { EthWalletProvider } from "@lit-protocol/lit-auth-client";
-import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
+  LitAbility,
   LitActionResource,
   LitPKPResource,
 } from "@lit-protocol/auth-helpers";
@@ -237,7 +237,7 @@ const pkpSessionSigs = await litNodeClient.getPkpSessionSigs({
     resourceAbilityRequests: [
     {
         resource: new LitActionResource("*"),
-        ability: LIT_ABILITY.LitActionExecution,
+        ability: LitAbility.LitActionExecution,
     },
     ],
     expiration: new Date(Date.now() + 1000 * 60 * 10).toISOString(), // 10 minutes

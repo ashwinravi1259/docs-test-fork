@@ -6,23 +6,23 @@ When initializing a `LitNodeClient` instance, you must provide a `litNetwork`.
 
 ```tsx
 import { LitNodeClient } from '@lit-protocol/lit-node-client';
-import { LIT_NETWORK } from '@lit-protocol/constants';
+import { LitNetwork } from '@lit-protocol/constants';
 
 const litNodeClient = new LitNodeClient({
-  litNetwork: LIT_NETWORK.DatilDev,
+  litNetwork: LitNetwork.DatilDev,
   debug: false,
 });
 
 await litNodeClient.connect();
 ```
 
-### `LIT_NETWORK` Constant
+### `LitNetwork` Constant
 
-The `LIT_NETWORK` constant contains the past and present Lit networks. The constant is imported from the `@lit-protocol/constants` package. The current networks in the constant can be found [here](https://v7-api-doc-lit-js-sdk.vercel.app/variables/constants_src.LIT_NETWORK.html).
+The `LitNetwork` constant contains the past and present Lit networks. The constant is imported from the `@lit-protocol/constants` package. The current networks in the constant can be found [here](https://v6-api-doc-lit-js-sdk.vercel.app/enums/constants_src.LitNetwork.html).
 
 ### `LitNodeClient` Flags
 
-You have the option to pass flags to the `LitNodeClient` instance. These flags are used to configure the Lit network connection. You can find a complete list of flags in the [LitNodeClient Config](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.LitNodeClientConfig.html). In this guide we will cover the most common flags: `debug` and `storageProvider`.
+You have the option to pass flags to the `LitNodeClient` instance. These flags are used to configure the Lit network connection. You can find a complete list of flags in the [LitNodeClient Config](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.LitNodeClientConfig.html). In this guide we will cover the most common flags: `debug` and `storageProvider`.
 
 #### `debug`
 
@@ -38,13 +38,13 @@ In a browser environment, the `storageProvider` flag will be ignored, and the Se
 
 ```ts
 import { LitNodeClient } from '@lit-protocol/lit-node-client';
-import { LIT_NETWORK } from '@lit-protocol/constants';
+import { LitNetwork } from '@lit-protocol/constants';
 import { disconnectWeb3 } from "@lit-protocol/auth-browser";
 
 let litNodeClient;
 try {
   litNodeClient = new LitNodeClient({
-      litNetwork: LIT_NETWORK.DatilDev,
+      litNetwork: LitNetwork.DatilDev,
       debug: false,
   });
 
@@ -90,7 +90,7 @@ The following is an example of a response to a request made using `LitNodeClient
 
 ### API Reference
 
-To learn more about `LitNodeClient` properties and methods, visit the [API Reference Docs](https://v7-api-doc-lit-js-sdk.vercel.app/classes/core_src.LitCore.html).
+To learn more about `LitNodeClient` properties and methods, visit the [API Reference Docs](https://v6-api-doc-lit-js-sdk.vercel.app/classes/core_src.LitCore.html).
 
 ### Code Example
 

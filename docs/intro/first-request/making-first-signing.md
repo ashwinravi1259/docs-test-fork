@@ -78,11 +78,11 @@ Additionally, we'll initialize an Ethereum wallet using the `ETHEREUM_PRIVATE_KE
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LIT_NETWORK, LIT_RPC } from "@lit-protocol/constants";
+import { LitNetwork, LIT_RPC } from "@lit-protocol/constants";
 import * as ethers from "ethers";
 
 const litNodeClient = new LitNodeClient({
-  litNetwork: LIT_NETWORK.DatilDev,
+  litNetwork: LitNetwork.DatilDev,
   debug: false
 });
 await litNodeClient.connect();
@@ -109,7 +109,7 @@ import { LitContracts } from "@lit-protocol/contracts-sdk";
 
 const litContracts = new LitContracts({
     signer: ethersWallet,
-    network: LIT_NETWORK.DatilDev,
+    network: LitNetwork.DatilDev,
     debug: false
 });
 await litContracts.connect();
@@ -136,10 +136,10 @@ These permissions ensure that the session can only perform specific actions with
 <p>
 
 ```ts
-import { LIT_ABILITY } from "@lit-protocol/constants";
 import {
   createSiweMessage,
   generateAuthSig,
+  LitAbility,
   LitActionResource,
   LitPKPResource,
 } from "@lit-protocol/auth-helpers";
@@ -150,11 +150,11 @@ const sessionSigs = await litNodeClient.getSessionSigs({
     resourceAbilityRequests: [
         {
             resource: new LitPKPResource(pkpInfo.tokenId),
-            ability: LIT_ABILITY.PKPSigning,
+            ability: LitAbility.PKPSigning,
         },
         {
           resource: new LitActionResource("*"),
-          ability: LIT_ABILITY.LitActionExecution,
+          ability: LitAbility.LitActionExecution,
         },
     ],
     authNeededCallback: async ({
@@ -185,7 +185,7 @@ const sessionSigs = await litNodeClient.getSessionSigs({
 
 With the generated Session Signatures, we can use the `pkpSign` method to sign our data using the PKP. In this example, we're signing the hash of the message **"The answer to the universe is 42."**.
 
-If you'd like to see the `pkpSign` method's parameters, you can find them [here](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#pkpSign).
+If you'd like to see the `pkpSign` method's parameters, you can find them [here](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#pkpSign).
 
 <details>
 <summary> Click here to see how this is done</summary>

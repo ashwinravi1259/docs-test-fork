@@ -41,10 +41,10 @@ An example of claiming with a customized `ClaimProcessor` using the `contracts-s
 ```jsx
 import { LitContracts } from '@lit-protocol/contracts-sdk';
 import { ClaimRequest, ClaimResult, ClientClaimProcessor } from "@lit-protocol/types"
-import { LIT_RPC, LIT_NETWORK } from "@lit-protocol/constants";
+import { LIT_RPC, LitNetwork } from "@lit-protocol/constants";
 
 const client = new LitNodeClient({
-	litNetwork: LIT_NETWORK.DatilDev,
+	litNetwork: LitNetwork.DatilDev,
 	debug: false
 });
 await client.connect();
@@ -122,9 +122,9 @@ console.log("pkp public key: ", res.pubkey);
 ```
 
 
-## Examples Using the `LitRelay`
+## Examples Using the `LitAuthClient`
 
-### Example of claiming a key with the `LitRelay` authenticating with `Stytch` email OTP
+### Example of claiming a key with the `LitAuthClient` authenticating with `Stytch` email OTP
 
 We will start by creating an instance of the Stytch client, with your project id and project secret. this should be loaded from a config and never put into source control.
 
@@ -142,6 +142,7 @@ const email = ""; // email address of user
 
 const stytchResponse = await client.otps.email.loginOrCreate({
   email: email,
+  
 })
 
 const authResponse = await client.otps.authenticate({
@@ -159,30 +160,23 @@ const sessionStatus = await client.sessions.authenticate({
 })
 ```
 
-Now we can create an instance of the `LitRelay`. Then an instance of the `StytchOtp` provider and provide a `user id` and `app id` the `user id` can come from the `loginOrCreate` response. The `app id` can be found in your `Stytch` project dashboard. 
+Now we can create an instance of the `LitAuthClient` with a `relay API key` . Then an instance of the `stytch otp` provider and provide a `user id` and `app id` the `user id` can come from the `loginOrCreate` response. The `app id` can be found in your `Stytch` project dashboard. 
 Finally, we can pass the `session jwt` from the `authenticate` response .
 
 ```jsx
-import { LitRelay } from '@lit-protocol/lit-auth-client';
-import { StytchOtpProvider } from '@lit-protocol/providers';
-import { LitNodeClient } from '@lit-protocol/lit-node-client';
-import { LIT_NETWORK, PROVIDER_TYPE } from '@lit-protocol/constants';
 
-const litNodeClient = new LitNodeClient({
-    litNetwork: LIT_NETWORK.DatilDev,
-    debug: true,
-  });
-await litNodeClient.connect();
-
-const litRelay = new LitRelay({
-  relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
-  relayApiKey: 'test-api-key',
+const authClient = new LitAuthClient({
+  litRelayConfig: {
+      relayApiKey: "<your relay apikey>",
+  }
 });
 
-// Initialize StytchOtp provider
-const stytchProvider = new StytchOtpProvider({ relay, litNodeClient });
+const session = authClient.initProvider(ProviderType.StytchOtp, {
+  userId: sessionStatus.session.user_id,
+  appId: "<your project id>"
+})
 
-const authMethod = await stytchProvider.authenticate({
+const authMethod = await session.authenticate({ 
   accessToken: sessionStatus.session_jwt 
 });
 
@@ -230,34 +224,26 @@ const sessionStatus = await client.sessions.authenticate({
 })
 ```
 
-Now we can create an instance of the `LitRelay`. Then an instance of the `StytchOtp` provider and provide a `user id` and `app id` the `user id` can come from the `loginOrCreate` response. The `app id` can be found in your `Stytch` project dashboard. 
+Now we can create an instance of the `LitAuthClient` with a `relay API key` . Then an instance of the `stytch otp` provider and provide a `user id` and `app id` the `user id` can come from the `loginOrCreate` response. The `app id` can be found in your `Stytch` project dashboard. 
 Finally, we can pass the `session jwt` from the `authenticate` response . Upon successful `authentication` of the token, an `AuthMethod` will be generated. With the `Auth Method` created we can parse it and get an `AuthMethodId` which can be used to calculate the public key. This is because the `AuthMethodId` is the `key id`
 
 ```jsx
-import { LitRelay, getAuthIdByAuthMethod } from '@lit-protocol/lit-auth-client';
-import { StytchOtpProvider } from '@lit-protocol/providers';
-import { LitNodeClient } from '@lit-protocol/lit-node-client';
-import { LIT_NETWORK, PROVIDER_TYPE } from '@lit-protocol/constants';
-
-const litNodeClient = new LitNodeClient({
-    litNetwork: LIT_NETWORK.DatilDev,
-    debug: true,
-  });
-await litNodeClient.connect();
-
-const litRelay = new LitRelay({
-  relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
-  relayApiKey: 'test-api-key',
+const authClient = new LitAuthClient({
+  litRelayConfig: {
+      relayApiKey: '<your relayer api key>',
+  }
 });
 
-// Initialize StytchOtp provider
-const stytchProvider = new StytchOtpProvider({ relay, litNodeClient });
+const session = authClient.initProvider(ProviderType.StytchOtp, {
+  userId: sessionStatus.session.user_id,
+  appId: "<your project id>"
+})
 
-const authMethod = await stytchProvider.authenticate({
+const authMethod = await session.authenticate({ 
   accessToken: sessionStatus.session_jwt 
 });
 
-const keyId = await getAuthIdByAuthMethod(authMethod);
+const keyId = session.getAuthMethodId({authMethod});
 const pubkey = session.litNodeClient.computePubkey(keyId);
 
 console.log("pkp public key: ", pubkey);

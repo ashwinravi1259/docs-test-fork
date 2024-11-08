@@ -25,12 +25,12 @@ A `Capacity Credits NFT` can be very easily minted from the Lit Explorer. So, he
 You’ll also need some `tstLPX` tokens for minting. These are test tokens that hold no real value and should only be used to pay for usage on Datil-test and Datil. `tstLPX` should only be claimed from the verified faucet, linked [here](https://chronicle-yellowstone-faucet.getlit.dev/).
 
 ```javascript
-import { LIT_NETWORK } from "@lit-protocol/constants";
+import { LitNetwork } from "@lit-protocol/constants";
 
 const walletWithCapacityCredit = new Wallet("<your private key or mnemonic>");
 let contractClient = new LitContracts({
   signer: dAppOwnerWallet,
-  network: LIT_NETWORK.DatilTest,
+  network: LitNetwork.DatilTest,
 });
 
 await contractClient.connect();
@@ -67,10 +67,10 @@ Usage of your Capacity Credits NFT may be delegated to other wallets. To create 
 Here we use the `capacityTokenId` we received when minting our Capacity Credit.
 
 ```javascript
-import { LIT_NETWORK } from "@lit-protocol/constants";
+import { LitNetwork } from "@lit-protocol/constants";
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LIT_NETWORK.DatilTest,
+    litNetwork: LitNetwork.DatilTest,
     checkNodeAttestation: true,
 });
 
@@ -110,12 +110,12 @@ Here we are delegating usage of `Capacity Credit` from a wallet which possesses 
 
 
 ```javascript
-  import { LIT_NETWORK, LIT_ABILITY } from "@lit-protocol/constants";
+  import { LitNetwork } from "@lit-protocol/constants";
 
   const DELEGATEE_WALLET = new ethers.Wallet(your_private_key_string, provider);
 
   const litNodeClient = new LitNodeClient({
-      litNetwork: LIT_NETWORK.DatilTest,
+      litNetwork: LitNetwork.DatilTest,
       checkNodeAttestation: true,
   });
   await litNodeClient.connect();
@@ -131,12 +131,12 @@ Here we are delegating usage of `Capacity Credit` from a wallet which possesses 
 
     recapObject.addCapabilityForResource(
       litResource,
-      LIT_ABILITY.LitActionExecution
+      LitAbility.LitActionExecution
     );
 
     const verified = recapObject.verifyCapabilitiesForResource(
       litResource,
-      LIT_ABILITY.LitActionExecution
+      LitAbility.LitActionExecution
     );
 
     if (!verified) {
@@ -177,7 +177,7 @@ Here we are delegating usage of `Capacity Credit` from a wallet which possesses 
     resourceAbilityRequests: [
       {
         resource: new LitActionResource('*'),
-        ability: LIT_ABILITY.LitActionExecution,
+        ability: LitAbility.LitActionExecution,
       },
     ],
     authNeededCallback,
@@ -193,10 +193,10 @@ To Delegate to a pkp wallet from a wallet which possesses a `Capacity Credit` we
 For more information on session signatures and pkps see [here](./authentication/session-sigs/intro.md)
 
 ```javascript
-import { LIT_NETWORK, LIT_ABILITY } from "@lit-protocol/constants";
+import { LitNetwork } from "@lit-protocol/constants";
 
   const litNodeClient = new LitNodeClient({
-      litNetwork: LIT_NETWORK.DatilTest,
+      litNetwork: LitNetwork.DatilTest,
       checkNodeAttestation: true,
   });
   
@@ -242,7 +242,7 @@ import { LIT_NETWORK, LIT_ABILITY } from "@lit-protocol/constants";
     resourceAbilityRequests: [
       {
         resource: new LitPKPResource('*'),
-        ability: LIT_ABILITY.PKPSigning,
+        ability: LitAbility.PKPSigning,
       },
     ],
     authNeededCallback: pkpAuthNeededCallback,

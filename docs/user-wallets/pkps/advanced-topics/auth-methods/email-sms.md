@@ -60,23 +60,20 @@ const sessionStatus = await client.sessions.authenticate({
 });
 ```
 
-## Use an Authenticated Stytch Session with the `LitRelay`
+## Use an Authenticated Stytch Session with the `lit-auth-client`
 
 ```javascript
-import { LIT_NETWORK } from "@lit-protocol/constants";
-import { StytchOtpProvider } from "@lit-protocol/providers";
-import { LitRelay } from "@lit-protocol/lit-auth-client";
+import { LitAuthClient } from "@lit-protocol/lit-auth-client";
 
-const litRelay = new LitRelay({
-  relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
-  relayApiKey: 'test-api-key',
+const authClient = new LitAuthClient({
+  litRelayConfig: {
+    relayApiKey: LIT_RELAY_API_KEY,
+  },
+  litNodeClient,
 });
 
-const session = new StytchOtpProvider({ relay: litRelay, litNodeClient, options: {    
-    userId: sessionStatus.session.user_id,
-    appId: "project-test-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"} 
-    });
-
+const session =
+  authClient.initProvider < StytchOtpProvider > ProviderType.StytchOtp;
 // from the above example of using the Stytch client to get an authenticated session
 const authMethod = await session.authenticate({
   accessToken: sessionStatus.session_jwt,
@@ -89,7 +86,7 @@ We also support specific Stytch `authentication factors` which are the same as u
 The `user id` will be the `Authentication Factor` transport. Meaning for example of sms otp was the authentication factor, then the phone number of the user will be the `user id`
 below is a table of what each `auth factor` will use as the `user id`
 
-| PROVIDER_TYPE           | user identifier value |
+| ProviderType            | user identifier value |
 | ----------------------- | --------------------- |
 | StytchEmailFactorOtp    | email address         |
 | StytchSmsFactorOtp      | phone number          |
@@ -127,11 +124,9 @@ An alternative to minting the PKP NFT via the Lit Relay Server is to send a tran
 ### Authenticating to Fetch PKP information
 
 ```javascript
-import { AUTH_METHOD_SCOPE } from "@lit-protocol/constants";
-
 // Using the session examples above you can call to fetch pkps by the auth method gotten from the provider examples
 const txHash = await session.fetchPKPThroughRelayer(authMethod,  {
-    permittedAuthMethodScopes: [[AUTH_METHOD_SCOPE.SignAnything]]
+    permittedAuthMethodScopes: [[AuthMethodScope.SignAnything]]
 });
 ```
 
@@ -161,8 +156,6 @@ Below is an example of an authentication method from successful authentication
 After successfully authenticating with a social login provider, you can generate `SessionSigs` using the provider's `getSessionSigs` method. The `getSessionSigs` method takes in an `AuthMethod` object, optional `LitNodeClient` object, a PKP public key, and other session-specific arguments in `SessionSigsParams` object such as `resourceAbilityRequests` and `chain`. View the [API Docs](https://js-sdk.litprotocol.com/interfaces/types_src.BaseProviderSessionSigsParams.html).
 
 ```javascript
-import { LIT_ABILITY } from "@lit-protocol/constants";
-
 // Get session signatures for the given PKP public key and auth method
 const sessionSigs = await provider.getSessionSigs({
   authMethod: '<AuthMethod object returned from authenticate()>',
@@ -171,7 +164,7 @@ const sessionSigs = await provider.getSessionSigs({
     chain: 'ethereum',
     resourceAbilityRequests: [{
         resource: litResource,
-        ability: LIT_ABILITY.AccessControlConditionDecryption
+        ability: LitAbility.AccessControlConditionDecryption
       }
     ],
   },
@@ -194,8 +187,6 @@ Request a specified pkp to sign a session signature, authenticating with an `Aut
 The `session.fetchPKPThroughRelayer` method above can be used to query PKP public keys associated with a given auth method. You can also use the `contracts-sdk` to query PKP information by Authentication Method.
 
 ```javascript
-import { LIT_ABILITY } from "@lit-protocol/constants";
-
 // The implementation below is wrapped by the above `provider.getSessionSigs`
 const authNeededCallback = async (params: AuthCallbackParams) => {
   console.log("params", params);
@@ -215,7 +206,7 @@ const authNeededCallback = async (params: AuthCallbackParams) => {
 const resourceAbilities = [
   {
     resource: new LitPkpResource("*"),
-    ability: LIT_ABILITY.PKPSigning,
+    ability: LitAbility.PKPSigning,
   },
 ];
 const sessionSigs = await litNodeClient
