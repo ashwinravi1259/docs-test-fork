@@ -2466,22 +2466,22 @@
     messageformat-parser "^4.1.3"
     ramda "^0.27.1"
 
-"@lit-protocol/accs-schemas@^0.0.17":
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/@lit-protocol/accs-schemas/-/accs-schemas-0.0.17.tgz#d7fcd6c7c533fb415a87b14dfaeb5bfa611fdd79"
-  integrity sha512-Vh0+U0O70S66w/d6/BUX8LvZ350MKzr/UYghk3EP8Ekcp+qt/V3CL7qSTtqkLxA9KjD5eAcHCneySbDxRalXVQ==
+"@lit-protocol/accs-schemas@^0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@lit-protocol/accs-schemas/-/accs-schemas-0.0.19.tgz#74216243d1208f62ee593d9e06c29ea433709ec0"
+  integrity sha512-O7hrDPUA6x5fgOx8HKRAV1k/8VMzwehfNHUwb2UGMbw4g3kKpokbR/ne7OPdIUYMgvRATc0WjL5gbh/w33pkOQ==
   dependencies:
     ajv "^8.12.0"
 
-"@lit-protocol/constants@^6.11.1":
-  version "6.11.1"
-  resolved "https://registry.yarnpkg.com/@lit-protocol/constants/-/constants-6.11.1.tgz#3720b1be19a648e2ef4fcde849f3d5c075b31208"
-  integrity sha512-9crCRGDuD6YaBYi6/U5E7ByyrluGzaYjMJdKSgsgU58OxVVLEmEKFOmJUZ/j+6W+3J+Pb5fVY1OsfvDjdHovoA==
+"@lit-protocol/constants@^6.11.2":
+  version "6.11.2"
+  resolved "https://registry.yarnpkg.com/@lit-protocol/constants/-/constants-6.11.2.tgz#b888fcaddcc153f6b00a476500cd59a17d5f8f1c"
+  integrity sha512-rcOrHikdJ/SdEL6dT/uRKWZNTYPPgQO4xbHweLMZocsIqofaU5Zpn/jLQ6xabVkx8YaW3quYMI2VT15r3u6CGw==
   dependencies:
     "@ethersproject/abstract-provider" "5.7.0"
-    "@lit-protocol/accs-schemas" "^0.0.17"
+    "@lit-protocol/accs-schemas" "^0.0.19"
     "@lit-protocol/contracts" "^0.0.63"
-    "@lit-protocol/types" "6.11.1"
+    "@lit-protocol/types" "6.11.2"
     ethers "^5.7.1"
     jszip "^3.10.1"
     siwe "^2.0.5"
@@ -2492,13 +2492,13 @@
   resolved "https://registry.yarnpkg.com/@lit-protocol/contracts/-/contracts-0.0.63.tgz#8700c37df9d2422e9c97aa27871fb64de6186f6c"
   integrity sha512-CAorNt72ybIY/g//dDeR837izNGuYQR99XwPSK2X2AJ6c+aZX1kdXCrOnxsbY40BzFrOk/dIFo+ymJ9E3qh48w==
 
-"@lit-protocol/types@6.11.1":
-  version "6.11.1"
-  resolved "https://registry.yarnpkg.com/@lit-protocol/types/-/types-6.11.1.tgz#5947621e0a011870bf0aa1258099996ac750d5ec"
-  integrity sha512-pLiu+1p96oC8fi1JJfoiucpcA8mOcywU93JKoZ7QzS3mKUD4CHLAeORlnU/oFJlr2/Lr4qFAniU0dZPbd3vP9Q==
+"@lit-protocol/types@6.11.2":
+  version "6.11.2"
+  resolved "https://registry.yarnpkg.com/@lit-protocol/types/-/types-6.11.2.tgz#69d0cc86824bb0ca5187d0854b4c0298b5ba1c16"
+  integrity sha512-CPsOcRaRrEkN2X1gV5yYdyaNmNjzWubWgpzElFtvxg0RqU52a+XBGyF2lwFj3rPMkXAqU7ebC9tffU8sSII7bg==
   dependencies:
     "@ethersproject/abstract-provider" "5.7.0"
-    "@lit-protocol/accs-schemas" "^0.0.17"
+    "@lit-protocol/accs-schemas" "^0.0.19"
     ethers "^5.7.1"
     jszip "^3.10.1"
     siwe "^2.0.5"
@@ -3411,25 +3411,25 @@
   resolved "https://registry.yarnpkg.com/@stablelib/wipe/-/wipe-1.0.1.tgz#d21401f1d59ade56a62e139462a97f104ed19a36"
   integrity sha512-WfqfX/eXGiAd3RJe4VU2snh/ZPwtSjLG4ynQ/vYzvghTh7dHFcI1wl+nrkWG6lGhukOxOsUHfv8dUXr58D0ayg==
 
-"@statsig/client-core@3.5.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@statsig/client-core/-/client-core-3.5.0.tgz#815e9af4c554941a626fa3ce59a2fe4a4c205616"
-  integrity sha512-JrjTAgQEfmN/xcBcDdtJkuJ7nnFvDuxm5ugbB+8s7Iwfcb4XuyMAmEFuj8m4RAM4e2lFDteSsOImrj9s6D0pVA==
+"@statsig/client-core@3.5.1":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@statsig/client-core/-/client-core-3.5.1.tgz#a97f026c58710b208b95de423c725d86ba164fe7"
+  integrity sha512-PFsrOW3Oy6xmgYXmjlXiCBsuBxejkDwUMLqMm48SLlgZM/G62dLms0zqHXXrx4Ck+yuGa8aY2KdzCr+BQBoIEQ==
 
-"@statsig/js-client@3.5.0", "@statsig/js-client@^3.1.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@statsig/js-client/-/js-client-3.5.0.tgz#d9450fd48f1aac8819aa890b3898be5c49d5dd01"
-  integrity sha512-76s7rXSWndo4an1pAYdJelDgWYX4nP2MY+fl7WEHC3FnfBZNdmus/+C2qKwqTUSw0F04O1EFUaJbcbEhFbNu/A==
+"@statsig/js-client@3.5.1", "@statsig/js-client@^3.1.0":
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@statsig/js-client/-/js-client-3.5.1.tgz#aae92d9829ce3654666b8371382dae4948963b97"
+  integrity sha512-YC6/AXcxD86EiNtsLnmYwpJggaGZ3quFZz6gYuIDXJj2ztv1El+r8chszJ5priFqgE4jnskhxl+xLmkGOClZKA==
   dependencies:
-    "@statsig/client-core" "3.5.0"
+    "@statsig/client-core" "3.5.1"
 
 "@statsig/react-bindings@^3.1.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@statsig/react-bindings/-/react-bindings-3.5.0.tgz#b927f9796246a21678899fc343800acef5800761"
-  integrity sha512-iyFb5ujQTBmsjvCXnw/yiRAxIkOwbmlpwzwkWeuvPB1xOtAheWAJGIeK7h7QgrMVnVk6q7uH/EDlR9SQX6z/fg==
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/@statsig/react-bindings/-/react-bindings-3.5.1.tgz#0722c1adb1116d367ba07135b88f0af32fece690"
+  integrity sha512-XzhlzfVN/ITrwRUBDsPGnVQwt3+TZJuwn/vRI/25uDyjitC5pEtEEMD6Ur2DDJiUJpSNIqSZhTS6Sb9PKtDNdw==
   dependencies:
-    "@statsig/client-core" "3.5.0"
-    "@statsig/js-client" "3.5.0"
+    "@statsig/client-core" "3.5.1"
+    "@statsig/js-client" "3.5.1"
 
 "@svgr/babel-plugin-add-jsx-attribute@^5.4.0":
   version "5.4.0"
