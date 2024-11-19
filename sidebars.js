@@ -88,6 +88,7 @@ const sidebars = {
             keywords: ['migrations'],
           },
           items: [
+            'sdk/migrations/7.0.0',
             'sdk/migrations/6.0.0',
             'sdk/migrations/4.0.0',
             'sdk/migrations/3.2.0',
@@ -202,7 +203,6 @@ const sidebars = {
                     'sdk/authentication/session-sigs/siws-pkp-session-sigs',
                   ],
                 },
-                'sdk/authentication/session-sigs/usage',
               ],
             },
             'sdk/authentication/authenticating-siws',
@@ -556,6 +556,7 @@ const sidebars = {
             keywords: ['api-reference'],
           },
           items: [
+            'api-reference/v6-sdk',
             'api-reference/v3-sdk',
             'api-reference/v2-sdk',
             'api-reference/v1-sdk',
