@@ -2466,42 +2466,43 @@
     messageformat-parser "^4.1.3"
     ramda "^0.27.1"
 
-"@lit-protocol/accs-schemas@^0.0.19":
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/@lit-protocol/accs-schemas/-/accs-schemas-0.0.19.tgz#74216243d1208f62ee593d9e06c29ea433709ec0"
-  integrity sha512-O7hrDPUA6x5fgOx8HKRAV1k/8VMzwehfNHUwb2UGMbw4g3kKpokbR/ne7OPdIUYMgvRATc0WjL5gbh/w33pkOQ==
+"@lit-protocol/accs-schemas@^0.0.20":
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@lit-protocol/accs-schemas/-/accs-schemas-0.0.20.tgz#64d1151002f63aa0a54ba2be92bf44edefb0eb1e"
+  integrity sha512-JHHX0q45nq1uQ4olkg4VIGLW9lzMnRRldeTDuOrOaoPVztz+2iSOjwzb+QmuSuKFQpP5SOej2zoQB+K8b22KDw==
   dependencies:
     ajv "^8.12.0"
 
-"@lit-protocol/constants@^6.11.2":
-  version "6.11.2"
-  resolved "https://registry.yarnpkg.com/@lit-protocol/constants/-/constants-6.11.2.tgz#b888fcaddcc153f6b00a476500cd59a17d5f8f1c"
-  integrity sha512-rcOrHikdJ/SdEL6dT/uRKWZNTYPPgQO4xbHweLMZocsIqofaU5Zpn/jLQ6xabVkx8YaW3quYMI2VT15r3u6CGw==
+"@lit-protocol/constants@^7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@lit-protocol/constants/-/constants-7.0.1.tgz#9af207ba83791d060c5ea04399d3ef4be5d3a8ab"
+  integrity sha512-KOyAy2n34migXbHBwQKcE50bNEyyDBdoWe1z/i1+Xb1rsE1iBuR5hmDZocRuqV7tT2iDlsJND0qorUptGnVHYg==
   dependencies:
     "@ethersproject/abstract-provider" "5.7.0"
-    "@lit-protocol/accs-schemas" "^0.0.19"
-    "@lit-protocol/contracts" "^0.0.63"
-    "@lit-protocol/types" "6.11.2"
+    "@lit-protocol/accs-schemas" "^0.0.20"
+    "@lit-protocol/contracts" "^0.0.74"
+    "@lit-protocol/types" "7.0.1"
+    "@openagenda/verror" "^3.1.4"
+    depd "^2.0.0"
     ethers "^5.7.1"
-    jszip "^3.10.1"
-    siwe "^2.0.5"
+    siwe "^2.3.2"
     tslib "1.14.1"
 
-"@lit-protocol/contracts@^0.0.63":
-  version "0.0.63"
-  resolved "https://registry.yarnpkg.com/@lit-protocol/contracts/-/contracts-0.0.63.tgz#8700c37df9d2422e9c97aa27871fb64de6186f6c"
-  integrity sha512-CAorNt72ybIY/g//dDeR837izNGuYQR99XwPSK2X2AJ6c+aZX1kdXCrOnxsbY40BzFrOk/dIFo+ymJ9E3qh48w==
+"@lit-protocol/contracts@^0.0.74":
+  version "0.0.74"
+  resolved "https://registry.yarnpkg.com/@lit-protocol/contracts/-/contracts-0.0.74.tgz#e726a9190c86b10cc6df3a392cd04d19057be27d"
+  integrity sha512-8uV038gzBp7ew7a4884SVt9Zhu8CtiTb+A8dKNnByxVoT1kFt4O4DmsaniV8p9AGjNR13IWfpU1NFChmPHVIpQ==
 
-"@lit-protocol/types@6.11.2":
-  version "6.11.2"
-  resolved "https://registry.yarnpkg.com/@lit-protocol/types/-/types-6.11.2.tgz#69d0cc86824bb0ca5187d0854b4c0298b5ba1c16"
-  integrity sha512-CPsOcRaRrEkN2X1gV5yYdyaNmNjzWubWgpzElFtvxg0RqU52a+XBGyF2lwFj3rPMkXAqU7ebC9tffU8sSII7bg==
+"@lit-protocol/types@7.0.1":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@lit-protocol/types/-/types-7.0.1.tgz#a8675442992eb104390870f610bd65e6d9ddfa59"
+  integrity sha512-CpAYgn797PgB6DjhPU2+PUTFud+mnm3UfqBpZqgvUC1WureqZ4tW1SdQvSmYrMQzHsJIdUOkMnoyO4dBrVOq0A==
   dependencies:
     "@ethersproject/abstract-provider" "5.7.0"
-    "@lit-protocol/accs-schemas" "^0.0.19"
+    "@lit-protocol/accs-schemas" "^0.0.20"
+    depd "^2.0.0"
     ethers "^5.7.1"
-    jszip "^3.10.1"
-    siwe "^2.0.5"
+    siwe "^2.3.2"
     tslib "1.14.1"
 
 "@mapbox/hast-util-table-cell-style@^0.2.0":
@@ -2662,6 +2663,16 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
+
+"@openagenda/verror@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@openagenda/verror/-/verror-3.1.4.tgz#a3560168e91dc35ae8c0823af70556a5a0bb8d60"
+  integrity sha512-+V7QuD6v5sMWez7cu+5DXoXMim+iQssOcspoNgbWDW8sEyC54Mdo5VuIkcIjqhPmQYOzBWo5qlbzNGEpD6PzMA==
+  dependencies:
+    assertion-error "^1.1.0"
+    depd "^2.0.0"
+    inherits "^2.0.4"
+    sprintf-js "^1.1.2"
 
 "@polka/url@^1.0.0-next.24":
   version "1.0.0-next.28"
@@ -4484,6 +4495,11 @@ asap@~2.0.3:
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
   integrity sha512-BSHWgDSAiKs50o2Re8ppvp3seVHXSRM44cdSsT9FfNEUUZLOGWVCsiWaRPWM1Znn+mqZ1OfVZ3z3DWEzSp7hRA==
 
+assertion-error@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/assertion-error/-/assertion-error-1.1.0.tgz#e60b6b0e8f301bd97e5375215bda406c85118c0b"
+  integrity sha512-jgsaNduz+ndvGyFt3uSuWqvy4lCnIJiovtouQN5JZHOKCS2QuhEdbcQHFhVksz2N2U9hXJo8odG7ETyWlEeuDw==
+
 at-least-node@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/at-least-node/-/at-least-node-1.0.0.tgz#602cd4b46e844ad4effc92a8011a3c46e0238dc2"
@@ -5693,7 +5709,7 @@ del@^6.1.1:
     rimraf "^3.0.2"
     slash "^3.0.0"
 
-depd@2.0.0:
+depd@2.0.0, depd@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/depd/-/depd-2.0.0.tgz#b696163cc757560d09cf22cc8fad1571b79e76df"
   integrity sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==
@@ -10615,7 +10631,7 @@ sitemap@^7.1.1:
     arg "^5.0.0"
     sax "^1.2.4"
 
-siwe@^2.0.5:
+siwe@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/siwe/-/siwe-2.3.2.tgz#0794ae25f734f3068de0ab093ddd2f7867bc2d67"
   integrity sha512-aSf+6+Latyttbj5nMu6GF3doMfv2UYj83hhwZgUF20ky6fTS83uVhkQABdIVnEuS8y1bBdk7p6ltb9SmlhTTlA==
@@ -10717,6 +10733,11 @@ spdy@^4.0.2:
     http-deceiver "^1.2.7"
     select-hose "^2.0.0"
     spdy-transport "^3.0.0"
+
+sprintf-js@^1.1.2:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.3.tgz#4914b903a2f8b685d17fdf78a70e917e872e444a"
+  integrity sha512-Oo+0REFV59/rz3gfJNKQiBlwfHaSESl1pcGyABQsnnIfWOFt6JNj5gCog2U6MLZ//IGYD+nA8nI+mTShREReaA==
 
 sprintf-js@~1.0.2:
   version "1.0.3"
