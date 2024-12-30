@@ -2466,22 +2466,22 @@
     messageformat-parser "^4.1.3"
     ramda "^0.27.1"
 
-"@lit-protocol/accs-schemas@^0.0.20":
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/@lit-protocol/accs-schemas/-/accs-schemas-0.0.20.tgz#64d1151002f63aa0a54ba2be92bf44edefb0eb1e"
-  integrity sha512-JHHX0q45nq1uQ4olkg4VIGLW9lzMnRRldeTDuOrOaoPVztz+2iSOjwzb+QmuSuKFQpP5SOej2zoQB+K8b22KDw==
+"@lit-protocol/accs-schemas@^0.0.22":
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/@lit-protocol/accs-schemas/-/accs-schemas-0.0.22.tgz#8dd2e6e96836aa22a52c25aac0a686c9ced9f65f"
+  integrity sha512-c3LPDE8g8COt8FdXx+Nfv4CvEvP+QcHh94HZcukcttjZyu6jjICecq/XMXWVUSMGhAVWRMH8tBbjpHzElB45QQ==
   dependencies:
     ajv "^8.12.0"
 
-"@lit-protocol/constants@^7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@lit-protocol/constants/-/constants-7.0.1.tgz#9af207ba83791d060c5ea04399d3ef4be5d3a8ab"
-  integrity sha512-KOyAy2n34migXbHBwQKcE50bNEyyDBdoWe1z/i1+Xb1rsE1iBuR5hmDZocRuqV7tT2iDlsJND0qorUptGnVHYg==
+"@lit-protocol/constants@^7.0.3":
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/@lit-protocol/constants/-/constants-7.0.3.tgz#d705d8f251d1b2cf7f208118af4f1e74471bf718"
+  integrity sha512-72DkiBff4tLNxqOx+FB3KcreZ2VknmUxG6EJoCFKQcAPa6d/WfLSuGE4IpLtTfkaF8r2Ovn75LeNlODUI6aROA==
   dependencies:
     "@ethersproject/abstract-provider" "5.7.0"
-    "@lit-protocol/accs-schemas" "^0.0.20"
+    "@lit-protocol/accs-schemas" "^0.0.22"
     "@lit-protocol/contracts" "^0.0.74"
-    "@lit-protocol/types" "7.0.1"
+    "@lit-protocol/types" "7.0.3"
     "@openagenda/verror" "^3.1.4"
     depd "^2.0.0"
     ethers "^5.7.1"
@@ -2493,13 +2493,13 @@
   resolved "https://registry.yarnpkg.com/@lit-protocol/contracts/-/contracts-0.0.74.tgz#e726a9190c86b10cc6df3a392cd04d19057be27d"
   integrity sha512-8uV038gzBp7ew7a4884SVt9Zhu8CtiTb+A8dKNnByxVoT1kFt4O4DmsaniV8p9AGjNR13IWfpU1NFChmPHVIpQ==
 
-"@lit-protocol/types@7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@lit-protocol/types/-/types-7.0.1.tgz#a8675442992eb104390870f610bd65e6d9ddfa59"
-  integrity sha512-CpAYgn797PgB6DjhPU2+PUTFud+mnm3UfqBpZqgvUC1WureqZ4tW1SdQvSmYrMQzHsJIdUOkMnoyO4dBrVOq0A==
+"@lit-protocol/types@7.0.3":
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/@lit-protocol/types/-/types-7.0.3.tgz#f694e1fa1447e25279a81e27098fe617ccc87daa"
+  integrity sha512-gIS71fLb1WKnI3Lo65Vz5jmYQvJtpOgD4hn1S9RxK7vdhJlSeeKpV5+j5Vu5iRiEcEWjbIZD0Hu9omfzCo52gw==
   dependencies:
     "@ethersproject/abstract-provider" "5.7.0"
-    "@lit-protocol/accs-schemas" "^0.0.20"
+    "@lit-protocol/accs-schemas" "^0.0.22"
     depd "^2.0.0"
     ethers "^5.7.1"
     siwe "^2.3.2"
