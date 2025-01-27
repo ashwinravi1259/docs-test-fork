@@ -71,6 +71,7 @@
 
 - **[Pimlico](https://docs.pimlico.io/how-to/integrations/lit-protocol)**: An infrastructure platform building the next generation of smart wallets.
 - **[MagicWallet](https://github.com/DustilDawn/Magic)**: One account, multiple seedless wallets.
+- **[Plurality](https://plurality.network/)**: Smart profiles for the Open Web.
 - **[litu safu](https://ethglobal.com/showcase/litu-safu-m9tja)**: Use a PKP as a signer on a Safe.
 - **[Stackup](https://spark.litprotocol.com/account-abstraction-with-stackup-lit/)**: Adding an MPC key as a signer on an AA wallet.
 - **[ZeroDev](https://zerodev.app/)**: Smart wallets as a service.
