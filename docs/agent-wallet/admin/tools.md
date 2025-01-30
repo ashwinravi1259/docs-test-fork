@@ -36,7 +36,7 @@ To completely remove a tool from the Agent Wallet, you can use the [removeTool](
 
 To see if a tool is registered (permitted) for a delegatee, you can use the [getRegisteredTool](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#getRegisteredTool) method. This will return the tool information if it is registered.
 
-If you would like to see all tools, you can use the [getRegisteredToolsAndDelegateesForPkps](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#getRegisteredToolsAndDelegateesForPkps) method. This will return an array of all tools and the delegatees that have access to them, organized into:
+If you would like to see all tools, you can use the [getRegisteredToolsAndDelegateesForPkp](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#getRegisteredToolsAndDelegateesForPkp) method. This will return an array of all tools and the delegatees that have access to them, organized into:
 
 - `toolsWithPolicies`: Object mapping tool IPFS CIDs to their metadata and delegatee policies
 - `toolsWithoutPolicies`: Object mapping tool IPFS CIDs to their metadata without policies

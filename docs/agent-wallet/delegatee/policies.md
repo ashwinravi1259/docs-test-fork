@@ -4,11 +4,7 @@ As a delegatee, your tool execution is governed by policies set by the Admin. Th
 
 ## Understanding Your Policies
 
-You can view the policies that apply to you using several methods:
-
-1. Get all policy parameters with [getToolPolicyParametersForDelegatee](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#getToolPolicyParametersForDelegatee)
-2. Get a specific policy with [getToolPolicyForDelegatee](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#getToolPolicyForDelegatee)
-3. Get a specific policy parameter with [getToolPolicyParameterForDelegatee](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#getToolPolicyParameterForDelegatee)
+As a delegatee, you can view the policies applied to a specific Agent Wallet delegated to you by using the [getToolPolicy](https://agent-wallet.vercel.app/classes/agent_wallet_src.Delegatee.html#getToolPolicy) method, providing the Agent Wallet's `pkpTokenId` and the tool's `ipfsCid`.
 
 ## Policy Examples
 

@@ -12,17 +12,9 @@ To execute a tool on behalf of the Admin, you can use the [executeTool](https://
 
 ## Viewing Available Tools
 
-You can view the tools that have been permitted to you by using the [getRegisteredToolsAndDelegateesForPkps](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#getRegisteredToolsAndDelegateesForPkps) method. This will show you:
+You can view the tools that have been permitted to you by using the [getPermittedToolsForPkp](https://agent-wallet.vercel.app/classes/agent_wallet_src.Delegatee.html#getPermittedToolsForPkp) method. This will show you:
 
 - Tools you have access to with their associated policies
 - Tools you have access to without policies
 - Any unknown tools that have policies set
 
-## Tool Status
-
-Before executing a tool, you can check:
-
-1. If the tool is permitted for your use with [isToolPermittedForDelegatee](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#isToolPermittedForDelegatee)
-2. If the tool is currently enabled with [getRegisteredTool](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#getRegisteredTool)
-
-This helps ensure that your tool execution will be successful and compliant with the Admin's settings. 

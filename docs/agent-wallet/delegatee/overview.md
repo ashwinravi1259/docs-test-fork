@@ -13,7 +13,7 @@ As a delegatee, you need to authenticate with the Lit network to execute tools. 
 1. Signing a Sign-in With Ethereum (SIWE) message
 2. Generating [Session Signatures](../../../sdk/authentication/session-sigs/intro.md)
 
-This authentication process verifies your identity and ensures secure access to the Agent Wallet's functionality.
+This authentication process verifies your identity and ensures secure access to the Agent Wallet's functionality. In the Lit Agent Wallet, this functionality is done under the hood in the [executeTool](https://agent-wallet.vercel.app/classes/agent_wallet_src.Delegatee.html#executeTool) method, so you don't need to worry about it.
 
 ## Additional Documentation
 

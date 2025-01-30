@@ -11,11 +11,11 @@ The admin is the entity that creates and manages the Agent Wallet. They are resp
 
 ### Transfering Ownership of the Agent Wallet
 
-To transfer the ownership of the Agent Wallet, you can use the [transferPkpOwnership](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#transferPkpOwnership) method. This will send the PKP NFT to the new Admin's address specified in the parameters.
+To transfer the ownership of the Agent Wallet, you can use the [transferPkpOwnership](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#transferPkpOwnership) method. This will send the PKP NFT to the new Admin's address specified in the execution parameters.
 
 ### Creating a New Agent Wallet
 
-To create a new Agent Wallet, we can use the [mintPkp](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#mintPkp) method. This will mint a new PKP NFT to the Admin's wallet address and save it in localstorage as well. 
+To create a new Agent Wallet, we can use the [mintPkp](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#mintPkp) method. This will mint a new PKP NFT to the Admin's wallet address, and save it in localstorage as well. 
 
 ### Viewing Owned Agent Wallets
 

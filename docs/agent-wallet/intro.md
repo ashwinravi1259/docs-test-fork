@@ -1,11 +1,11 @@
 # Agent Wallet Overview
 
-The Lit Agent Wallet (LAW) is a powerful tool that enables secure delegation of wallet operations through a system of administrators, delegatees, tools, and policies. It's built on top of Programmable Key Pairs (PKPs) and provides a flexible framework for managed wallet access.
+The Lit Agent Wallet (LAW) is a powerful tool that enables secure delegation of wallet operations through a system of administrators, delegatees, tools, and policies. It's built on top of [Programmable Key Pairs (PKPs)](../user-wallets/pkps/overview.md) and provides a flexible framework for managed wallet access.
 
 ## Core Concepts
 
 ### Admin
-The admin is the owner of the Agent Wallet and has full control over its management. They are responsible for:
+The Admin is the owner of the Agent Wallet and has full control over its management. They are responsible for:
 - Creating and managing PKPs (Agent Wallets)
 - Adding and removing delegatees
 - Registering and managing tools
@@ -14,13 +14,13 @@ The admin is the owner of the Agent Wallet and has full control over its managem
 ### Delegatees
 Delegatees are entities that can execute operations on behalf of the Agent Wallet. They:
 - Must authenticate using Sign-in With Ethereum (SIWE)
-- Can execute tools permitted by the admin
-- Operate within the constraints of policies set by the admin
+- Can execute tools permitted by the Admin
+- Operate within the constraints of policies set by the Admin
 - Have access to specific PKPs assigned to them
 
 ### Tools
 Tools are the building blocks of Agent Wallet functionality. They:
-- Must be registered by the admin
+- Must be registered by the Admin
 - Can be permitted or unpermitted for specific delegatees
 - Can be enabled or disabled without removal
 - Execute specific operations on behalf of the Agent Wallet
@@ -29,7 +29,7 @@ Tools are the building blocks of Agent Wallet functionality. They:
 Policies are rules that govern how delegatees can use tools. They:
 - Are immutable once published to IPFS
 - Can restrict various parameters of tool execution
-- Can be enabled or disabled by the admin
+- Can be enabled or disabled by the Admin
 - Apply to specific delegatee-tool combinations
 
 ## Common Use Cases
@@ -56,7 +56,7 @@ Policies are rules that govern how delegatees can use tools. They:
 
 ## Documentation Structure
 
-- **[Admin Documentation](./references/admin/overview.md)**
+- **[Admin Documentation](./references/Admin/overview.md)**
   - Managing PKPs and ownership
   - Delegatee management
   - Tool registration and permissions
@@ -84,15 +84,6 @@ Policies are rules that govern how delegatees can use tools. They:
    - Tool-level access control
    - Policy-based parameter restrictions
 
-```mermaid
-graph TD
-    A[Admin] -->|Defines| B(Policies)
-    A -->|Approves| C(Tools)
-    C -->|Used by| D[Delegatee]
-    D -->|Validates against| B
-    B -->|Enforced by| E[Lit Network]
-```
-
 ## Getting Started
 
 1. **Initialize System**
@@ -100,15 +91,15 @@ graph TD
 pnpm install && pnpm build
 ```
 
-2. **Deploy Base Tools**
-```bash
-pnpm deploy:tools
-```
-
-3. **Launch CLI**
+2. **Launch CLI**
 ```bash
 pnpm start:cli
 ```
 
-> 📘 Next: [Create Custom Tools →](./new-tool.md) | [Configure Policies →](./building.md) | [Role Details →](./roles.md)
+## Additional Resources
+
+> - [Create Custom Tools →](./new-tool.md) 
+> - [Building with ElizaOS →](./building.md)
+> - [Admin Documentation →](./Admin/overview.md)
+> - [Delegatee Documentation →](./delegatee/overview.md)
 
