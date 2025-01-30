@@ -14,8 +14,8 @@ Below we will walk through an implementation of `signTransactionWithEncryptedKey
 1. The Wrapped Keys SDK will use the provided Wrapped Key ID and PKP Session Signatures to fetch the encryption metadata for a specific Wrapped Key
 2. Using the PKP Session Signatures, the SDK will make a request to the Lit network to execute the Sign Transaction Lit Action
    - Depending on the provided `network`, one of the following Lit Actions will be executed:
-     - If `network` is `ethereum`, then the [signTransactionWithEthereumEncryptedKey](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys/src/lib/litActions/ethereum/src/signTransactionWithEthereumEncryptedKey.js) Lit Action is executed
-     - If `network` is `solana`, then the [signTransactionWithSolanaEncryptedKey](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys/src/lib/litActions/solana/src/signTransactionWithSolanaEncryptedKey.js) Lit Action is executed
+     - If `network` is `ethereum`, then the [signTransactionWithEthereumEncryptedKey](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys-lit-actions/src/lib/raw-action-functions/ethereum/signTransactionWithEncryptedEthereumKey.ts) Lit Action is executed
+     - If `network` is `solana`, then the [signTransactionWithSolanaEncryptedKey](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys-lit-actions/src/lib/raw-action-functions/solana/signTransactionWithEncryptedSolanaKey.ts) Lit Action is executed
 3. The Lit Action will verify the required transaction parameters were provided in order to sign the transaction
 4. The Lit Action will check the Access Control Conditions the plaintext private key was encrypted with to verify the PKP is authorized to decrypt the private key
 5. If authorized, the Wrapped Key will be decrypted within a Lit node's TEE. If not authorized, an error will be returned

@@ -208,6 +208,8 @@ All encryption functions will output the `ciphertext` and a hash of the plaintex
 :::
 
 ```jsx
+import { encryptString } from '@lit-protocol/encryption';
+
 class Lit {
     ...
 

@@ -199,7 +199,7 @@ import * as LitJsSdk from '@lit-protocol/lit-node-client';
 const runLitAction = async () => {
   const litNodeClient = new LitJsSdk.LitNodeClient({
     alertWhenUnauthorized: false,
-    litNetwork: "serrano",
+    litNetwork: "datil-dev",
     debug: true,
   });
   await litNodeClient.connect();
