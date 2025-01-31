@@ -14,7 +14,7 @@ The Admin is the registered owner of a given Agent Wallet and has full control o
 - Setting policies
 
 ### Delegatees
-Delegatees are entities that Administrators permit to execute specific operations on their behalf using their Agent Wallet. They
+Delegatees are entities that Administrators permit to execute specific operations on their behalf using their Agent Wallet. Typically, the "agent" / LLM machine is the delegatee. They:
 - Must authenticate using Sign-in With Ethereum (SIWE)
 - Can execute tools permitted by the Admin
 - Operate within the constraints of policies set by the Admin
