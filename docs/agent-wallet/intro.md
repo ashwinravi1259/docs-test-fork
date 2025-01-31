@@ -27,6 +27,11 @@ Tools are the building blocks of Agent Wallet functionality, represented by [Lit
 - Can be enabled or disabled without removal
 - Execute specific operations on behalf of the Agent Wallet
 
+#### Terminology
+
+- **Registered**: When referring to tools from the Admin's perspective (e.g., "registered tools" are tools that have been added to the Agent Wallet by the Admin)
+- **Permitted**: When referring to tools from the Delegatee's perspective (e.g., "permitted tools" are tools that a specific delegatee is allowed to execute)
+
 ### Policies
 Policies are rules that govern how delegatees can use tools. Policies are also represented by [Lit Actions](../sdk/serverless-signing/overview.md) published on IPFS. They are called within the Tool Lit Action to enforce the policies. They:
 - Are immutable once published to IPFS
