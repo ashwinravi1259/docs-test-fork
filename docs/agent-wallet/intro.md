@@ -37,6 +37,10 @@ Policies are rules that govern how delegatees can use tools. Policies are also r
 - Can be enabled or disabled by the Admin
 - Apply to specific delegatee-tool combinations
 
+## LAW Framework Diagram
+
+![LAW Diagram](../../static/img/LAW-diagram.png)
+
 ## Security Considerations
 
 1. **Authentication**
