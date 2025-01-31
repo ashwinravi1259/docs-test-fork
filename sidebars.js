@@ -183,8 +183,6 @@ const sidebars = {
             id: 'agent-wallet/intro',
           },
           items: [
-            'agent-wallet/building',
-            'agent-wallet/new-tool',
             {
               type: 'category',
               label: 'Admin',
@@ -212,6 +210,8 @@ const sidebars = {
                 'agent-wallet/delegatee/policies',
               ],
             },
+            'agent-wallet/building',
+            'agent-wallet/new-tool'
           ],
         },
         {
