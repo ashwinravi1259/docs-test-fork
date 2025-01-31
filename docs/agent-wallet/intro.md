@@ -23,9 +23,9 @@ Delegatees are entities that can execute operations on behalf of the Agent Walle
 ### Tools
 Tools are the building blocks of Agent Wallet functionality, represented by [Lit Actions](../sdk/serverless-signing/overview.md) published on IPFS. They:
 - Must be registered by the Admin
-- Can be permitted or unpermitted for specific delegatees
+- Can be permitted for specific delegatees
 - Can be enabled or disabled without removal
-- Execute specific operations using the Agent Wallet as the signer
+- Execute specific operations on behalf of the Agent Wallet
 
 ### Policies
 Policies are rules that govern how delegatees can use tools. Policies are also represented by [Lit Actions](../sdk/serverless-signing/overview.md) published on IPFS. They are called within the Tool Lit Action to enforce the policies. They:

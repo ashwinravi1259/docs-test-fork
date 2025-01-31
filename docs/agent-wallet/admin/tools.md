@@ -2,6 +2,11 @@
 
 Tools are the core functionality of the Agent Wallet. They are the actions that can be executed by delegatees on behalf of the Admin. The Admin is responsible for registering tools and managing tool permissions for delegatees.
 
+## Terminology
+
+- **Registered**: When referring to tools from the Admin's perspective (e.g., "registered tools" are tools that have been added to the Agent Wallet by the Admin)
+- **Permitted**: When referring to tools from the Delegatee's perspective (e.g., "permitted tools" are tools that a specific delegatee is allowed to execute)
+
 ## Tool Registration and Management
 
 ### Registering Tools
