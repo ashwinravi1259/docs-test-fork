@@ -7,21 +7,19 @@ The admin is the entity that creates and manages the Agent Wallet. They are resp
 3. Managing tools
 4. Setting and managing policies
 
-## Ownership
-
-### Transfering Ownership of the Agent Wallet
+## Transferring Ownership of the Agent Wallet
 
 To transfer the ownership of the Agent Wallet, you can use the [transferPkpOwnership](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#transferPkpOwnership) method. This will send the PKP NFT to the new Admin's address specified in the execution parameters.
 
-### Creating a New Agent Wallet
+## Creating a New Agent Wallet
 
-To create a new Agent Wallet, we can use the [mintPkp](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#mintPkp) method. This will mint a new PKP NFT to the Admin's wallet address, and save it in localstorage as well. 
+To create a new Agent Wallet, you can use the [mintPkp](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#mintPkp) method. This will mint a new PKP NFT to the Admin's wallet address and save it in localStorage. 
 
-### Viewing Owned Agent Wallets
+## Viewing Owned Agent Wallets
 
-To see the Agent Wallets that the Admin owns, we can use the [getPkps](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#getPkps) method. This will return an array of PKP NFT metadata that the Admin owns.
+To see the Agent Wallets that the Admin owns, you can use the [getPkps](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#getPkps) method. This will return an array of PKP metadata that the Admin owns.
 
-### Viewing Information About a Specific Agent Wallet
+## Viewing Information About an Agent Wallet
 
 To retrieve information about a specific PKP by its token ID, you can use the [getPkpByTokenId](https://agent-wallet.vercel.app/classes/agent_wallet_src.Admin.html#getPkpByTokenId) method. This will return the metadata for the specified PKP NFT.
 

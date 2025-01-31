@@ -2,6 +2,8 @@
 
 The Lit Agent Wallet (LAW) is a powerful tool that enables secure delegation of wallet operations through a system of administrators, delegatees, tools, and policies. It's built on top of [Programmable Key Pairs (PKPs)](../user-wallets/pkps/overview.md) and provides a flexible framework for managed wallet access.
 
+The full repository for the Lit Agent Wallet is available on [GitHub](https://github.com/LIT-Protocol/agent-wallet).
+
 ## Core Concepts
 
 ### Admin
@@ -19,87 +21,42 @@ Delegatees are entities that can execute operations on behalf of the Agent Walle
 - Have access to specific PKPs assigned to them
 
 ### Tools
-Tools are the building blocks of Agent Wallet functionality. They:
+Tools are the building blocks of Agent Wallet functionality, represented by [Lit Actions](../sdk/serverless-signing/overview.md) published on IPFS. They:
 - Must be registered by the Admin
 - Can be permitted or unpermitted for specific delegatees
 - Can be enabled or disabled without removal
-- Execute specific operations on behalf of the Agent Wallet
+- Execute specific operations using the Agent Wallet as the signer
 
 ### Policies
-Policies are rules that govern how delegatees can use tools. They:
+Policies are rules that govern how delegatees can use tools. Policies are also represented by [Lit Actions](../sdk/serverless-signing/overview.md) published on IPFS. They are called within the Tool Lit Action to enforce the policies. They:
 - Are immutable once published to IPFS
 - Can restrict various parameters of tool execution
 - Can be enabled or disabled by the Admin
 - Apply to specific delegatee-tool combinations
 
-## Common Use Cases
-
-1. **Managed Wallet Operations**
-   - Admins can delegate specific wallet operations to trusted entities
-   - Operations can be restricted by amount, recipient, or other parameters
-   - Multiple delegatees can operate within defined boundaries
-
-2. **Automated Transactions**
-   - Delegatees can execute pre-approved transaction types
-   - Policies ensure transactions stay within defined limits
-   - Tools can be enabled/disabled as needed
-
-3. **Multi-User Wallet Management**
-   - Different delegatees can have different permissions
-   - Policies can be tailored to each delegatee's role
-   - Admin maintains ultimate control
-
-## Getting Started
-
-1. [Build Your First Agent](./building.md) - Learn how to set up and configure an Agent Wallet
-2. [Create New Tools](./new-tool.md) - Understand how to extend functionality with custom tools
-
-## Documentation Structure
-
-- **[Admin Documentation](./references/Admin/overview.md)**
-  - Managing PKPs and ownership
-  - Delegatee management
-  - Tool registration and permissions
-  - Policy creation and enforcement
-
-- **[Delegatee Documentation](./references/delegatee/overview.md)**
-  - Authentication and access
-  - Tool execution
-  - Understanding and working with policies
-
 ## Security Considerations
 
 1. **Authentication**
    - Delegatees must authenticate using SIWE
-   - Session signatures ensure secure operations
-   - PKP ownership controls ultimate access
+   - Admin controls ultimate access
 
-2. **Policy Enforcement**
+2. **Smart Contract Enforcement**
+   - Data such as delegatee addresses, tool and policy CIDs are stored within a [smart contract](https://github.com/LIT-Protocol/agent-wallet/tree/main/packages/aw-contracts) on Lit's [Chronicle Yellowstone](../connecting-to-a-lit-network/lit-blockchains/chronicle-yellowstone.md) blockchain
+   - Only the Admin can update the smart contract
+
+3. **Policy Enforcement**
    - Policies are immutable once published
-   - Multiple layers of restrictions possible
    - Real-time policy checking during execution
 
-3. **Access Control**
+4. **Access Control**
    - Granular permissions per delegatee
    - Tool-level access control
-   - Policy-based parameter restrictions
 
 ## Getting Started
 
-1. **Initialize System**
-```bash
-pnpm install && pnpm build
-```
+1. [Admin Documentation](./admin/overview.md) - Learn how to set up and configure an Agent Wallet
+2. [Delegatee Documentation](./delegatee/overview.md) - Learn how to use an Agent Wallet
+3. [Build Your First Agent](./building.md) - Learn how to integrate an Agent Wallet into your own Agent (ElizaOS)
+4. [Create New Tools](./new-tool.md) - Understand how to extend functionality with custom tools
 
-2. **Launch CLI**
-```bash
-pnpm start:cli
-```
-
-## Additional Resources
-
-> - [Create Custom Tools →](./new-tool.md) 
-> - [Building with ElizaOS →](./building.md)
-> - [Admin Documentation →](./Admin/overview.md)
-> - [Delegatee Documentation →](./delegatee/overview.md)
 
