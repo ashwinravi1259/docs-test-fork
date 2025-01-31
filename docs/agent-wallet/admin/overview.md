@@ -1,6 +1,6 @@
 # Admin Overview
 
-The admin is the entity that creates and manages the Agent Wallet. They are responsible for:
+The Admin is the entity that creates, manages, and holds ownership of the Agent Wallet. They are responsible for:
 
 1. Managing PKPs (Agent Wallets)
 2. Managing delegatees
