@@ -5,6 +5,10 @@
 - Basic understanding of Zod schemas
 - Dependencies installed (`pnpm install` already run)
 
+## Video Tutorial
+
+[![Lit Agent Wallet - New Tools](https://img.youtube.com/vi/I_Mfn3333jU/0.jpg)](https://www.youtube.com/watch?v=I_Mfn3333jU)
+
 ## Generating the Tool Structure
 
 1. From the repository root:
