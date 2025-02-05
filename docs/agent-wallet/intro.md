@@ -4,6 +4,10 @@ The Lit Agent Wallet (LAW) is a toolkit for enabling designated administrators (
 
 The full repository for the Lit Agent Wallet is available on [GitHub](https://github.com/LIT-Protocol/agent-wallet).
 
+:::info
+The root authority of the Agent Wallet is the PKP, which is represented by an ERC-721 token held by the Admin.
+:::
+
 ## Core Concepts
 
 ### Admin
