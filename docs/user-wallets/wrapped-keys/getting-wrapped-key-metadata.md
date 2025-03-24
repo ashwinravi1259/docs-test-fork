@@ -95,7 +95,7 @@ Used with the `dataToEncryptHash`, Access Control Conditions, and `pkpSessionSig
 
 #### `dataToEncryptHash`
 
-This is the `SHA-256` hash of the `ciphertext`.
+This is the `SHA-256` hash of the `plaintext`.
 
 Used with the `ciphertext`, Access Control Conditions, and `pkpSessionSigs`, [you can decrypt](../../sdk/access-control/quick-start#performing-decryption) the `ciphertext` to get the clear text private key.
 
