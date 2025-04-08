@@ -17,7 +17,7 @@ Each Lit Protocol node collectively participates in a Distributed Key Generation
 The Lit network supports multiple cryptographic curves, signing schemes, and key types. Additional curves and schemes can be added as desired to enable additional interoperability with a wide variety of protocols and standards.
 
 ## Policy Enforcement and Data Orchestration – Lit Actions
-Each Lit node contains a JavaScript execution environment which allows developers to write arbitrary code that dictates how the secrets and keys managed by the network are used. These programs are called [Lit Actions], immutable JS serverless functions that govern signing and encryption / decryption operations. Lit Actions can natively fetch and process data from any on or off-chain source, be used to create complex transaction automations (i.e. dollar-cost-averaging), define rules for usage and access, create spending policies, trigger signature generation, and more. 
+Each Lit node contains a JavaScript execution environment which allows developers to write arbitrary code that dictates how the secrets and keys managed by the network are used. These programs are called [Lit Actions](../sdk/serverless-signing/overview.md), immutable JS serverless functions that govern signing and encryption / decryption operations. Lit Actions can natively fetch and process data from any on or off-chain source, be used to create complex transaction automations (i.e. dollar-cost-averaging), define rules for usage and access, create spending policies, trigger signature generation, and more. 
 
 ## Further Reading
 For an in-depth overview of how Lit keeps keys and assets secure, please check out the [security](../security/introduction.md) section.
