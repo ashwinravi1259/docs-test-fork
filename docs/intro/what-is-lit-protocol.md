@@ -30,7 +30,7 @@ Lit Protocol fills a missing layer of the Web3 “stack” by taking on secret m
 ## Use Cases
 The programmable signing and encryption capabilities provided by the Lit network can be used by developers to support the following use cases.
 
-For a more comprehensive list of example projects, check out the [Lit Ecosystem page](../../Ecosystem/projects.md). 
+For a more comprehensive list of example projects, check out the [Lit Ecosystem page](../../Ecosystem/projects). 
 
 Universal Accounts: Lit Protocol enables the creation of universal accounts that can operate seamlessly across any blockchain network, including Bitcoin, Ethereum, Solana, Cosmos, and beyond. The underlying private keys are managed by the decentralized Lit network, meaning these wallets are fully programmable and always non-custodial. Developers can use this to build user wallets, orchestrate liquidity across isolated networks, enable transaction automations (i.e. dollar-cost-averaging), and more.
 
