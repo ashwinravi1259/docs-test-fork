@@ -32,15 +32,15 @@ The programmable signing and encryption capabilities provided by the Lit network
 
 For a more comprehensive list of example projects, check out the [Lit Ecosystem page](../../Ecosystem/projects). 
 
-Universal Accounts: Lit Protocol enables the creation of universal accounts that can operate seamlessly across any blockchain network, including Bitcoin, Ethereum, Solana, Cosmos, and beyond. The underlying private keys are managed by the decentralized Lit network, meaning these wallets are fully programmable and always non-custodial. Developers can use this to build user wallets, orchestrate liquidity across isolated networks, enable transaction automations (i.e. dollar-cost-averaging), and more.
+**Universal Accounts**: Lit Protocol enables the creation of universal accounts that can operate seamlessly across any blockchain network, including Bitcoin, Ethereum, Solana, Cosmos, and beyond. The underlying private keys are managed by the decentralized Lit network, meaning these wallets are fully programmable and always non-custodial. Developers can use this to build user wallets, orchestrate liquidity across isolated networks, enable transaction automations (i.e. dollar-cost-averaging), and more.
 
 Examples: [Emblem Vault](https://circuitsofvalue.com/), [CollabLand](https://collab.land/), [Genius](https://www.tradegenius.com/), [Tria](https://tria.so/), [Eco](https://eco.com/).
 
-Private Data: The Lit network can be used to implement encryption and access control for any use case that demands privacy. Builders can use [access control conditions] to manage access rights for relevant stakeholders according to the policies you set.   
+**Private Data**: The Lit network can be used to implement encryption and access control for any use case that demands privacy. Builders can use [access control conditions] to manage access rights for relevant stakeholders according to the policies you set.   
 
 Examples: [Verify (Fox Corp)](https://www.verifymedia.com/), [Streamr](https://streamr.network/), [Cheqd](https://cheqd.io/), [Index](https://index.network/).
 
-Agent Wallets: [Vincent](https://docs.heyvincent.ai/) is a framework and open standard that enables the creation of autonomous, verifiable, and user-controlled agents. Built directly on top of Lit’s core infrastructure, Vincent enables agents to securely manage keys, sensitive data, and other secrets. Developers building agent runtimes and other agent-powered applications can use Vincent to manage their agents’ keys and create “tools” (using [Lit Actions](../sdk/serverless-signing/overview.md)) custom built for specific actions and operations (i.e. Dollar-Cost-Averaging). 
+**Agent Wallets**: [Vincent](https://docs.heyvincent.ai/) is a framework and open standard that enables the creation of autonomous, verifiable, and user-controlled agents. Built directly on top of Lit’s core infrastructure, Vincent enables agents to securely manage keys, sensitive data, and other secrets. Developers building agent runtimes and other agent-powered applications can use Vincent to manage their agents’ keys and create “tools” (using [Lit Actions](../sdk/serverless-signing/overview.md)) custom built for specific actions and operations (i.e. Dollar-Cost-Averaging). 
 
 For end users, Vincent serves as a marketplace for discovering these agentic apps and tools, while giving them the ability to set fine-grained permissions that govern the specific actions agents can take on their behalf when interacting with each (i.e. spending limits or time intervals for DCA).
 
