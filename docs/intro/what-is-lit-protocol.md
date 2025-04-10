@@ -43,7 +43,7 @@ Examples: [Emblem Vault](https://circuitsofvalue.com/), [CollabLand](https://col
 
 Examples: [Verify (Fox Corp)](https://www.verifymedia.com/), [Streamr](https://streamr.network/), [Cheqd](https://cheqd.io/), [Index](https://index.network/).
 
-**Agent Wallets**: [Vincent](https://docs.heyvincent.ai/) is a framework and open standard that enables the creation of autonomous, verifiable, and user-controlled agents. Built directly on top of Lit’s core infrastructure, Vincent enables agents to securely manage keys, sensitive data, and other secrets. Developers building agent runtimes and other agent-powered applications can use Vincent to manage their agents’ keys and create “tools” (using [Lit Actions](../sdk/serverless-signing/overview.md)) custom built for specific actions and operations (i.e. Dollar-Cost-Averaging). 
+**Agent Wallets**: [Vincent](https://docs.heyvincent.ai/) is a framework and open standard that enables the creation of autonomous, verifiable, and user-controlled agents. Built directly on top of Lit’s core infrastructure, Vincent enables agents to securely manage keys, sensitive data, and other secrets. Developers building agent runtimes and other agent-powered applications can use Vincent to manage their agents’ keys and create “tools” (using [Lit Actions](../sdk/serverless-signing/overview.md)) custom built for specific actions and operations (e.g. Dollar-Cost-Averaging). 
 
 For end users, Vincent serves as a marketplace for discovering these agentic apps and tools, while giving them the ability to set fine-grained permissions that govern the specific actions agents can take on their behalf when interacting with each (i.e. spending limits or time intervals for DCA).
 
