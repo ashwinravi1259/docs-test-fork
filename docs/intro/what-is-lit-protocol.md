@@ -14,6 +14,7 @@ Giving private keys or credentials to a server is a massive security responsibil
 
 Lit Protocol is a decentralized key management network for programmable signing and encryption. The network empowers developers to create secure, decentralized applications that manage crypto assets, private data, and user authority seamlessly across platforms.
 
+
 Lit’s threshold cryptography architecture ensures secrets remain verifiably secure—air-gapped, encrypted at the hardware level, and shared among distributed nodes. For the first time, universal accounts can be programmed without trusting centralized custodians.
 Using Lit’s SDK, developers can easily [encrypt data](../sdk/access-control/quick-start.md), [create and manage Web3 accounts](../user-wallets/overview.md), [generate digital signatures](../intro/first-request/making-first-signing.md), execute blockchain transactions, and implement virtually any signing or encryption operation.
 
