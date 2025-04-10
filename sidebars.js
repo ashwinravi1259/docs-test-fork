@@ -44,11 +44,27 @@ const sidebars = {
     {
       type: 'category',
       label: 'Getting Started',
-      collapsed: true,
+      collapsed: false,
       items: [
         'intro/overview',
         'intro/what-is-lit-protocol',
         'resources/how-it-works',
+        {
+          type: 'category',
+          label: 'Making Your First Request',
+          collapsed: true,
+          link: {
+            type: 'doc',
+            id: 'intro/first-request/overview',
+          },
+          items: [
+            'intro/first-request/connecting-to-lit',
+            'intro/first-request/generating-session-sigs',
+            'intro/first-request/installing-sdk',
+            'intro/first-request/making-first-decryption',
+            'intro/first-request/making-first-signing',
+          ],
+        },
       ],
     },
     {
@@ -72,6 +88,7 @@ const sidebars = {
             keywords: ['migrations'],
           },
           items: [
+            'sdk/migrations/7.0.0',
             'sdk/migrations/6.0.0',
             'sdk/migrations/4.0.0',
             'sdk/migrations/3.2.0',
@@ -159,9 +176,50 @@ const sidebars = {
       items: [
         {
           type: 'category',
+          label: 'Agent Wallet',
+          collapsed: true,
+          link: {
+            type: 'doc',
+            id: 'agent-wallet/intro',
+          },
+          items: [
+            {
+              type: 'category',
+              label: 'Admin',
+              link: {
+                type: 'doc',
+                id: 'agent-wallet/admin/overview',
+              },
+              collapsed: true,
+              items: [
+                'agent-wallet/admin/delegatees',
+                'agent-wallet/admin/tools',
+                'agent-wallet/admin/policies',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Delegatee',
+              link: {
+                type: 'doc',
+                id: 'agent-wallet/delegatee/overview',
+              },
+              collapsed: true,
+              items: [
+                'agent-wallet/delegatee/tools',
+                'agent-wallet/delegatee/policies',
+              ],
+            },
+            'agent-wallet/building',
+            'agent-wallet/new-tool'
+          ],
+        },
+        {
+          type: 'category',
           label: 'Authentication',
           collapsed: true,
           items: [
+            'sdk/authentication/security',
             {
               type: 'category',
               label: 'Session Signatures',
@@ -174,13 +232,20 @@ const sidebars = {
                 'sdk/authentication/session-sigs/resources-and-abilities',
                 'sdk/authentication/session-sigs/capability-objects',
                 'sdk/capacity-credits',
-                'sdk/authentication/session-sigs/get-session-sigs',
-                'sdk/authentication/session-sigs/get-pkp-session-sigs',
-                'sdk/authentication/session-sigs/get-lit-action-session-sigs',
-                'sdk/authentication/session-sigs/usage',
+                {
+                  type: 'category',
+                  label: 'Generating Session Signatures',
+                  collapsed: true,
+                  items: [
+                    'sdk/authentication/session-sigs/get-session-sigs',
+                    'sdk/authentication/session-sigs/get-pkp-session-sigs',
+                    'sdk/authentication/session-sigs/get-lit-action-session-sigs',
+                    'sdk/authentication/session-sigs/siws-pkp-session-sigs',
+                  ],
+                },
               ],
             },
-            'sdk/authentication/security',
+            'sdk/authentication/authenticating-siws',
           ],
         },
         {
@@ -221,10 +286,6 @@ const sidebars = {
                 {
                   type: 'category',
                   label: 'Advanced Topics',
-                  link: {
-                    type: 'doc',
-                    id: 'user-wallets/pkps/advanced-topics/overview',
-                  },
                   collapsed: true,
                   items: [
                     {
@@ -252,6 +313,21 @@ const sidebars = {
                       },
                       collapsed: true,
                       items: ['user-wallets/pkps/claimable-keys/usage'],
+                    },
+                    {
+                      type: 'category',
+                      label: 'Signing Bitcoin Transactions',
+                      link: {
+                        type: 'doc',
+                        id: 'user-wallets/pkps/bitcoin/overview',
+                      },
+                      collapsed: true,
+                      items: [
+                        'user-wallets/pkps/bitcoin/single-sig',
+                        'user-wallets/pkps/bitcoin/multi-sig',
+                        'user-wallets/pkps/bitcoin/collaborative',
+                        'user-wallets/pkps/bitcoin/1of1-multi-sig',
+                      ],
                     },
                   ],
                 },
@@ -323,12 +399,19 @@ const sidebars = {
                 },
                 {
                   type: 'category',
-                  label: 'Other Chains',
+                  label: 'Solana',
                   collapsed: true,
                   items: [
-                    'sdk/access-control/other-chains/sol-rpc-conditions',
-                    'sdk/access-control/other-chains/cosmos-conditions',
+                    'sdk/access-control/solana/siws-access-control',
+                    'sdk/access-control/solana/siws-encryption',
+                    'sdk/access-control/solana/sol-rpc-conditions',
                   ],
+                },
+                {
+                  type: 'category',
+                  label: 'Other Chains',
+                  collapsed: true,
+                  items: ['sdk/access-control/other-chains/cosmos-conditions'],
                 },
                 {
                   type: 'category',
@@ -372,6 +455,7 @@ const sidebars = {
                 'sdk/serverless-signing/run-once',
                 `sdk/serverless-signing/get-rpc-url`,
                 'sdk/serverless-signing/broadcast-and-collect',
+                'sdk/serverless-signing/web-assembly',
               ],
             },
           ],
@@ -453,8 +537,8 @@ const sidebars = {
                 {
                   type: 'doc',
                   id: 'integrations/aa/candide',
-                  label: 'Candide'
-                }
+                  label: 'Candide',
+                },
               ],
             },
             {
@@ -463,6 +547,7 @@ const sidebars = {
               collapsed: true,
               items: [
                 'integrations/storage/ceramic-example',
+                'integrations/storage/orbis-example',
                 'integrations/storage/irys',
               ],
             },
@@ -513,6 +598,7 @@ const sidebars = {
             keywords: ['api-reference'],
           },
           items: [
+            'api-reference/v6-sdk',
             'api-reference/v3-sdk',
             'api-reference/v2-sdk',
             'api-reference/v1-sdk',

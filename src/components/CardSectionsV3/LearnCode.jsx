@@ -15,7 +15,7 @@ export default function LearnCodeSection({ title, className }) {
       <Card
         title="📖 SDK API Documentation"
         description="Discover all the functions available in the Lit SDK."
-        to="https://v6-api-doc-lit-js-sdk.vercel.app/"
+        to="https://v7-api-doc-lit-js-sdk.vercel.app/"
       />
       <Card
         title="📃 Lit Actions SDK Documentation"

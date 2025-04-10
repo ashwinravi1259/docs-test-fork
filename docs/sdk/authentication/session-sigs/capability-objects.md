@@ -13,6 +13,8 @@ When session capability objects are omitted from the `getSessionSigs()` function
 ## Grant Decryption Capability To Access Control Condition
 
 ```javascript
+import { LIT_ABILITY } from "@lit-protocol/constants";
+
 // Create the session capability object
 const sessionCapabilityObject = new newSessionCapabilityObject();
 
@@ -23,7 +25,7 @@ const litResource = new LitAccessControlConditionResource('someResource');
 // lit resource.
 sessionCapabilityObject.addCapabilityForResource(
     litResource,
-    LitAbility.AccessControlConditionDecryption
+    LIT_ABILITY.AccessControlConditionDecryption
 );
 ```
 
@@ -55,7 +57,7 @@ const litResource = new LitAccessControlConditionResource('*');
 // lit resource.
 sessionCapabilityObject.addCapabilityForResource(
     litResource,
-    LitAbility.AccessControlConditionDecryption
+    LIT_ABILITY.AccessControlConditionDecryption
 );
 ```
 <FeedbackComponent/>

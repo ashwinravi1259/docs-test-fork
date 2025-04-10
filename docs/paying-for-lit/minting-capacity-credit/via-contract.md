@@ -66,16 +66,16 @@ const ethersSigner = new ethers.Wallet(
 
 ```ts
 import { LitContracts } from "@lit-protocol/contracts-sdk";
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const litContractClient = new LitContracts({
     signer: ethersSigner,
-    network: LitNetwork.DatilTest,
+    network: LIT_NETWORK.DatilTest,
 });
 await litContractClient.connect();
 ```
 
-You can learn more about the `@lit-protocol/contracts-sdk` package and what is offers using the [API reference docs](https://v6-api-doc-lit-js-sdk.vercel.app/modules/contracts_sdk_src.html).
+You can learn more about the `@lit-protocol/contracts-sdk` package and what is offers using the [API reference docs](https://v7-api-doc-lit-js-sdk.vercel.app/modules/contracts_sdk_src.html).
 
 ## Minting a Capacity Credit
 

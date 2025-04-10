@@ -52,10 +52,10 @@ Within a file (in the Lit example repos it will likely be called `lit.js`), set
 `client.connect()` will return a promise that resolves when you are connected to the Lit Network.
 
 ```jsx
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const client = new LitJsSdk.LitNodeClient({
-  litNetwork: LitNetwork.Datil,
+  litNetwork: LIT_NETWORK.Datil,
 });
 
 await client.connect();
@@ -82,11 +82,11 @@ Keep in mind that in the server-side implementation, the client class is named 
 `app.locals.litNodeClient.connect()` returns a promise that resolves when you are connected to the Lit network.
 
 ```jsx
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 app.locals.litNodeClient = new LitJsSdk.LitNodeClientNodeJs({
   alertWhenUnauthorized: false,
-  litNetwork: LitNetwork.Datil,
+  litNetwork: LIT_NETWORK.Datil,
 });
 await app.locals.litNodeClient.connect();
 ```
@@ -116,11 +116,11 @@ You'll need to use ethers.js v5 with the Lit SDK. The Lit SDK is not compatible 
 
 ```jsx
 import { LitContracts } from '@lit-protocol/contracts-sdk';
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const contractClient = new LitContracts({
   signer: wallet,
-  network: LitNetwork.Datil,
+  network: LIT_NETWORK.Datil,
 });
 
 await contractClient.connect();
@@ -139,10 +139,9 @@ In order to interact with the nodes in the Lit Network, you will need to generat
 Using the Lit SDK and the methods `createSiweMessageWithRecaps` and `generateAuthSig` from the `@lit-protocol/auth-helpers` package, we can create a `SessionSigs` by signing a SIWE message using a private key stored in a browser wallet like MetaMask:
 
 ```jsx
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK, LIT_ABILITY } from "@lit-protocol/constants";
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
 import {
-  LitAbility,
   LitAccessControlConditionResource,
   createSiweMessage,
   generateAuthSig,
@@ -154,7 +153,7 @@ await provider.send("eth_requestAccounts", []);
 const ethersSigner = provider.getSigner();
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.Datil,
+    litNetwork: LIT_NETWORK.Datil,
   });
 await litNodeClient.connect();
 
@@ -164,7 +163,7 @@ const sessionSigs = await litNodeClient.getSessionSigs({
   resourceAbilityRequests: [
     {
       resource: new LitActionResource("*"),
-      ability: LitAbility.LitActionExecution,
+      ability: LIT_ABILITY.LitActionExecution,
     },
   ],
   authNeededCallback: async ({ resourceAbilityRequests, expiration, uri }) => {
@@ -268,7 +267,7 @@ const authNeededCallback = async (params) => {
 const resourceAbilities = [
  {
    resource: new LitActionResource('*'),
-   ability: LitAbility.PKPSigning,
+   ability: LIT_ABILITY.PKPSigning,
  },
 ];
 // Get the session key for the session signing request
@@ -291,7 +290,7 @@ Now that we have installed all of the required packages and authenticated with t
 
 Permitted scopes are a crucial part of defining the capabilities of each authentication method you use. They determine what actions a given authentication method can perform with the PKP. For instance, the `SignAnything` scope allows an auth method to sign any data, while the `PersonalSign` scope restricts it to signing messages using the EIP-191 scheme.
 
-You can also set scopes: `[]` which will mean that the auth method can only be used for authentication, but not authorization. This means that the auth method can be used to prove that the user is who they say they are, but cannot be used to sign transactions or messages. You can read more about Auth Method scopes [here](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.MintWithAuthParams.html#scopes).
+You can also set scopes: `[]` which will mean that the auth method can only be used for authentication, but not authorization. This means that the auth method can be used to prove that the user is who they say they are, but cannot be used to sign transactions or messages. You can read more about Auth Method scopes [here](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.MintWithAuthParams.html#scopes).
 
 The following code block demonstrates how to mint a PKP with specific permitted scopes:
 
@@ -300,19 +299,19 @@ The PKP NFT represents root ownership of the key pair. The NFT owner can grant o
 :::
 
 ```jsx
-import { AuthMethodScope, AuthMethodType } from '@lit-protocol/constants';
+import { AUTH_METHOD_SCOPE, AUTH_METHOD_TYPE } from '@lit-protocol/constants';
 
 const authMethod = {
-  authMethodType: AuthMethodType.EthWallet,
+  authMethodType: AUTH_METHOD_TYPE.EthWallet,
   accessToken: JSON.stringify(authSig),
 };
 
 const mintInfo = await contractClient.mintWithAuth({
   authMethod: authMethod,
   scopes: [
-        // AuthMethodScope.NoPermissions,
-        AuthMethodScope.SignAnything, 
-        AuthMethodScope.PersonalSign
+        // AUTH_METHOD_SCOPE.NoPermissions,
+        AUTH_METHOD_SCOPE.SignAnything, 
+        AUTH_METHOD_SCOPE.PersonalSign
     ],
 });
 
@@ -330,12 +329,12 @@ const mintInfo = await contractClient.mintWithAuth({
 You should now have successfully minted a PKP! You can verify that the PKP has the necessary permissions for signing by calling the following function:
 
 ```jsx
-import { LitAuthClient } from '@lit-protocol/lit-auth-client';
+import { getAuthIdByAuthMethod } from '@lit-protocol/lit-auth-client';
 
-const authId = await LitAuthClient.getAuthIdByAuthMethod(authMethod);
+const authId = await getAuthIdByAuthMethod(authMethod);
 await contractClient.pkpPermissionsContract.read.getPermittedAuthMethodScopes(
   mintInfo.pkp.tokenId,
-  AuthMethodType.EthWallet,
+  AUTH_METHOD_TYPE.EthWallet,
   authId,
   3
 );
@@ -357,13 +356,13 @@ In order to execute a transaction with Lit, you’ll need to reserve capacity on
 The first step is to initialize a signer. This should be a wallet controlled by your application and the same wallet you’ll use to mint the Capacity Credit NFT:
 
 ```jsx
-import { LitNetwork } from "@lit-protocol/constants";
+import { LIT_NETWORK } from "@lit-protocol/constants";
 
 const walletWithCapacityCredit = new Wallet("<your private key or mnemonic>");
 
 let contractClient = new LitContracts({
   signer: dAppOwnerWallet,
-  network: LitNetwork.Datil,
+  network: LIT_NETWORK.Datil,
 });
 
 await contractClient.connect();
@@ -467,7 +466,7 @@ We can use the Capacity Credit delegation to generate a Session Signature for th
     resourceAbilityRequests: [
       {
         resource: new LitPKPResource('*'),
-        ability: LitAbility.PKPSigning,
+        ability: LIT_ABILITY.PKPSigning,
       },
     ],
     authNeededCallback: pkpAuthNeededCallback,
@@ -501,7 +500,7 @@ We can use the Capacity Credit delegation to generate a Session Signature for th
 
 Authentication methods ('auth methods' for short) are the specific credentials (i.e. a wallet address or email account) that have permission to control and manage permissions associated with the underlying PKP (for example, to add another auth method or sign a transaction). 
 
-To manage the auth methods registered to a `Programmabale Key Pair`  you will need to use the `LitContracts` package that we installed earlier. Once that has been installed, you can add an auth method in the following steps:
+To manage the auth methods registered to a `Programmable Key Pair`  you will need to use the `LitContracts` package that we installed earlier. Once that has been installed, you can add an auth method in the following steps:
 
 If a `Programmable Key Pair` owns itself through the `sendPkpToIteself` flag you will need to use an instance of the `PkpEthersWallet` as the `signer` in the `LitContracts` constructor options:
 

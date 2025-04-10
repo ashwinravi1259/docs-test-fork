@@ -2,16 +2,16 @@
 
 Lit Actions are powerful JavaScript programs that run on a Lit network. This guide covers the two approaches to deploying your Lit Action to Lit. For more info on what a Lit Action is, go [here](./overview.md). For a guide on getting started with Lit Actions, go [here](./quick-start.md).
 
-In order for the Lit nodes to be able to run your Lit Action, they need access to it's code. There are two methods of providing your code to the Lit network for execution:
+In order for the Lit nodes to be able to run your Lit Action, they need access to its code. There are two methods of providing your code to the Lit network for execution:
 
 1. Providing a Code String
 2. Uploading to IPFS
 
 ## Lit Action Constraints
 
-Before diving into the approaches for deploying a Lit Action, it's important to understand the constraints that in place to prevent malicious parties from performing DoS attacks, and the over consumption of resources on the Lit nodes. The following are the time and size constraints that are imposed on Lit Actions:
+Before diving into the approaches for deploying a Lit Action, it's important to understand the constraints that are in place to prevent malicious parties from performing DoS attacks, and the over consumption of resources on the Lit nodes. The following are the time and size constraints that are imposed on Lit Actions:
 
-- A `30 second` time limit
+- A `30 second` time limit on the Datil and Datil-test network, and a `60 second` time limit on Datil-dev.
 - A max size of `100MB`
   - Code minifiers can help address code size issues
 - Memory usage (RAM) of `256MB`
@@ -47,7 +47,7 @@ However, it's important to note some potential drawbacks:
 
 ## Deploying Using a Code String
 
-This method is the more straightforward of the two, as we're simply providing our Lit Action code as a string when using one of the Lit SDK methods such as [executeJs](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.ILitNodeClient.html#executeJs).
+This method is the more straightforward of the two, as we're simply providing our Lit Action code as a string when using one of the Lit SDK methods such as [executeJs](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.ILitNodeClient.html#executeJs).
 
 :::note
 Most of the code in the full implementation is boilerplate code used to connect to a Lit network and generate Session Signatures. If you don't understand all of the code, or want to learn more about it, you can go [here](../../connecting-to-a-lit-network/connecting.md) to learn about connecting to a network, and [here](../authentication/session-sigs/intro.md) to learn more about generating Session Signatures.
@@ -59,11 +59,10 @@ Most of the code in the full implementation is boilerplate code used to connect 
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LIT_RPC, LitNetwork } from "@lit-protocol/constants";
+import { LIT_RPC, LIT_NETWORK, LIT_ABILITY } from "@lit-protocol/constants";
 import {
   createSiweMessageWithRecaps,
   generateAuthSig,
-  LitAbility,
   LitActionResource,
 } from "@lit-protocol/auth-helpers";
 
@@ -73,7 +72,7 @@ const ethersSigner = new ethers.Wallet(
 );
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.DatilDev,
+    litNetwork: LIT_NETWORK.DatilDev,
     debug: false,
 });
 await litNodeClient.connect();
@@ -84,7 +83,7 @@ const sessionSigs = await litNodeClient.getSessionSigs({
     resourceAbilityRequests: [
         {
             resource: new LitActionResource("*"),
-            ability: LitAbility.LitActionExecution,
+            ability: LIT_ABILITY.LitActionExecution,
         },
     ],
     authNeededCallback: async ({
@@ -144,7 +143,7 @@ Next we're calling the `executeJs` method to create a request to the Lit network
 
 ## Deploying Using IPFS
 
-While providing a code string is generally recommended, there are scenarios where uploading your Lit Action to IPFS can be beneficial as covered above. To implement this, we pass the [IPFS Content Identifier (CID)](https://docs.ipfs.tech/quickstart/publish/#cids-explained) when calling Lit SDK methods such as [executeJs](https://v6-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.ILitNodeClient.html#executeJs).
+While providing a code string is generally recommended, there are scenarios where uploading your Lit Action to IPFS can be beneficial as covered above. To implement this, we pass the [IPFS Content Identifier (CID)](https://docs.ipfs.tech/quickstart/publish/#cids-explained) when calling Lit SDK methods such as [executeJs](https://v7-api-doc-lit-js-sdk.vercel.app/interfaces/types_src.ILitNodeClient.html#executeJs).
 
 :::note
 Most of the code in the full implementation is boilerplate code used to connect to a Lit network and generate Session Signatures. If you don't understand all of the code, or want to learn more about it, you can go [here](../../connecting-to-a-lit-network/connecting.md) to learn about connecting to a network, and [here](../authentication/session-sigs/intro.md) to learn more about generating Session Signatures.
@@ -156,11 +155,10 @@ Most of the code in the full implementation is boilerplate code used to connect 
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LIT_RPC, LitNetwork } from "@lit-protocol/constants";
+import { LIT_RPC, LIT_NETWORK, LIT_ABILITY } from "@lit-protocol/constants";
 import {
   createSiweMessageWithRecaps,
   generateAuthSig,
-  LitAbility,
   LitActionResource,
 } from "@lit-protocol/auth-helpers";
 
@@ -170,7 +168,7 @@ const ethersSigner = new ethers.Wallet(
 );
 
 const litNodeClient = new LitNodeClient({
-    litNetwork: LitNetwork.DatilDev,
+    litNetwork: LIT_NETWORK.DatilDev,
     debug: false,
 });
 await litNodeClient.connect();
@@ -181,7 +179,7 @@ const sessionSigs = await litNodeClient.getSessionSigs({
     resourceAbilityRequests: [
         {
             resource: new LitActionResource("*"),
-            ability: LitAbility.LitActionExecution,
+            ability: LIT_ABILITY.LitActionExecution,
         },
     ],
     authNeededCallback: async ({

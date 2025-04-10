@@ -151,12 +151,12 @@ You can call Lit Actions from inside Lit Actions and any signatures or decryptio
 You do this by passing an IPFS ID to the Lit.Actions.call() function like so: 
 
 ```jsx
-Lit.Actions.call({ ipfsId: "Qmb2sJtVLXiNNXnerWB7zjSpAhoM8AxJF2uZsU2iednTtT", params: {}) 
+Lit.Actions.call({ ipfsId: "QmRwN9GKHvCn4Vk7biqtr6adjXMs7PzzYPCzNCRjPFiDjm", params: {}) 
 ```
 
 which would call the Lit Action at the given IPFS ID with the params you pass in to the `params` key. 
 
-Check out that action code here to see how it works: https://ipfs.io/ipfs/Qmb2sJtVLXiNNXnerWB7zjSpAhoM8AxJF2uZsU2iednTtT
+Check out that action code here to see how it works: https://ipfs.io/ipfs/QmRwN9GKHvCn4Vk7biqtr6adjXMs7PzzYPCzNCRjPFiDjm
 
 Below is an action that takes a function name to run, and runs a "child" Lit Action accordingly. This example only has 1 function ("signEcdsa") but it could have many.
 
@@ -199,7 +199,7 @@ import * as LitJsSdk from '@lit-protocol/lit-node-client';
 const runLitAction = async () => {
   const litNodeClient = new LitJsSdk.LitNodeClient({
     alertWhenUnauthorized: false,
-    litNetwork: "serrano",
+    litNetwork: "datil-dev",
     debug: true,
   });
   await litNodeClient.connect();

@@ -29,7 +29,7 @@ At completion of this reading you should be able to:
 
 ### How does it Work?
 
-The Ceramic Protocol is built on decentralized event streams, where user accounts (enabled by decentralized identifiers, or [DIDs](https://developers.ceramic.network/protocol/accounts/decentralized-identifiers/)) cryptographically sign data events and submit them to the network. These events are stored in the Interplanetary File System (IPFS) using the IPLD protocol, and organized into readable streams. Each stream is flexible enough to store many types of content. Therefore, Ceramic is home to a diversity of different data use cases such as user profiles, posts, relations to other entities, and more.
+The Ceramic Protocol is built on decentralized event streams, where user accounts (enabled by decentralized identifiers, or [DIDs](https://developers.ceramic.network/protocol/accounts/decentralized-identifiers/)) cryptographically sign data events and submit them to the network. These events are synchronized across subscribing nodes in the network and arranged into event logs, or Ceramic "streams." Each stream offers the flexibility to hold various types of content, making Ceramic suitable for a wide range of data applications, including user profiles, posts, relationships, and more, while retaining the history of changes the stream has undergone throughout its lifetime.
 
 Due to Ceramic's open readability, any participating node can read from any stream in the network. Therefore, encrypting data using Lit Protocol and saving it Ceramic is a common (and necessary) integration for many teams.
 

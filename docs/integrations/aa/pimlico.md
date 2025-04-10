@@ -146,37 +146,43 @@ const sessionStatus = await stytchClient.sessions.authenticate({
 ### 5. Get a Lit Relay Server API Key
 Checking in! If you didn't complete the pre-req of getting a Lit relay key, you can get it by filling out this [form](https://forms.gle/RNZYtGYTY9BcD9MEA) and the Lit development team will get back to you shortly. 
 
-You can also ping the Lit developement team on [Discord](https://litgateway.com/discord) once you fill out the form. 
+You can also ping the Lit development team on [Discord](https://litgateway.com/discord) once you fill out the form. 
 
 
 ### 6. Mint a PKPs through Lit Protocol
 
 ```js
-const litClient = new LitAuthClient({
-    litRelayConfig: {
-        relayApiKey: '<Your Lit Relay Server API Key>',
-    }
+import { LIT_NETWORK } from "@lit-protocol/constants";
+import { StytchOtpProvider } from "@lit-protocol/providers";
+import { LitRelay } from "@lit-protocol/lit-auth-client";
+
+const litRelay = new LitRelay({
+    relayUrl: LitRelay.getRelayUrl(LIT_NETWORK.DatilDev),
+    relayApiKey: 'test-api-key',
 });
- 
-const session = litClient.initProvider(ProviderType.StytchOtp, {
+
+const session = new StytchOtpProvider({ relay: litRelay, litNodeClient,    
     userId: sessionStatus.session.user_id,
     appId: "project-test-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-})
+});
  
 const authMethod = await session.authenticate({ 
     accessToken: sessionStatus.session_jwt 
-})
+});
  
-await session.mintPKPThroughRelayer(authMethod)
-const pkps = await session.fetchPKPsThroughRelayer(authMethod)
+await litRelay.mintPKPWithAuthMethods([authMethod], {});
+const pkps = await session.fetchPKPs(authMethod);
 ```
 
 
 ### 7. Generate the Controller Session Signatures or its context to generate them on demand
 
 ```js
+import { LitNodeClientNodeJs } from "@lit-protocol/lit-node-client-nodejs";
+import { LIT_ABILITY, LIT_NETWORK } from "@lit-protocol/constants";
+
 const litNodeClient = new LitNodeClientNodeJs({
-    litNetwork: "datil-dev",
+    litNetwork: LIT_NETWORK.DatilDev,
     debug: false,
 })
 await litNodeClient.connect();
@@ -184,7 +190,7 @@ await litNodeClient.connect();
 const resourceAbilities = [
     {
         resource: new LitActionResource("*"),
-        ability: LitAbility.PKPSigning,
+        ability: LIT_ABILITY.PKPSigning,
     },
 ];
  
@@ -228,8 +234,8 @@ We will now generate a wallet that can act a regular Ethers.js wallet, but will 
 const pkpWallet = new PKPEthersWallet({
   pkpPubKey: pkp[pkp.length - 1].publicKey,
   rpc: "<standard RPC URL for the chain you are using>", // e.g. https://rpc.ankr.com/eth_goerli
+  litNodeClient,
   authContext: {
-    client: litNodeClient,
     getSessionSigsProps: {
       chain: 'ethereum',
       expiration: new Date(Date.now() + 60_000 * 60).toISOString(),
@@ -237,7 +243,21 @@ const pkpWallet = new PKPEthersWallet({
       authNeededCallback,
     },
   },
-  // controllerSessionSigs: sesionSigs, // (deprecated) If you will be passing sessionSigs directly, do not pass authContext
+  // controllerSessionSigs: sessionSigs, // (deprecated) If you will be passing sessionSigs directly, do not pass authContext
+});
+
+const pkpWallet = new PKPEthersWallet({
+  pkpPubKey: pkp[pkp.length - 1].publicKey,
+  litNodeClient,
+  authContext: {
+    getSessionSigsProps: {
+      chain: 'ethereum',
+      expiration: new Date(Date.now() + 60_000 * 60).toISOString(),
+      resourceAbilityRequests: resourceAbilities,
+      authNeededCallback,
+    },
+  },
+  // controllerSessionSigs: sessionSigs, // (deprecated) If you will be passing sessionSigs directly, do not pass authContext
 });
  
 await pkpWallet.init();
@@ -250,7 +270,7 @@ You can now use the `pkpWallet` as a regular Ethers.js wallet to sign user opera
 
 To submit a user operation to Pimlico, you can follow the steps to sponsor a user operation with Pimlico's verifying paymaster and/or submit a user operation through Pimlico's bundler. If you would like to integrate Lit with the full flow of generating, signing, and submitting a user operation, you can follow the steps in [tutorial 1](https://docs.pimlico.io/tutorial/tutorial-1), replacing the signing step with the PKP wallet and using `pkpWallet.address` as the owner address of the smart account.
 
-Modified from Plimlico's [tutorial 1](https://docs.pimlico.io/tutorial/tutorial-1), an example of how to use the PKP wallet to sign a user operation is shown below:
+Modified from Pimlico's [tutorial 1](https://docs.pimlico.io/tutorial/tutorial-1), an example of how to use the PKP wallet to sign a user operation is shown below:
 
 ```js
 const signature = await pkpWallet.signMessage(

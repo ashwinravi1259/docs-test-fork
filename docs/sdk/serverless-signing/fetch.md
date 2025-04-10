@@ -56,7 +56,6 @@ When writing data, it's crucial to use operations that produce the same result r
 - SQL Update: Running it multiple times only changes the row once.
 - Result: Consistent outcome, regardless of repetition.
 
-
 2. Non-repeatable operation (avoid):
 
 - SQL Insert: Each execution creates a new row.

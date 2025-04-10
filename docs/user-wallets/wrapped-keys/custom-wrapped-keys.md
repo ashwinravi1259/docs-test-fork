@@ -19,22 +19,22 @@ Currently the Wrapped Keys SDK includes Lit Action to support the following:
 For Wrapped Keys derived from the `K256` algorithm (commonly known as `ecdsa`):
 
 - Generating `K256` (commonly known as `ecdsa`) private keys within a Lit Action
-  - Uses the [generateEncryptedEthereumPrivateKey](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys/src/lib/litActions/ethereum/src/generateEncryptedEthereumPrivateKey.js) Lit Action
+  - Uses the [generateEncryptedEthereumPrivateKey](https://v7-api-doc-lit-js-sdk.vercel.app/modules/wrapped_keys_lit_actions_src.html#generateEncryptedEthereumPrivateKey) Lit Action
 - Signing arbitrary messages using Ethers.js' [signMessage](https://docs.ethers.org/v5/api/signer/#Signer-signMessage)
-  - Uses the [signMessageWithEthereumEncryptedKey](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys/src/lib/litActions/ethereum/src/signMessageWithEthereumEncryptedKey.js) Lit Action
+  - Uses the [signMessageWithEthereumEncryptedKey](https://v7-api-doc-lit-js-sdk.vercel.app/modules/wrapped_keys_lit_actions_src.html#signMessageWithEthereumEncryptedKey) Lit Action
 - Signing Ethers.js transaction objects using [signTransaction](https://docs.ethers.org/v5/api/signer/#Signer-signTransaction)
-  - Uses the [signTransactionWithEthereumEncryptedKey](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys/src/lib/litActions/ethereum/src/signTransactionWithEthereumEncryptedKey.js) Lit Action
+  - Uses the [signTransactionWithEthereumEncryptedKey](https://v7-api-doc-lit-js-sdk.vercel.app/modules/wrapped_keys_lit_actions_src.html#signTransactionWithEthereumEncryptedKey) Lit Action
 
 ### Wrapped Keys Derived `ed25519` Algorithm
 
 For Wrapped Keys derived from the `ed25519` algorithm (used for Solana private key):
 
 - Generating `ed25519` private keys within a Lit Action using the [@solana/web3.js](https://github.com/solana-labs/solana-web3.js) SDK
-  - Uses the [generateEncryptedSolanaPrivateKey](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys/src/lib/litActions/solana/src/generateEncryptedSolanaPrivateKey.js) Lit Action
+  - Uses the [generateEncryptedSolanaPrivateKey](https://v7-api-doc-lit-js-sdk.vercel.app/modules/wrapped_keys_lit_actions_src.html#signTransactionWithEthereumEncryptedKey) Lit Action
 - Signing arbitrary messages using the `@solana/web3.js` SDK
-  - Uses the [signMessageWithSolanaEncryptedKey](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys/src/lib/litActions/solana/src/signMessageWithSolanaEncryptedKey.js) Lit Action
+  - Uses the [signMessageWithSolanaEncryptedKey](https://v7-api-doc-lit-js-sdk.vercel.app/modules/wrapped_keys_lit_actions_src.html#signTransactionWithEthereumEncryptedKey) Lit Action
 - Signing Solana transaction objects using the `@solana/web3.js` SDK
-  - uses the [signTransactionWithSolanaEncryptedKey](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys/src/lib/litActions/solana/src/signTransactionWithSolanaEncryptedKey.js) Lit Action
+  - uses the [signTransactionWithSolanaEncryptedKey](https://v7-api-doc-lit-js-sdk.vercel.app/modules/wrapped_keys_lit_actions_src.html#signTransactionWithEthereumEncryptedKey) Lit Action
 
 ## Implementing a Custom Lit Action
 
@@ -68,7 +68,7 @@ If you manually encrypt your private key with custom Access Control Conditions, 
 
 The [Ethers.js v5](https://docs.ethers.org/v5/) SDK is already made available within a Lit Action. For any other SDK, you'll need to bundle the code with your Lit Action. Lit Actions execute within a [Deno](https://deno.com/) environment, so any APIs that aren't supported by Deno will need to be accounted for via polyfills and/or shims.
 
-As a reference implementation, the Wrapped Keys SDK uses [esbuild](https://esbuild.github.io/) to bundle the `@solana/web3.js` SDK with the Lit Action code, and provide the required shim. [This](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys/esbuild.config.js) is the `esbuild.config.js` used and [this](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys/buffer.shim.js) is the shim used to include [buffer](https://www.npmjs.com/package/buffer) within the bundled Lit Action code.
+As a reference implementation, the Wrapped Keys SDK uses [esbuild](https://esbuild.github.io/) to bundle the `@solana/web3.js` SDK with the Lit Action code, and provide the required shim. [This](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys-lit-actions/esbuild.config.js) is the `esbuild.config.js` used and [this](https://github.com/LIT-Protocol/js-sdk/blob/master/packages/wrapped-keys-lit-actions/buffer.shim.js) is the shim used to include [buffer](https://www.npmjs.com/package/buffer) within the bundled Lit Action code.
 
 Then, as you can see in the [Solana Wrapped Keys Lit Actions](#wrapped-keys-derived-ed25519-algorithm), various `@solana/web3.js` exports are `import`ed into the Lit Action code as usual.
 
@@ -155,11 +155,11 @@ If you manually encrypted your private key with custom Access Control Conditions
 
 ##### `ciphertext`
 
-This is the encrypted form of the underlying private key for the Wrapped Key (encrypted using the Lit network's BLS public key). This value is returned by the encryption functions from the Lit SDK e.g. [encryptString](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html).
+This is the encrypted form of the underlying private key for the Wrapped Key (encrypted using the Lit network's BLS public key). This value is returned by the encryption functions from the Lit SDK e.g. [encryptString](https://v7-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html).
 
 ##### `dataToEncryptHash`
 
-This is the `SHA-256` hash of the underlying private key for the Wrapped Key that was encrypted using the Lit network's BLS public key. This value is returned by the encryption functions from the Lit SDK e.g. [encryptString](https://v6-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html).
+This is the `SHA-256` hash of the underlying private key for the Wrapped Key that was encrypted using the Lit network's BLS public key. This value is returned by the encryption functions from the Lit SDK e.g. [encryptString](https://v7-api-doc-lit-js-sdk.vercel.app/functions/encryption_src.encryptString.html).
 
 ##### `authSig`
 
@@ -216,7 +216,7 @@ After decrypting the private key, you'll have access to it's clear text form to 
 
 ## Executing Your Custom Lit Action
 
-After implementing your custom Lit Action, you'll want to make use of Lit SDK's [executeJs](https://v6-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#executeJs) method to execute the Lit Action with any required arguments.
+After implementing your custom Lit Action, you'll want to make use of Lit SDK's [executeJs](https://v7-api-doc-lit-js-sdk.vercel.app/classes/lit_node_client_src.LitNodeClientNodeJs.html#executeJs) method to execute the Lit Action with any required arguments.
 
 As a reference implementation, you can take a look at the following methods used by the Wrapped Keys SDK to call the [Provided Wrapped Keys Lit Actions](#provided-wrapped-keys-lit-actions):
 

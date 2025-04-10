@@ -16,13 +16,13 @@ You can only pass one of the three. If you pass more than one, `PKPEthersWallet`
 
 ```js
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { LitAbility, LitActionResource } from '@lit-protocol/auth-helpers';
+import { LitActionResource } from '@lit-protocol/auth-helpers';
 import { PKPEthersWallet } from "@lit-protocol/pkp-ethers";
-import { LIT_RPC, LitNetwork } from "@lit-protocol/constants";
+import { LIT_RPC, LIT_NETWORK, LIT_ABILITY } from "@lit-protocol/constants";
 
 // If you haven't done before, create a LitNodeClient instance
 const litNodeClient = new LitNodeClient({
-  litNetwork: LitNetwork.DatilDev,
+  litNetwork: LIT_NETWORK.DatilDev,
 });
 await litNodeClient.connect();
 
@@ -30,7 +30,7 @@ await litNodeClient.connect();
 const resourceAbilities = [
   {
     resource: new LitActionResource("*"),
-    ability: LitAbility.PKPSigning,
+    ability: LIT_ABILITY.PKPSigning,
   },
 ];
 
@@ -46,8 +46,8 @@ const authNeededCallback = async (params: AuthCallbackParams) => {
 };
 
 const pkpWallet = new PKPEthersWallet({
+  litNodeClient,
   authContext: {
-    client: litNodeClient,
     getSessionSigsProps: {
       chain: 'ethereum',
       expiration: new Date(Date.now() + 60_000 * 60).toISOString(),
@@ -56,7 +56,7 @@ const pkpWallet = new PKPEthersWallet({
     },
   },
   // controllerAuthSig: authSig,
-  // controllerSessionSigs: sesionSigs, // (deprecated)
+  // controllerSessionSigs: sessionSigs, // (deprecated)
   pkpPubKey: "<Your PKP public key>",
   rpc: LIT_RPC.CHRONICLE_YELLOWSTONE,
 });

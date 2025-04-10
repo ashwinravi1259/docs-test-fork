@@ -2,100 +2,102 @@
  sidebar_position: 3
 --- 
 
-# Projects Building with Lit
+# Lit Protocol Ecosystem Projects
+The following is a list of projects that have integrated Lit Protocol. Don’t see your project? Please submit a pull request to add it here: https://github.com/LIT-Protocol/docs/blob/main/Ecosystem/projects.md 
 
-### Social
-
-- **[Collab.Land](https://www.collab.land/)**: Web3 native community management and seamless user onboarding.
-- **[Relation](https://spark.litprotocol.com/semantic/)**: Web3 native social graph.
-- **[Orbis Club](https://orbis.club/)**: A fully decentralized social layer for Web3.
-- **[Gather](https://www.gather.town/)**: Virtual spaces for remote collaboration.
-- **[Charmverse](https://www.charmverse.io/)**: Web3-native all-in-one workspace.
-- **[P00ls](https://www.p00ls.io/)**: A web3 platform for creators and brands.
-- **[Gateway](https://www.mygateway.xyz)**: Verifiable credential platform.
-- **[Tempra](https://ethglobal.com/showcase/tempra-xnxf4)**: Decentralized social platform inspired by Snapchat.
-- **[Lens](https://lens.xyz/)**: Token-gated content on Lens.
-- **[The 402](https://www.the402.xyz/)**: Live-streaming and NFT marketplace.
-- **[MemeDAO](https://github.com/Eyon42/MemeDAO)**: DAO communication platform that uses Lit to support private, members-only content.
-- **[Iris](https://github.com/irisxyz/iris)**: A decentralized social media and subscription platform built on Lens.
-- **[DecentraScholar](https://github.com/TanusreeSharma/LFGrow-hack)**: A platform that incentivizes collaboration among academic researchers.
-- **[MxTape](https://ethglobal.com/showcase/mxtape-1tr3a)**: Decentralized music player.
-- **[Peal](https://github.com/Pearl-Market/marketplace)**: Discover and share typefaces and designs on-chain.
-- **[DFSP](https://github.com/shazi57/dfsp-js)**: Decentralized, private live-streaming platform for creators.
-- **[Decensus](https://github.com/decensus-crypto/app)**: Web3-based survey platform.
-- **[creativegene](https://github.com/ddresch/creativegene)**: Decentralized social platform for buying and selling digital goods.
-- **[Muzu](https://ethglobal.com/showcase/muzu-3jhzc)**: Content-locked music NFTs.
-
-### Infrastructure
-
-- **[DataverseOS](https://dataverse-os.com/)**: DataverseOS is the next-generation personal computer owned by your wallet. It is an Internet Data Operating System that manages online data for users and eases development of sovereign data dApps.
-- **[BAILOUT](https://ethglobal.com/showcase/bailout-ia6s1?ref=spark.litprotocol.com)**: Securely move assets between EOAs, smart contract wallets, and cold wallets.
-- **[DIMO](https://dimo.zone/)**: Building IoT software solutions for cars. 
-- **[Strata Protocol](https://github.com/StrataFoundation/strata)**: An open-source protocol to launch tokens around a person, project, idea, or collective on Solana.
-- **[Key-Recovery](https://github.com/Joseph-Gross/key-recovery)**: Distributed social private key recovery made by the team at [Sling Protocol](https://twitter.com/slingprotocol).
-- **[Neya](https://github.com/stefsimion/Site-Neya-2)**: Web3-native 2FA protocol.
-- **[EtherMonitor](https://github.com/seetadev/EtherMonitor)**: Tools for traffic incident management.
-- **[ourpass](https://ethglobal.com/showcase/ourpass-91ucq)**: NFT event pass generator.
-- **[Burnt](https://xion.burnt.com/)**: Burnt is working on XION, a solution that empowers developers and brands to create frictionless Web3 experiences, with a toolkit that removes technical barriers for any user, anywhere.
-- **[Gitcoin](https://docs.publicgoods.network/)**: Building the Public Goods Network, a new L2 specifically designed to support public goods. It has the same fast, cost-efficient, and scalable features that come with an L2, but with the added benefit of collecting funding for your favorite public goods projects.
-
-### Data and Identity Marketplaces
-
-- **[Index Network](https://index.network/)**: Create and monetize personalized content discovery engines.
-- **[WeaveDB](https://docs.weavedb.dev/examples/lit-protocol)**: Decentralized Web3 database.
-- **[Streamr](https://blog.streamr.network/streamr-integrates-lit-protocol/)**: Distributed real-time data network.
-- **[KaratDAO](https://docs.karatdao.com/why-karat-network)**: A decentralized data network connecting Web2 to Web3.
-- **[Cheqd](https://cheqd.io/)**: Infrastructure for trusted data markets.
-- **[Krebit](https://spark.litprotocol.com/krebitxlitactions/)**: Open identity verification protocol and marketplace for Verifiable Credentials.
-- **[AQA Protocol](https://ethglobal.com/showcase/aqa-protocol-b5ok4?ref=spark.litprotocol.com)**: Give users full control over their private data.
-- **[VerifyXYZ](https://github.com/verify-xyz/did-profiles/tree/poc-lit?ref=spark.litprotocol.com)**: Essential building blocks for Decentralized ID.
+![ecoMap](https://github.com/user-attachments/assets/b3038b23-963a-4ee9-a011-bd965e781882)
 
 
-### Privacy and Encryption
+## User Wallets and Onboarding
+In this category, teams are revolutionizing user onboarding and wallet experiences using Lit Protocol. By integrating Lit's highly flexible authentication flows, these projects offer users a familiar UX while maintaining the security and ownership principles of Web3. This approach bridges the gap between traditional web experiences and blockchain technology, making crypto applications more accessible and user-friendly.
 
-- **[dKeeper](https://ethglobal.com/showcase/dkeeper-3ma7r?ref=spark.litprotocol.com)**: Access control management for dApps.
-- **[Livepeer](https://docs.livepeer.org/tutorials/developing/token-gate-videos-using-lit.en-US)**: Livepeer is a high-performance video infrastructure protocol for live and on-demand streaming. 
-- **[Incognfto](https://blog.spheron.network/incognfto-a-private-nft-gallery)**: Create a private NFT gallery with Spheron and Lit.
-- **[Selfguard](https://github.com/selfguard/selfguard?ref=spark.litprotocol.com)**: Universal API for encryption.
-- **[Starling Lab](https://github.com/starlinglab/archive-explorer/)**: Token-gated data archives.
-- **[Curve Labs](https://github.com/Curve-Labs/lit-privacy/tree/main)**: Privacy-preserving infrastructure tooling.
-- **[Hashchat](https://github.com/hashchat-xyz/hashchat-lfgrow)**: Wallet-to-wallet encrypted messaging.
-- **[LitChat](https://github.com/cryptoKevinL/LitChat)**: Wallet-to-wallet encrypted messaging using Lit and Ceramic.
-- **[XMTP Chat App](https://github.com/GeorgeFane/lit-xmtp)** with token gating enabled by Lit Protocol.
-- **[DAP](https://github.com/dap-cool/protocol)**: An SDK for encrypting and decrypting files with Lit Protocol. 
-- **[DECK](https://usedeck.vercel.app/)**: Private data sharing for Web3.
-- **[Cask](https://caskprotocol.medium.com/cask-protocol-integrates-with-lit-protocol-to-attach-private-data-to-nfts-token-gate-content-496b2c5bb995)**: Automated, recurring payments.
-- **[AlgoveraAI](https://github.com/AlgoveraAI/streamlit-metamask?ref=spark.litprotocol.com)**: Token-gated Streamlit applications.
+- [CollabLand](https://www.collab.land/)
+- [Obvious Wallet](https://www.obvious.technology/)
+- [AARC](https://www.aarc.xyz/)
+- [Safe](https://safe.global/)
+- [Openfort](https://www.openfort.xyz/)
+- [Alchemy](https://www.alchemy.com/)
+- [Plurality Network](http://plurality.network/)
+- [Silk](https://www.silk.sc/)
+- [Pimlico](https://www.pimlico.io/)
+- [Candide Wallet](https://www.candidewallet.com/)
 
-### Wallets and Account Abstraction (AA)
+## Chain Abstraction and DeFi
+Teams in this category leverage Lit to break down barriers between previously isolated blockchain networks. By utilizing Lit's programmable signing capabilities and generalized message passing, these projects are creating seamless interoperability solutions that facilitate cross-chain communications and transaction execution, creating a more unified and efficient Web3 ecosystem.
 
-- **[Pimlico](https://docs.pimlico.io/how-to/integrations/lit-protocol)**: An infrastructure platform building the next generation of smart wallets.
-- **[MagicWallet](https://github.com/DustilDawn/Magic)**: One account, multiple seedless wallets.
-- **[litu safu](https://ethglobal.com/showcase/litu-safu-m9tja)**: Use a PKP as a signer on a Safe.
-- **[Stackup](https://spark.litprotocol.com/account-abstraction-with-stackup-lit/)**: Adding an MPC key as a signer on an AA wallet.
-- **[ZeroDev](https://zerodev.app/)**: Smart wallets as a service.
-- **[SafeMail](https://ethglobal.com/showcase/safemail-n8b96)**: A one-click onboarding experience for Web3.
-- **[Patch Wallet](https://app.patchwallet.com/)**: Use your social account as your personal crypto wallet to manage your assets without the complexity.
-- **[Obvious](https://www.obvious.technology/)**: Flexible smart contract wallets.
-- **[Snowball](https://twitter.com/snowballtools/status/1693791419264090465)**: Shaping the future of mobile crypto. 
+- [Eco](https://eco.com/)
+- [Genius](https://www.tradegenius.com/)
+- [GVNR](https://gvnr.xyz/)
+- [Emblem Vault](https://emblem.vision/)
+- [Juice](https://www.juice.finance/)
+- [Tria](https://www.tria.so/)
+- [Osmosis](https://osmosis.zone/)
+- [Omega](https://www.omega.xyz/)
+- [Vault Layer](https://vaultlayer.xyz/)
 
-### DeFi
+## AI Agents and Infrastructure
+Teams in this category are leveraging Lit’s signing and compute services to build autonomous, verifiable, and unruggable AI agents and infrastructure. 
 
-- **[Yacht Labs](https://spark.litprotocol.com/xchain-bridging-yacht-lit-swap/)**: Cross-chain atomic swaps with PKPs and Lit Actions.
-- **[Sling Protocol](https://github.com/Sling-Protocol/pkp-dex-sdk)**: An SDK for automating DEX interactions using PKPs and Lit Actions.
-- **[TradeRep](https://ethglobal.com/showcase/traderep-7gpzv)**: On-chain reputation building for traders.
-- **[Violet Protocol](https://twitter.com/violetprotocol/status/1499797952130428929)**: Ultra🤝Violet, enables *uncollateralized* loans.
+- [Thales](https://thalesai.net/)
+- [elizaOS](https://www.elizaos.ai/)
+- [Virtuals Protocol](https://app.virtuals.io/)
+- [Gaia](https://www.gaianet.ai/)
+- [Covalent](https://www.covalenthq.com/)
+- [Crestal Network](https://www.crestal.network/)
+- [Theoriq](https://www.theoriq.ai/)
+- [Ember AI](https://x.com/EmberAGI)
+- [Hustle](https://agenthustle.ai/prompt)
+- [Omo](https://www.omoprotocol.ai/)
+- [Bonsai](https://www.bonsai.meme/)
 
-### Metaverse
+## Digital Identity
+Projects focused on digital identity are utilizing Lit to give individuals unparalleled control over their personal data. By leveraging Lit's programmable encryption and access control capabilities, these teams are creating solutions where users can selectively disclose personal data and manage access rights dynamically. This approach enables privacy-preserving identity systems that put users in full control of their digital data backpack.
 
-- **[Nowhere](https://www.urnowhere.com/)**: Token-gated metaverse spaces.
-- **[Mona](https://monaverse.com/)**: Buy, mint, and sell metaverse worlds.
+- [Cheqd](https://cheqd.io/)
+- [Terminal 3](https://www.terminal3.io/)
+- [Lens Protocol](https://www.lens.xyz/)
+- [Index Network](https://index.network/)
+- [Humanity Protocol](https://www.humanity.org/)
+- [Oamo](https://www.oamo.io/)
+- [Camp Network](https://www.campnetwork.xyz/)
+- [idOS](https://www.idos.network/)
 
-### Sports and Entertainment
+## Verifiable Data Marketplaces
+Teams in this category are building decentralized data marketplaces using Lit Protocol's encryption and access control features. Lit enables these projects to facilitate peer-to-peer data exchange without relying on centralized intermediaries. Buyers and sellers can engage in trustless data exchanges, with Lit ensuring that access is granted only to authorized parties under specified conditions.
 
-- **[Vault](https://vault.fan/)**: Digital music collectibles.
-- **[VaynerSports](https://vaynersports.com/)**: Talent representation and brand consulting.
+- [Streamr](https://streamr.network/)
+- [Bonny](https://bonny.so/)
+- [DataverseOS](https://github.com/dataverse-os)
+- [Beacon Protocol](https://beaconprotocol.com/)
+- [Starling Lab](https://www.starlinglab.org/)
 
-### E-Commerce
+## DWeb Storage Providers
+DWeb storage providers stand as the backbone of the decentralized data economy. Lit can be used as a secure data encryption solution when using one of the following providers to store your data.
 
-- **[Shopify](https://apps.shopify.com/lit-token-access)**: Blockchain-based access control for your online store.
+- [Irys](https://irys.xyz/)
+- [OrbisDB](https://useorbis.com/)
+- [Ceramic](https://ceramic.network/)
+- [Arweave](https://arweave.org/)
+
+## IP Management
+Teams in this category are using Lit’s flexible encryption capabilities to securely manage access to digital IP on the open Web. Whether its personal data or data pertinent to business operations, these projects leverage Lit to ensure that data remains encrypted and accessible only to authorized parties, often leveraging on-chain conditions (like token ownership) to dictate access.
+
+- [Anotherblock](https://anotherblock.com/)
+- [Verify](https://www.verifymedia.com/) (FOX Corp)
+- [Story Protocol](https://www.story.foundation/)
+- [Molecule](https://www.molecule.xyz/)
+- [BackedBy](https://backed.by/)
+- [Alexandria Labs](https://www.alexandriabooks.com/)
+
+## Web3 Infrastructure
+Projects in this category are focused on delivering essential infrastructure critical to Web3 application development. This includes payment infrastructure, smart contract tooling, grants management, video streaming, and more. The following projects leverage Lit’s signing, encryption, and compute capabilities in a multitude of ways to deliver value to end consumers. 
+
+- [Request Network](https://request.network/)
+- [Crossmint](https://www.crossmint.com/)
+- [Gitcoin](https://www.gitcoin.co/)
+- [Livepeer](https://www.livepeer.org/)
+- [Hats Protocol](https://www.hatsprotocol.xyz/)
+- [Open Campus](https://opencampus.xyz/)
+- [CharmVerse](https://charmverse.io/)
+- [Spheron Network](https://www.spheron.network/)
+- [Sign Protocol](https://sign.global/)
