@@ -9,9 +9,11 @@ All keys (except the BLS encryption key) in the network are derived hierarchical
 The backups ensure that if the network were to ever fall below threshold it could be recovered by decrypting the backups (with the help of the recovery party) and importing them into a fresh set of nodes.  
 
 ## The Recovery Party
+
 To assist with the recovery process, there is a designated set of recovery party members who facilitate the root key share decryption process. More than two-thirds of the members of the recovery party must participate to successfully decrypt the stored backups. Additionally, each backup is encrypted with a Blinder that is held by each node operator.
 
 ## Encrypting the Backups
+
 The process for encrypting the root key backups involves:
 
 1. Each member of the recovery party (RP) creates a public encryption key and the decryption key shares using Distributed Key Generation (DKG).
@@ -20,6 +22,7 @@ The process for encrypting the root key backups involves:
 4. The encrypted backups are stored securely by the Lit Protocol development company.
 
 ## Recovery Process
+
 If the network needs to be restored:
 
 1. Each RP member validates their identities with a Lit node and produces decryption shares for the required root key shares.
