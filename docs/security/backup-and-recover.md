@@ -27,7 +27,7 @@ The process for encrypting the root key backups involves:
 
 1. Each member of the recovery party (RP) creates a public encryption key and the decryption key shares using Distributed Key Generation (DKG).
 2. This public key is used for encrypting the root key backups.
-3. Each Node creates a Blinder, which is used to additionally encrypt the backup.
+3. Each node generates a Blinder, which is used to apply an additional encryption layer to its backup.
 4. The encrypted backups are stored securely by the Lit Protocol development company.
 
 ## Recovery Process
