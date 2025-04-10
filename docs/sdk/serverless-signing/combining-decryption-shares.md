@@ -10,6 +10,10 @@ When you call `decryptAndCombine`, each Lit node's decryption shares are collect
 
 The following doc will provide a complete walkthrough of using `decryptAndCombine`. We'll start by encrypting a string client-side before using a Lit Action to decrypt it. At the bottom of the page you'll find a complete example that demonstrates how you can use this functionality to decrypt an API key and perform a remote API call from within an Action. 
 
+## Supported access control conditions and types
+
+The `decryptAndCombine` function only supports [Unified Access Control Conditions](../access-control/condition-types/unified-access-control-conditions.md).  If you are using basic EVM Access Control Conditions, you can skip reading the rest of this section.  If you are using anything other than basic EVM acccess control conditions, you will need to specify "conditionType" in each access control condition object and your schema must match the one for that condition type in the Unified Access Control Conditions docs.  For example, if you are using [EVM Custom Contract Calls](../access-control/evm/custom-contract-calls.md), you should add `"conditionType": "evmContract"` to your access control condition object, as if you were using Unified Access Control Conditions.
+
 # Encrypting content
 The first step is to encrypt your data. The encryption operation will be performed client-side *outside* of your Lit Action using the `LitNodeClient`:
 
