@@ -4,7 +4,7 @@ All Lit Protocol node operators use a [Distributed Key Generation](https://githu
 
 ## Root Keys
 
-All signing keys are derived hierarchically from a set of root keys. These root keys are periodically refreshed or reshared (see below) and backed up regularly. See the [recovery](../security/backup-and-recover.md) section below for more information on the backup process.
+All signing keys are derived hierarchically from a set of root keys. These root keys are periodically refreshed or reshared (see below) and are backed up regularly. See the [recovery](../security/backup-and-recover.md) section below for more information on the backup process.
 
 ## Key Refresh and Resharing
 
