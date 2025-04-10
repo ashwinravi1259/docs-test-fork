@@ -10,7 +10,16 @@ The backups ensure that if the network were to ever fall below threshold it coul
 
 ## The Recovery Party
 
-To assist with the recovery process, there is a designated set of recovery party members who facilitate the root key share decryption process. More than two-thirds of the members of the recovery party must participate to successfully decrypt the stored backups. Additionally, each backup is encrypted with a Blinder that is held by each node operator.
+To assist with the recovery process, a designated set of Recovery Party members are responsible for facilitating the decryption of encrypted root key shares. For a successful recovery, more than two-thirds of these members must participate—enabling a threshold-based decryption process that ensures no single party can perform recovery unilaterally.
+
+Each encrypted backup is further protected using a Blinder, a symmetric encryption key held by each node operator. This additional layer ensures that even if the Recovery Party is compromised, the backups cannot be decrypted without participation from the nodes themselves. During recovery, after the Recovery Party has met quorum and produced the necessary decryption shares, each node operator applies their Blinder to fully decrypt the backup.
+
+This two-step safeguard ensures that:
+• The Recovery Party alone cannot decrypt the root key shares.
+• The Lit nodes alone cannot decrypt the backups without the Recovery Party’s participation.
+• Only with cooperation from both groups—Recovery Party quorum and node-held Blinders—can the encrypted backups be fully decrypted.
+
+This mechanism preserves the system’s threshold security guarantees, even in the context of sensitive operations like key recovery.
 
 ## Encrypting the Backups
 
