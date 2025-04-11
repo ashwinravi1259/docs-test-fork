@@ -4,9 +4,9 @@ Staking $LITKEY provides the first level of resilience for the network, ensuring
 
 ## Verifiable Backups
 
-All keys (except the BLS encryption key) in the network are derived hierarchically from a set of root keys. These root keys are generated during each distributed key generation process (DKG) in which each Lit node generates and holds a share of each key. To ensure these key shares are safe and can be recovered as needed, they're encrypted and backed up regularly using a dedicated recovery party and verifiable encryption. The verifiable encryption process ensures that the ciphertext (in this case, each encrypted key share) meets certain properties which allow the protocol to confirm that all encrypted root key shares are genuine. Every time new root keys are produced, nodes update the backups they have stored with the new data.
+All keys in the network are either root keys or derived hierarchically from the root keys. These root keys are generated during each distributed key generation process (DKG) in which each Lit node generates and holds a share of each key. To ensure these key shares are safe and can be recovered as needed, they're encrypted and backed up using a dedicated recovery party and verifiable encryption. The verifiable encryption process ensures that the ciphertext (in this case, each encrypted key share) meets certain properties which allow its public key to be used to confirm that all encrypted root key shares are genuine. Every time new root keys are produced, nodes update the backups they have stored with the new data.
 
-The backups ensure that if the network were to ever fall below threshold it could be recovered by decrypting the backups (with the help of the recovery party) and importing them into a fresh set of nodes.  
+The backups ensure that if the available key shares were to ever fall below threshold the network could be recovered by importing the backups into a fresh set of nodes and decrypting them with the help of the node operators and the recovery party.
 
 ## The Recovery Party
 
@@ -25,8 +25,8 @@ This mechanism preserves the system’s threshold security guarantees, even in t
 
 The process for encrypting the root key backups involves:
 
-1. Each member of the recovery party (RP) creates a public encryption key and the decryption key shares using Distributed Key Generation (DKG).
-2. This public key is used for encrypting the root key backups.
+1. The nodes generate a public encryption key and the corresponding private decryption key shares using Distributed Key Generation (DKG) and provide each Recovery Party member with a decryption key share which is a private key share corresponding to the encryption key.
+2. This public key is used for encrypting the root keys to generate the backups.
 3. Each node generates a Blinder, which is used to apply an additional encryption layer to its backup.
 4. The encrypted backups are stored securely by the Lit Protocol development company.
 
@@ -34,6 +34,7 @@ The process for encrypting the root key backups involves:
 
 If the network needs to be restored:
 
-1. Each RP member validates their identities with a Lit node and produces decryption shares for the required root key shares.
-2. Node operators spin up a new node environment and input their Blinder and encrypted backup, reaching out to each RP member for their share of the decryption key. The decryption key shares are combined above the threshold, combined with the Blinder, to fully decrypt the ciphertext backups.  Recovery, therefore, requires participation of ⅔ of the Recovery Party, ⅔ of the node operators, and Lit Protocol to supply the encrypted backups.
+1. Node operators spin up a new node environment and input their Blinder and encrypted backup. The nodes start waiting for decryption shares from the Recovery Party members.
+2. Each Recovery Party member produces a decryption share for each root key share by combining the root key share's ciphertext with their own decryption key share. Then each Recovery Party member uploads the decryption shares they generated to the nodes. (Note that decryption shares are produced by and different from decryption key shares).
+3. Each node receives such decryption shares from the Recovery Party members for each encrypted root key share that it holds. The decryption key shares a node received for a root key share are combined above the threshold, combined with the Blinder, to fully decrypt the ciphertext in the backups. Recovery, therefore, requires participation of ⅔ of the Recovery Party, ⅔ of the node operators, and ⅔ of the encrypted backups.
 3. With the decrypted root key shares in the new node environment, the network can be restored.
