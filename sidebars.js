@@ -194,46 +194,6 @@ const sidebars = {
       items: [
         {
           type: 'category',
-          label: 'Agent Wallet',
-          collapsed: true,
-          link: {
-            type: 'doc',
-            id: 'agent-wallet/intro',
-          },
-          items: [
-            {
-              type: 'category',
-              label: 'Admin',
-              link: {
-                type: 'doc',
-                id: 'agent-wallet/admin/overview',
-              },
-              collapsed: true,
-              items: [
-                'agent-wallet/admin/delegatees',
-                'agent-wallet/admin/tools',
-                'agent-wallet/admin/policies',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Delegatee',
-              link: {
-                type: 'doc',
-                id: 'agent-wallet/delegatee/overview',
-              },
-              collapsed: true,
-              items: [
-                'agent-wallet/delegatee/tools',
-                'agent-wallet/delegatee/policies',
-              ],
-            },
-            'agent-wallet/building',
-            'agent-wallet/new-tool'
-          ],
-        },
-        {
-          type: 'category',
           label: 'Authentication',
           collapsed: true,
           items: [
