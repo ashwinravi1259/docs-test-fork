@@ -1,7 +1,8 @@
 # Cryptoeconomic Security
 
-import TokenDisclaimer from "@site/src/pages/token-disclaimer.md";
-
+:::info
+The $LITKEY token and v1 Mainnet are NOT YET LIVE, but coming soon. [Stay up to date](https://x.com/LitProtocol).
+:::
 
 While threshold cryptography and TEEs provide technical security guarantees, the $LITKEY token introduces cryptoeconomic security that adds another layer of **defense in depth**. 
 
