@@ -20,7 +20,7 @@ For more in-depth guides on PKP signing, please see the [PKPs](../../user-wallet
 
 ## Installing the Example Dependencies
 
-To start PKP signing with theLit SDK, you'll need to install these packages:
+To start PKP signing with the Lit SDK, you'll need to install these packages:
 
 - `@lit-protocol/lit-node-client`: The core Lit SDK package.
 - `@lit-protocol/constants`: A package containing useful constants across the SDK.
@@ -247,7 +247,8 @@ const recoveredAddress = ethers.utils.recoverAddress(
   encodedSig
 );
 
-console.log(recoveredPubkey === pkpInfo.publicKey); // true
+// adjust for ethers.utils.recoverPublicKey prefixing the public key with 0x
+console.log(recoveredPubkey === `0x${pkp.publicKey}`); // true
 console.log(recoveredAddress === pkpInfo.ethAddress); // true
 ```
 

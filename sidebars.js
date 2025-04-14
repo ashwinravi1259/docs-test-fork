@@ -69,6 +69,24 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Security',
+      link: {
+        type: 'doc',
+        id: 'security/introduction',
+      },
+      collapsed: true,
+      items: [
+        'security/node-architecture',
+        'security/distributed-key-gen',
+        'security/on-chain-coordination',
+        'security/crypto-security',
+        'security/backup-and-recover',
+        'security/audits',
+        'security/bug-bounty',
+      ]
+    },
+    {
+      type: 'category',
       label: 'Installing the Lit SDK',
       link: {
         type: 'doc',
@@ -530,7 +548,6 @@ const sidebars = {
         'resources/contracts',
         'resources/glossary',
         'support/faq',
-        'support/bug-bounty',
       ],
     },
     {

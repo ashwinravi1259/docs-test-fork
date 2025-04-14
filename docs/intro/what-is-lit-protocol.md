@@ -10,57 +10,48 @@ import FeedbackComponent from "@site/src/pages/feedback.md";
 
 <StateOfTheNetwork/>
 
-Lit is a decentralized key management and compute network. Builders of apps, wallets, protocols, and AI agents use Lit to advance digital ownership with decentralized keys and private, immutable programs.
+Giving private keys or credentials to a server is a massive security responsibility. 
+
+Lit Protocol is a decentralized key management network for programmable signing and encryption. The network empowers developers to create secure, decentralized applications that manage crypto assets, private data, and user authority seamlessly across platforms.
 
 
-The system builds off of contemporary work in applied cryptography, sealed confidential hardware, and peer-to-peer networking to provide the maximum amount of control and privacy to developers.
 
-Developers can use Lit to build apps with [private data](../sdk/access-control/quick-start.md), intuitive [onboarding and wallet management](../user-wallets/overview.md), and [private, immutable programs](../sdk/serverless-signing/quick-start.md) that run based on the rules you set.
+Lit’s threshold cryptography architecture ensures secrets remain verifiably secure—air-gapped and encrypted at the hardware level—while being fragmented and distributed across a decentralized network. For the first time, universal accounts can be programmed without trusting centralized custodians.
+Using Lit’s SDK, developers can easily [encrypt data](../sdk/access-control/quick-start.md), [create and manage Web3 accounts](../user-wallets/overview.md), [generate digital signatures](../intro/first-request/making-first-signing.md), execute blockchain transactions, and implement virtually any signing or encryption operation.
 
-Get started with the [Lit SDK](../sdk/installation.md).
+Builders leverage these capabilities to develop immutable, interoperable, and user-owned apps, agents, and protocols. Existing ecosystem applications include AI-driven agents, cross-chain DeFi solutions, universal solvers, private user-controlled accounts, and decentralized data marketplaces.
 
-[Whitepaper](https://github.com/LIT-Protocol/whitepaper).   [Open Source Node Code](https://github.com/LIT-Protocol/Node).   [Audit reports](https://drive.google.com/drive/folders/1Rrht88iUkzpofwl1CvP9gEjqY60BKyFn?ref=spark.litprotocol.com).
+Learn more about [How Lit Works](../resources/how-it-works.md).
+
+Lit Protocol fills a missing layer of the Web3 “stack” by taking on secret management and making it into a computing primitive for builders with a fault-tolerant, and programmable network. Lit Protocol helps secure our digital interactions and data, facilitates greater interoperability between on and off-chain systems, and eliminates centralized points of control. 
+
+[Make your first signing request](../intro/first-request/making-first-signing.md).
+
+[Make your first decryption request](../intro/first-request/making-first-decryption.md).
 
 ## Use Cases
+The programmable signing and encryption capabilities provided by the Lit network can be used by developers to support the following use cases.
 
-Lit Protocol can be utilized for various web3 applications, including:
+:::note
+For a more comprehensive list of example projects, check out the [Lit Ecosystem page](../../Ecosystem/projects). 
+:::
 
-Lit and ecosystem partners are building the next generation of identity and machine intelligence protocols and apps, all running on the open web.
+**Universal Accounts**: Lit Protocol enables the creation of universal accounts that can operate seamlessly across any blockchain network, including Bitcoin, Ethereum, Solana, Cosmos, and beyond. The underlying private keys are managed by the decentralized Lit network, meaning these wallets are fully programmable and always non-custodial. Developers can use this to build user wallets, orchestrate liquidity across isolated networks, enable transaction automations (e.g. dollar-cost-averaging), and more.
 
-**Developer Tooling**: Projects like [Alchemy](https://alchemy.com/?ref=spark.litprotocol.com), [Pimlico](https://www.pimlico.io/?ref=spark.litprotocol.com), [Openfort](https://www.openfort.xyz/?ref=spark.litprotocol.com), [Lens Protocol](https://www.lens.xyz/?ref=spark.litprotocol.com), [Orbis](https://useorbis.com/?ref=spark.litprotocol.com), [Spheron](https://spheron.network/?ref=spark.litprotocol.com), and [Snowball](https://www.snowballtools.xyz/?ref=spark.litprotocol.com) are using the generalized services provided by Lit and making them available for developers in the form of SDKs, powering specific use cases like [account abstraction](https://developer.litprotocol.com/v3/integrations/aa/overview?ref=spark.litprotocol.com), private data on web3 social, [token gated](https://developer.litprotocol.com/v3/sdk/access-control/evm/basic-examples?ref=spark.litprotocol.com) chat, and mobile wallet tooling.
+Examples: [Emblem Vault](https://circuitsofvalue.com/), [CollabLand](https://collab.land/), [Genius](https://www.tradegenius.com/), [Tria](https://tria.so/), [Eco](https://eco.com/).
 
-**Data Marketplaces**: Protocols like [Cheqd](https://cheqd.io/?ref=spark.litprotocol.com), [KaratDAO](https://karatdao.com/?ref=spark.litprotocol.com), [Index](https://index.network/?ref=spark.litprotocol.com), [DataverseOS](https://dataverse-os.com/?ref=spark.litprotocol.com), and [Streamr](https://streamr.network/?ref=spark.litprotocol.com) use Lit for [encryption](https://developer.litprotocol.com/v3/sdk/access-control/encryption?ref=spark.litprotocol.com) in the commercialization of data, powering trustless marketplaces being built on blockchains and the open web.
+**Private Data**: The Lit network can be used to implement encryption and access control for any use case that demands privacy. Builders can use [access control conditions] to manage access rights for relevant stakeholders according to the policies you set.   
 
-**Identity**: Projects like [Oamo](https://www.oamo.io/?ref=spark.litprotocol.com), [Krebit](https://krebit.id/?ref=spark.litprotocol.com), [Terminal3](https://terminal3.io/?ref=spark.litprotocol.com), [Holonym](https://www.holonym.id/?ref=spark.litprotocol.com), [AlphaCapture](https://alphacapture.xyz/?ref=spark.litprotocol.com), and [Gateway](https://sandbox.mygateway.xyz/?ref=spark.litprotocol.com) use Lit to power the selective disclosure of encrypted data and credentials, giving users the ability to control how their information is accessed, managed, and monetized.
+Examples: [Verify (Fox Corp)](https://www.verifymedia.com/), [Streamr](https://streamr.network/), [Cheqd](https://cheqd.io/), [Index](https://index.network/).
 
-**Content Authenticity and Licensing**: [Blockchain Creative Labs](https://www.bcl.xyz/?ref=spark.litprotocol.com) has integrated Lit for encryption  within their [Verify](https://www.verifymedia.com/?ref=spark.litprotocol.com) platform as a secure signing backend, enabling content to be stored privately and under a proper license.
+**Agent Wallets**: [Vincent](https://docs.heyvincent.ai/) is a framework and open standard that enables the creation of autonomous, verifiable, and user-controlled agents. Built directly on top of Lit’s core infrastructure, Vincent enables agents to securely manage keys, sensitive data, and other secrets. Developers building agent runtimes and other agent-powered applications can use Vincent to manage their agents’ keys and create “tools” (using [Lit Actions](../sdk/serverless-signing/overview.md)) custom built for specific actions and operations (e.g. dollar-cost-averaging). 
 
-**Digital Product NFTs**: Teams like [Crossmint](https://crossmint.io/?ref=spark.litprotocol.com), [Molecule](https://www.molecule.xyz/?ref=spark.litprotocol.com), [Alexandria](https://alexandrialabs.xyz/?ref=spark.litprotocol.com), [CharmVerse](https://charmverse.io/?ref=spark.litprotocol.com), and [Anotherblock](https://anotherblock.io/drops/the-jackson-5-big-boy-limited-edition?ref=spark.litprotocol.com) use Lit to meet their consumer demand for more creative utility for digital assets, like unlockable NFTs and for selective decryption for managing IP rights.
+For end users, Vincent serves as a marketplace for discovering these agentic apps and tools, while giving them the ability to set fine-grained permissions that govern the specific actions agents can take on their behalf when interacting with each (i.e. spending limits or time intervals for DCA).
 
-**User Wallets**: Lit is being used as a decentralized key management solution for wallets and onboarding experiences being built by the teams at [Collab.Land](https://www.collab.land/?ref=spark.litprotocol.com), [Infinex](https://twitter.com/infinex_app?ref=spark.litprotocol.com), [Obvious](https://www.obvious.technology/?ref=spark.litprotocol.com), [PatchWallet](https://app.patchwallet.com/?ref=spark.litprotocol.com), [Silk](https://www.silk.sc/?ref=spark.litprotocol.com), [Meteor](https://meteor.computer/?ref=spark.litprotocol.com), and [Burnt](https://xion.burnt.com/?ref=spark.litprotocol.com). These products have taken the form of wallet applications, account abstraction signers, and embedded wallets on existing platforms like Telegram and Discord.
+[Get started building with Vincent](https://sdk-docs.heyvincent.ai/). 
 
-Explore more [use cases](usecases.md) or learn [how it works](../resources/how-it-works.md).
+## Community
+Join the Lit developer community on [Discord](https://litgateway.com/discord) and [Telegram](https://t.me/+aa73FAF9Vp82ZjJh) to stay up to date on the latest developments, troubleshoot errors, get technical support, and engage with fellow builders.
 
-## Getting Started
-
-Get started on your developer journey by diving right into the code:
-
-- [**Lit SDK**](../sdk/installation.md): The Lit JS SDK provides developers with a modular framework for implementing Lit functionality into their own applications.
-- [**Encryption Quick Start**](../sdk/access-control/quick-start.md): Learn how to encrypt and decrypt content using the SDK.
-- [**Wallets Quick Start**](../user-wallets/pkps/quick-start.md): Learn how to build user wallets with the Lit SDK.
-- [**Compute Quick Start**](../sdk/serverless-signing/quick-start.md): Get started with Lit Actions.
-- [**Lit CLI**](../tools/getlit-cli.md): A command line tool that makes developing Lit Actions easy!
-- [**API Reference**](https://js-sdk.litprotocol.com/index.html): An overview of SDK functions and packages.
-
-## Join the Community
-
-Join the Lit developer community on [Discord](https://litgateway.com/discord) and [Telegram](https://t.me/+aa73FAF9Vp82ZjJh) to stay up to date on the latest developments, troubleshoot errors, get technical support, and engage with fellow builders. 
-
-Have an idea for a project or currently building? Take a look at Lit's [Ecosystem RFPs](https://github.com/LIT-Protocol/Ecosystem-Ideas) and [Grant program](https://github.com/LIT-Protocol/LitGrants).
-
-Check out the Lit [blog](https://spark.litprotocol.com/) to read about new product announcements, integrations, ecosystem updates, and additional insights into the world of cryptography and web3.
-
-Subscribe to Lit's [community calendar](https://calendar.google.com/calendar/u/5?cid=Y19hMnVxZDNjaHVqZ2Q0a3FqbGlvcDdxY2JhMEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t) to stay up to date on sponsored events, hackathons, office hours, and additional opportunities to engage with the Lit development team.
-
-Follow Lit on [X](https://twitter.com/LitProtocol).
+Stay informed by following Lit on [X](https://x.com/LitProtocol), and by reading the Lit [blog](https://spark.litprotocol.com/) for new product announcements, integrations, ecosystem updates, and insights into cryptography and Web3.
 <FeedbackComponent/>
