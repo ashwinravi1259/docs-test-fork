@@ -30,3 +30,14 @@ A common question is whether requests sent to the Lit network, including sensiti
 * No public broadcast: Requests are not broadcast in a way that makes them fetchable by anyone. Nodes only share data with other verified nodes via secure channels.
 
 This holds true for all network operations, including signing, decryption, and Lit Action execution. It means that neither node operators nor any external parties can see or access the contents of any request. This includes any sensitive data passed into the `jsParams` of [Lit Actions](../sdk/serverless-signing/overview.md), such as environment variables like API or private keys.
+
+## Complete Request Lifecycle
+The following is the complete request lifecycle when communicating with the Lit nodes:
+
+1. A user sends a request to N nodes, where N must be at or above the threshold (> two-thirds of the network), with their associated [authentication material](../sdk/authentication/session-sigs/intro.md).
+
+2. Each node independently verifies the user's auth material, ensuring they are authorized to perform a given operation. After the verification check is complete, they each run the requested operation (signing, decryption, or Lit Action execution.)
+
+3. In the case of interactive requests — such as ECDSA signing with [Programmable Key Pairs](../user-wallets/pkps/overview.md) — the nodes communicate with one another to complete those operations as needed.
+
+4. All operations are driven by the user - a node can not ask another node to sign or participate unless the user has also asked the other node to perform the same operation. This means that a matching "pending request" from the requesting user must be present on **all** nodes participating in interactive operations.
