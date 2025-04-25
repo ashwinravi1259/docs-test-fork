@@ -15,9 +15,9 @@ To assist with the recovery process, a designated set of Recovery Party members 
 Each encrypted backup is further protected using a Blinder, a symmetric encryption key held by each node operator. This additional layer ensures that even if the Recovery Party is compromised, the backups cannot be decrypted without participation from the nodes themselves. During recovery, after the Recovery Party has met quorum and produced the necessary decryption shares, each node operator applies their Blinder to fully decrypt the backup.
 
 This two-step safeguard ensures that:
-• The Recovery Party alone cannot decrypt the root key shares.
-• The Lit nodes alone cannot decrypt the backups without the Recovery Party’s participation.
-• Only with cooperation from both groups—Recovery Party quorum and node-held Blinders—can the encrypted backups be fully decrypted.
+- The Recovery Party alone cannot decrypt the root key shares.
+- The Lit nodes alone cannot decrypt the backups without the Recovery Party’s participation.
+- Only with cooperation from both groups—Recovery Party quorum and node-held Blinders—can the encrypted backups be fully decrypted.
 
 This mechanism preserves the system’s threshold security guarantees, even in the context of sensitive operations like key recovery.
 
