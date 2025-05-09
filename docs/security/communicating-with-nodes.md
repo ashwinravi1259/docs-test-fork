@@ -41,3 +41,17 @@ The following is the complete request lifecycle when communicating with the Lit 
 3. In the case of interactive requests — such as ECDSA signing with [Programmable Key Pairs](../user-wallets/pkps/overview.md) — the nodes communicate with one another to complete those operations as needed.
 
 4. All operations are driven by the user - a node can not ask another node to sign or participate unless the user has also asked the other node to perform the same operation. This means that a matching "pending request" from the requesting user must be present on **all** nodes participating in interactive operations.
+
+## Active Nodes
+The following node operators are active on the [Datil Mainnet Beta](../connecting-to-a-lit-network/mainnets.md):
+- Hypha Co-Op
+- Cheqd
+- Imperator
+- 01nodes
+- Zerion
+- Thunderhead
+- HireNodes
+- CMT Digital
+- Lit Protocol (managed by the Lit Protocol development company)
+
+Interested in running a node? [Get in touch](https://forms.gle/n4WKtsyxaduEz8dDA). 
