@@ -73,7 +73,7 @@ Additionally, we'll initialize an Ethereum wallet using the `ETHEREUM_PRIVATE_KE
 
 ```ts
 import { LitNodeClient } from "@lit-protocol/lit-node-client";
-import { encryptString, decryptToString } from "lit-protocol/encryption";
+import { encryptString, decryptToString } from "@lit-protocol/encryption";
 import { LIT_NETWORK, LIT_RPC } from "@lit-protocol/constants";
 import * as ethers from "ethers";
 
