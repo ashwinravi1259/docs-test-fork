@@ -123,4 +123,8 @@ If you are changing the path of a page, you will need to add a redirect to the `
 
 Before running any yarn scripts, be sure to do the following:
 
+
+
+no need to add further edit to it only commit wihtout merging
+
 - `cp .env.example .env` and fill in the secrets.
